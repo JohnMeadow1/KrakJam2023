@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bfxraapqgv6o5"]
+[gd_scene load_steps=13 format=3 uid="uid://bfxraapqgv6o5"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_j4ppp"]
 
@@ -18,6 +18,35 @@ glow_enabled = true
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_oys8e"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_gridf"]
+
+[sub_resource type="Curve3D" id="Curve3D_ufq0x"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 6.47198, 0.789134, -0.795648, 0.034564, -0.918926, 0.989096, -0.034564, 0.918926, -0.989096, 9.01658, 2.27428, -2.27447, 0, 0, 0, 0, 0, 0, 7.20487, 3.30555, -3.52897),
+"tilts": PackedFloat32Array(0, 0, 0)
+}
+point_count = 3
+
+[sub_resource type="GDScript" id="GDScript_2b17r"]
+script/source = "extends Path3D
+
+func _process(delta: float) -> void:
+	$PathFollow3D.progress += delta
+	$Path3D.curve.add_point($PathFollow3D/MeshInstance3D.global_position)
+	
+#	$MultiMeshInstance3D.multimesh.instance_count += 1
+#	$MultiMeshInstance3D.multimesh.set_instance_transform($MultiMeshInstance3D.multimesh.instance_count - 1, $PathFollow3D/MeshInstance3D.global_transform)
+#	print($MultiMeshInstance3D.multimesh.get_instance_transform($MultiMeshInstance3D.multimesh.instance_count - 1))
+"
+
+[sub_resource type="SphereMesh" id="SphereMesh_bd2qr"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_vkdb4"]
+
+[sub_resource type="MultiMesh" id="MultiMesh_fwp2n"]
+transform_format = 1
+mesh = SubResource("SphereMesh_vkdb4")
+
+[sub_resource type="Curve3D" id="Curve3D_r1283"]
 
 [node name="Game" type="Node3D"]
 
@@ -40,3 +69,38 @@ mesh = SubResource("CapsuleMesh_gridf")
 
 [node name="Camera3D" type="Camera3D" parent="Player"]
 transform = Transform3D(0.999998, 0.00127465, -0.00124615, 0, 0.699066, 0.715057, 0.00178259, -0.715056, 0.699065, -0.0984405, 3.36112, 2.23078)
+
+[node name="Path3D" type="Path3D" parent="."]
+curve = SubResource("Curve3D_ufq0x")
+script = SubResource("GDScript_2b17r")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
+transform = Transform3D(-0.502468, -0.389507, 0.771886, 0, 0.892771, 0.450508, -0.864594, 0.226366, -0.44859, 6.47198, 0.789134, -0.795648)
+loop = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Path3D/PathFollow3D"]
+visible = false
+mesh = SubResource("SphereMesh_bd2qr")
+
+[node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="Path3D"]
+multimesh = SubResource("MultiMesh_fwp2n")
+
+[node name="Path3D" type="Path3D" parent="Path3D"]
+curve = SubResource("Curve3D_r1283")
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="Path3D"]
+polygon = PackedVector2Array(-0.523438, -0.0234375, -0.523438, -0.0234375, -0.460938, 0.289063, -0.460938, 0.289063, -0.171875, 0.484375, -0.171875, 0.484375, 0.0703125, 0.539063, 0.0703125, 0.539063, 0.367188, 0.453125, 0.367188, 0.453125, 0.515625, 0.195313, 0.515625, 0.195313, 0.578125, -0.320313, 0.578125, -0.320313, 0.398438, -0.671875, 0.398438, -0.671875, -0.046875, -0.765625, -0.046875, -0.765625, -0.359375, -0.5625, -0.359375, -0.5625, -0.445313, -0.257813, -0.445313, -0.257813)
+mode = 2
+path_node = NodePath("../Path3D")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_local = false
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = false
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.57926, 0.25727, -0.773479, 0, 0.948888, 0.315614, 0.815143, -0.182823, 0.549653, 3.82438, 2.15576, 0.605807)
+current = true
