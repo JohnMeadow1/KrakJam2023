@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://c514njor17cvc"]
+[gd_scene load_steps=7 format=3 uid="uid://c514njor17cvc"]
 
-[ext_resource type="PackedScene" uid="uid://gcggqnbh7abd" path="res://Scenes/Snake.tscn" id="1_c55gu"]
+[ext_resource type="PackedScene" path="res://Scenes/Snake.tscn" id="1_c55gu"]
+[ext_resource type="Script" path="res://Scripts/GameSnake.gd" id="1_jj3oq"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_73e1h"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -15,12 +16,42 @@ sky = SubResource("Sky_enxy5")
 tonemap_mode = 2
 glow_enabled = true
 
+[sub_resource type="BoxMesh" id="BoxMesh_mgm4x"]
+size = Vector3(5, 50, 5)
+
 [node name="GameSnake" type="Node3D"]
+script = ExtResource("1_jj3oq")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_x331o")
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.0025878, 0.933292, -0.35911, 0, 0.359111, 0.933295, 0.999997, -0.00241518, 0.000929309, -0.555466, 7.01325, -0.466614)
+[node name="CameraPivot" type="Node3D" parent="."]
 
-[node name="Snake" parent="." instance=ExtResource("1_c55gu")]
+[node name="Camera3D" type="Camera3D" parent="CameraPivot"]
+unique_name_in_owner = true
+transform = Transform3D(-0.046219, -0.417491, 0.907505, 0, 0.908476, 0.417937, -0.998931, 0.0193166, -0.0419888, 9.98971, 4.32691, -0.192844)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_mgm4x")
+
+[node name="Snakes" type="Node3D" parent="."]
+
+[node name="Snake" parent="Snakes" instance=ExtResource("1_c55gu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.03273, 0, 0)
+up_direction = Vector3(1, 0, 0)
+
+[node name="Snake3" parent="Snakes" instance=ExtResource("1_c55gu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.09731, 0, 0)
+up_direction = Vector3(-1, 0, 0)
+
+[node name="Snake2" parent="Snakes" instance=ExtResource("1_c55gu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.40757, 4.76837e-07, 3.14958)
+up_direction = Vector3(0, 0, 1)
+
+[node name="Snake4" parent="Snakes" instance=ExtResource("1_c55gu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.40757, 4.76837e-07, -3.00896)
+up_direction = Vector3(0, 0, -1)
