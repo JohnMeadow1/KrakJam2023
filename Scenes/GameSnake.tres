@@ -88,8 +88,7 @@ void vertex() {
 
 
 // VectorCompose:11
-	float n_in11p2 = 0.00000;
-	vec3 n_out11p0 = vec3(n_out12p0, n_out13p0, n_in11p2);
+	vec3 n_out11p0 = vec3(n_out12p0, n_out13p0, n_out10p2);
 
 
 // Output:0
@@ -98,7 +97,7 @@ void vertex() {
 
 }
 "
-graph_offset = Vector2(-263.698, -245.377)
+graph_offset = Vector2(-24.2469, -212.068)
 nodes/vertex/0/position = Vector2(920, -20)
 nodes/vertex/2/node = SubResource("VisualShaderNodeInput_lhscp")
 nodes/vertex/2/position = Vector2(-580, 120)
@@ -121,6 +120,6 @@ nodes/vertex/11/position = Vector2(700, -220)
 nodes/vertex/12/node = SubResource("VisualShaderNodeFloatOp_voct8")
 nodes/vertex/12/position = Vector2(400, -120)
 nodes/vertex/13/node = SubResource("VisualShaderNodeFloatOp_82df0")
-nodes/vertex/13/position = Vector2(420, 0)
-nodes/vertex/connections = PackedInt32Array(6, 0, 8, 0, 8, 1, 7, 1, 7, 0, 5, 0, 9, 0, 7, 0, 2, 0, 9, 0, 3, 0, 10, 0, 11, 0, 0, 0, 5, 0, 12, 1, 10, 0, 12, 0, 12, 0, 11, 0, 5, 0, 13, 1, 10, 1, 13, 0, 13, 0, 11, 1)
+nodes/vertex/13/position = Vector2(420, 80)
+nodes/vertex/connections = PackedInt32Array(6, 0, 8, 0, 8, 1, 7, 1, 7, 0, 5, 0, 9, 0, 7, 0, 2, 0, 9, 0, 3, 0, 10, 0, 11, 0, 0, 0, 5, 0, 12, 1, 10, 0, 12, 0, 12, 0, 11, 0, 5, 0, 13, 1, 10, 1, 13, 0, 13, 0, 11, 1, 10, 2, 11, 2)
 nodes/fragment/0/position = Vector2(560, 120)

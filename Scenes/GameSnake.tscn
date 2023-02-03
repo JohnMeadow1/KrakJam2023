@@ -1,5 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://c514njor17cvc"]
+[gd_scene load_steps=6 format=3 uid="uid://c514njor17cvc"]
 
+[ext_resource type="Script" path="res://Scripts/Camera3D.gd" id="1_bllkc"]
 [ext_resource type="PackedScene" uid="uid://gcggqnbh7abd" path="res://Scenes/Snake.tscn" id="1_c55gu"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_73e1h"]
@@ -22,5 +23,6 @@ environment = SubResource("Environment_x331o")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.0025878, 0.933292, -0.35911, 0, 0.359111, 0.933295, 0.999997, -0.00241518, 0.000929309, -0.555466, 7.01325, -0.466614)
+script = ExtResource("1_bllkc")
 
 [node name="Snake" parent="." instance=ExtResource("1_c55gu")]
