@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://bfxraapqgv6o5"]
+
+[ext_resource type="Script" path="res://Scripts/Player.gd" id="1_j4ppp"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cbqh6"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_bc8wl"]
+sky_material = SubResource("ProceduralSkyMaterial_cbqh6")
+
+[sub_resource type="Environment" id="Environment_jh8hq"]
+background_mode = 2
+sky = SubResource("Sky_bc8wl")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_oys8e"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_gridf"]
+
+[node name="Game" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_jh8hq")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+use_collision = true
+size = Vector3(10, 0.1, 10)
+
+[node name="Player" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05, 0)
+script = ExtResource("1_j4ppp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+shape = SubResource("CapsuleShape3D_oys8e")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
+mesh = SubResource("CapsuleMesh_gridf")
+
+[node name="Camera3D" type="Camera3D" parent="Player"]
+transform = Transform3D(0.999998, 0.00127465, -0.00124615, 0, 0.699066, 0.715057, 0.00178259, -0.715056, 0.699065, -0.0984405, 3.36112, 2.23078)
