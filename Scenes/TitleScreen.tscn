@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://co5nwgi4etmcl"]
+[gd_scene load_steps=4 format=3 uid="uid://co5nwgi4etmcl"]
 
 [ext_resource type="Texture2D" uid="uid://b1i8pprnjjjs4" path="res://Textures/Title.png" id="1_gjkd8"]
+[ext_resource type="AudioStream" uid="uid://l6rrog8136wn" path="res://Audio/Title.ogg" id="2_620a1"]
 
 [sub_resource type="GDScript" id="GDScript_jj4ef"]
 script/source = "extends Control
@@ -108,6 +109,10 @@ Your task: wrap the building.
 There is many rootsneks. The one closest to the camera is controlled.
 Snek dies if it collides with itself or another snek."
 horizontal_alignment = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_620a1")
+autoplay = true
 
 [connection signal="pressed" from="VBoxContainer/Button" to="." method="play"]
 [connection signal="pressed" from="VBoxContainer/Button2" to="." method="exit"]

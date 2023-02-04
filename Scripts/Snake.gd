@@ -7,6 +7,7 @@ extends Node3D
 @onready var down_raycast: RayCast3D = $BackRaycast
 @onready var glow: MeshInstance3D = %MeshInstance3D2
 @onready var leaves: GPUParticles3D = $GPUParticles3D
+@onready var audio: AudioStreamPlayer3D = $AudioStreamPlayer3D
 
 @export var up_direction: Vector3
 
@@ -33,12 +34,14 @@ func _ready() -> void:
 	curve.set_point_position(current_point, head_position)
 	head.position = curve.get_point_position(current_point) + direction * 0.5
 	head.rotation.y = get_forward_rotation()
+	audio.play(randf() * audio.stream.get_length())
 
 func _physics_process(delta: float) -> void:
 	head_position += direction * 2 * delta
 	curve.set_point_position(current_point, head_position)
 	head.position = head_position
 	leaves.position = head_position
+	audio.position = head_position
 	leaves.look_at(leaves.global_position + direction, up_direction)
 	
 	front_raycast.position = head_position
@@ -55,6 +58,7 @@ func _physics_process(delta: float) -> void:
 			set_physics_process(false)
 			glow.hide()
 			deded.emit()
+			audio.stop()
 			leaves.emitting = false
 			return
 		

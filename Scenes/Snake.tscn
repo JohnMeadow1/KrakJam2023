@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://b6dbbu4210xbb"]
+[gd_scene load_steps=14 format=3 uid="uid://b6dbbu4210xbb"]
 
 [ext_resource type="Script" path="res://Scripts/Snake.gd" id="1_m5bta"]
 [ext_resource type="Material" uid="uid://0hmxtpijjwj4" path="res://Resources/SnakeBronw.material" id="2_dtsnv"]
 [ext_resource type="Material" uid="uid://dxs26fv8yrl3r" path="res://Resources/SnakeBronwGlow.material" id="3_5suqn"]
 [ext_resource type="Texture2D" uid="uid://mcwlau316m3t" path="res://Textures/Leaf.png" id="4_fpi77"]
+[ext_resource type="AudioStream" uid="uid://mjr3248klqtg" path="res://Audio/Ambient.ogg" id="5_0kw48"]
 
 [sub_resource type="Curve3D" id="Curve3D_h4x1m"]
 _data = {
@@ -94,3 +95,6 @@ visibility_aabb = AABB(-9999, -9999, -9999, 99999, 99999, 99999)
 draw_order = 1
 process_material = SubResource("ParticleProcessMaterial_dtpg7")
 draw_pass_1 = SubResource("QuadMesh_qfnn8")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("5_0kw48")
