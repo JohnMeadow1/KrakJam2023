@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bg2eiux2wqf3v"]
+[gd_scene load_steps=9 format=3 uid="uid://bg2eiux2wqf3v"]
 
 [ext_resource type="Texture2D" uid="uid://bc15ycqgwgt2k" path="res://Textures/bark_brown_01_diff_2k.jpg" id="1_m0j5c"]
 [ext_resource type="Texture2D" uid="uid://bn4sf5ug7akrj" path="res://Textures/bark_brown_01_disp_2k.png" id="2_j5vqo"]
@@ -104,10 +104,6 @@ point_count = 2
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_8aoj6"]
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_mhm8k"]
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_e4cvk"]
-
 [node name="Snake" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.419005)
 script = SubResource("GDScript_0ehyi")
@@ -138,11 +134,5 @@ mesh = SubResource("SphereMesh_4aj2m")
 [node name="FrontRaycast" type="ShapeCast3D" parent="."]
 shape = SubResource("SphereShape3D_8aoj6")
 
-[node name="64988" type="MeshInstance3D" parent="FrontRaycast"]
-mesh = SubResource("ArrayMesh_mhm8k")
-
 [node name="BackRaycast" type="ShapeCast3D" parent="."]
 shape = SubResource("SphereShape3D_8aoj6")
-
-[node name="65705" type="MeshInstance3D" parent="BackRaycast"]
-mesh = SubResource("ArrayMesh_e4cvk")
