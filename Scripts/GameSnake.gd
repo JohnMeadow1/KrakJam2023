@@ -16,9 +16,13 @@ func _process(delta: float) -> void:
 	elif Input.is_key_pressed(KEY_A):
 		camera_pivot.rotate_y(-delta)
 		update_current_snake()
-	
-	if current_snake:
-		camera_pivot.position.y = lerpf(camera_pivot.position.y, current_snake.head_position.y, 0.01)
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
+			camera_pivot.position.y += event.factor
+		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+			camera_pivot.position.y -= event.factor
 
 func update_current_snake():
 	var new_current: Node3D
