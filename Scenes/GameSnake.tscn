@@ -53,6 +53,14 @@ up_direction = Vector3(0, 0, -1)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.99513, 0, -24.9924)
 up_direction = Vector3(0, 0, -1)
 
+[node name="SnekSpawner13" parent="SnekSpawners" instance=ExtResource("5_sb6wk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.74694, 0, -24.7013)
+up_direction = Vector3(0, 0, -1)
+
+[node name="SnekSpawner14" parent="SnekSpawners" instance=ExtResource("5_sb6wk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.480678, -0.0112903, -19.1131)
+up_direction = Vector3(0, 0, -1)
+
 [node name="SnekSpawner2" parent="SnekSpawners" instance=ExtResource("5_sb6wk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.74521, 0, -17.6443)
 up_direction = Vector3(-1, 0, 0)
@@ -61,36 +69,32 @@ up_direction = Vector3(-1, 0, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.74521, 0, -12.8785)
 up_direction = Vector3(-1, 0, 0)
 
-[node name="SnekSpawner3" parent="SnekSpawners" instance=ExtResource("5_sb6wk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.23054, 0, -11.2353)
-up_direction = Vector3(0, 0, 1)
-
 [node name="SnekSpawner4" parent="SnekSpawners" instance=ExtResource("5_sb6wk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.86308, -4.76837e-07, -5.3296)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.86308, -4.76837e-07, -5.52968)
 up_direction = Vector3(0, 0, 1)
 
 [node name="SnekSpawner5" parent="SnekSpawners" instance=ExtResource("5_sb6wk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.70641, -4.76837e-07, -5.3296)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.98, 0, -5.532)
 up_direction = Vector3(0, 0, 1)
 
 [node name="SnekSpawner6" parent="SnekSpawners" instance=ExtResource("5_sb6wk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.29663, -4.76837e-07, -5.3296)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.46895, -7.15256e-07, -5.66979)
 up_direction = Vector3(0, 0, 1)
 
 [node name="SnekSpawner7" parent="SnekSpawners" instance=ExtResource("5_sb6wk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.0639, -4.76837e-07, -5.3296)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.2016, 0, -5.5672)
 up_direction = Vector3(0, 0, 1)
 
 [node name="SnekSpawner8" parent="SnekSpawners" instance=ExtResource("5_sb6wk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.6293, -4.76837e-07, -11.9512)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.3451, -4.76837e-07, -12.0437)
 up_direction = Vector3(1, 0, 0)
 
 [node name="SnekSpawner9" parent="SnekSpawners" instance=ExtResource("5_sb6wk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.6293, -4.76837e-07, -19.3074)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.3392, -4.76837e-07, -19.3993)
 up_direction = Vector3(1, 0, 0)
 
 [node name="SnekSpawner10" parent="SnekSpawners" instance=ExtResource("5_sb6wk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.6293, -4.76837e-07, -23.7579)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.243, -4.76837e-07, -23.8268)
 up_direction = Vector3(1, 0, 0)
 
 [node name="Catedral_Scene_no_Ivy_002" parent="." instance=ExtResource("3_2542n")]
