@@ -9,58 +9,58 @@
 [ext_resource type="Texture2D" uid="uid://d1e3d7ctk7vxt" path="res://Textures/bark_brown_01_rough_2k.jpg" id="4_uswmk"]
 [ext_resource type="AudioStream" uid="uid://mjr3248klqtg" path="res://Audio/Ambient.ogg" id="6_jdjj8"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_vepru"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1f4qx"]
 render_priority = 0
 shader = ExtResource("1_ofm4c")
 shader_parameter/albedo = Color(1, 1, 1, 1)
 shader_parameter/roughness = 1.0
-shader_parameter/total_vertices = 390
-shader_parameter/max_tip = 2
+shader_parameter/total_vertices = 516
+shader_parameter/max_tip_rings = 6
 shader_parameter/texture_albedo = ExtResource("3_bfwg7")
 shader_parameter/texture_roughness = ExtResource("4_uswmk")
 
-[sub_resource type="Curve3D" id="Curve3D_le6io"]
+[sub_resource type="Curve3D" id="Curve3D_ikwqs"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0),
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
 
-[sub_resource type="SphereMesh" id="SphereMesh_1bspi"]
-radius = 0.125
-height = 0.25
+[sub_resource type="SphereMesh" id="SphereMesh_rb56t"]
+radius = 0.35
+height = 0.7
 radial_segments = 8
 rings = 4
 
-[sub_resource type="SphereMesh" id="SphereMesh_kidro"]
-radius = 0.25
-height = 0.5
+[sub_resource type="SphereMesh" id="SphereMesh_464r4"]
+radius = 0.4
+height = 0.75
 radial_segments = 8
 rings = 4
 
-[sub_resource type="Curve" id="Curve_csf5e"]
+[sub_resource type="Curve" id="Curve_nw7f1"]
 _data = [Vector2(0, 0), 0.0, 97.903, 0, 0, Vector2(0.034264, 1), 6.61528e-07, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_sctea"]
-curve = SubResource("Curve_csf5e")
+[sub_resource type="CurveTexture" id="CurveTexture_qspg5"]
+curve = SubResource("Curve_nw7f1")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qe7h5"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qe563"]
 particle_flag_rotate_y = true
 direction = Vector3(1, 1, 0)
 spread = 180.0
 gravity = Vector3(0, 0, 0)
 angle_max = 360.0
 scale_max = 2.0
-scale_curve = SubResource("CurveTexture_sctea")
+scale_curve = SubResource("CurveTexture_qspg5")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_80ikk"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dktyb"]
 transparency = 1
 cull_mode = 2
 albedo_texture = ExtResource("4_fpi77")
 
-[sub_resource type="QuadMesh" id="QuadMesh_0axei"]
-material = SubResource("StandardMaterial3D_80ikk")
+[sub_resource type="QuadMesh" id="QuadMesh_klj32"]
+material = SubResource("StandardMaterial3D_dktyb")
 size = Vector2(0.6, 0.3)
 center_offset = Vector3(0.6, 0, 0)
 orientation = 1
@@ -71,16 +71,16 @@ up_direction = Vector3(0, 0, 1)
 metadata/_edit_lock_ = true
 
 [node name="CSGPolygon3D" type="CSGPolygon3D" parent="."]
-material_override = SubResource("ShaderMaterial_vepru")
+material_override = SubResource("ShaderMaterial_1f4qx")
 snap = 0.0001
 calculate_tangents = false
 use_collision = true
 collision_mask = 0
-polygon = PackedVector2Array(0.5, 0, 0.353553, 0.353553, -2.18557e-08, 0.5, -0.353553, 0.353553, -0.5, -4.37114e-08, -0.353553, -0.353553, 5.96244e-09, -0.5, 0.353553, -0.353553)
+polygon = PackedVector2Array(0.125, 0, 0.0883883, 0.0883883, -5.46392e-09, 0.125, -0.0883883, 0.0883883, -0.125, -1.09278e-08, -0.0883884, -0.0883883, 1.49061e-09, -0.125, 0.0883883, -0.0883884)
 mode = 2
 path_node = NodePath("../Path3D")
-path_interval_type = 1
-path_interval = 0.5
+path_interval_type = 0
+path_interval = 0.75
 path_simplify_angle = 0.0
 path_rotation = 2
 path_local = true
@@ -91,20 +91,20 @@ smooth_faces = true
 metadata/snek = true
 
 [node name="Path3D" type="Path3D" parent="."]
-curve = SubResource("Curve3D_le6io")
+curve = SubResource("Curve3D_ikwqs")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 material_override = ExtResource("2_dtsnv")
 gi_mode = 2
-mesh = SubResource("SphereMesh_1bspi")
+mesh = SubResource("SphereMesh_rb56t")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D"]
 unique_name_in_owner = true
 visible = false
 material_override = ExtResource("3_5suqn")
 gi_mode = 2
-mesh = SubResource("SphereMesh_kidro")
+mesh = SubResource("SphereMesh_464r4")
 skeleton = NodePath("../..")
 
 [node name="FrontRaycast" type="RayCast3D" parent="."]
@@ -112,13 +112,12 @@ skeleton = NodePath("../..")
 [node name="BackRaycast" type="RayCast3D" parent="."]
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
-visible = false
 amount = 1000
 lifetime = 300.0
 visibility_aabb = AABB(-9999, -9999, -9999, 99999, 99999, 99999)
 draw_order = 1
-process_material = SubResource("ParticleProcessMaterial_qe7h5")
-draw_pass_1 = SubResource("QuadMesh_0axei")
+process_material = SubResource("ParticleProcessMaterial_qe563")
+draw_pass_1 = SubResource("QuadMesh_klj32")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("6_jdjj8")
