@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://c514njor17cvc"]
 
-[ext_resource type="PackedScene" path="res://Scenes/Snake.tscn" id="1_c55gu"]
+[ext_resource type="PackedScene" uid="uid://gcggqnbh7abd" path="res://Scenes/Snake.tscn" id="1_c55gu"]
 [ext_resource type="Script" path="res://Scripts/GameSnake.gd" id="1_jj3oq"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_73e1h"]
@@ -48,37 +48,17 @@ mesh = SubResource("BoxMesh_mgm4x")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.68888, 0, 0)
 up_direction = Vector3(1, 0, 0)
 
-[node name="CSGPolygon3D" parent="Snakes/Snake" index="0"]
-material_override = null
-
-[node name="RayCast3D" type="RayCast3D" parent="Snakes/Snake"]
-
 [node name="Snake3" parent="Snakes" instance=ExtResource("1_c55gu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.09731, 0, 0)
 up_direction = Vector3(-1, 0, 0)
-
-[node name="CSGPolygon3D" parent="Snakes/Snake3" index="0"]
-material_override = null
-
-[node name="RayCast3D" type="RayCast3D" parent="Snakes/Snake3"]
 
 [node name="Snake2" parent="Snakes" instance=ExtResource("1_c55gu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.40757, 4.76837e-07, 3.14958)
 up_direction = Vector3(0, 0, 1)
 
-[node name="CSGPolygon3D" parent="Snakes/Snake2" index="0"]
-material_override = null
-
-[node name="RayCast3D" type="RayCast3D" parent="Snakes/Snake2"]
-
 [node name="Snake4" parent="Snakes" instance=ExtResource("1_c55gu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.40757, 4.76837e-07, -3.00896)
 up_direction = Vector3(0, 0, -1)
-
-[node name="CSGPolygon3D" parent="Snakes/Snake4" index="0"]
-material_override = null
-
-[node name="RayCast3D" type="RayCast3D" parent="Snakes/Snake4"]
 
 [node name="Borders" type="StaticBody3D" parent="."]
 
@@ -97,8 +77,3 @@ shape = SubResource("BoxShape3D_gbg5n")
 [node name="CollisionShape3D4" type="CollisionShape3D" parent="Borders"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 25, -3)
 shape = SubResource("BoxShape3D_gbg5n")
-
-[editable path="Snakes/Snake"]
-[editable path="Snakes/Snake3"]
-[editable path="Snakes/Snake2"]
-[editable path="Snakes/Snake4"]

@@ -19,7 +19,7 @@ func _process(delta: float) -> void:
 	
 	assert(current_snake)
 	
-	camera_pivot.position.y = lerpf(camera_pivot.position.y, current_snake.head_position.y, 0.1)
+	camera_pivot.position.y = lerpf(camera_pivot.position.y, current_snake.head_position.y, 0.01)
 
 func update_current_snake():
 	var new_current: Node3D

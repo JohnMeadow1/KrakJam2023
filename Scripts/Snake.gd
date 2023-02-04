@@ -28,6 +28,9 @@ func _physics_process(delta: float) -> void:
 	head.position = head_position + direction * 0.5
 	head.rotation.y = lerp_angle(head.rotation.y, get_forward_rotation(), 0.1)
 	
+	if not body.get_meshes().is_empty():
+		body.set_instance_shader_parameter("vertex_count",(body.get_meshes()[1].get_faces().size()-18)/24)
+	
 	ray_cast.position = head_position
 	ray_cast.target_position = direction
 	

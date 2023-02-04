@@ -1,18 +1,20 @@
 [gd_scene load_steps=15 format=3 uid="uid://gcggqnbh7abd"]
 
 [ext_resource type="Script" path="res://Scripts/Snake.gd" id="1_346co"]
-[ext_resource type="Shader" uid="uid://ih3pmrhai2xm" path="res://Scenes/GameSnake.tres" id="2_wfsbq"]
+[ext_resource type="Shader" uid="uid://dkrooat6kxleh" path="res://Resources/snake_visual_shader.tres" id="2_h61f7"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_w0j5q"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_eml2u"]
+resource_local_to_scene = true
 render_priority = 0
-shader = ExtResource("2_wfsbq")
+shader = ExtResource("2_h61f7")
+shader_parameter/vertex_count = 1
 
 [sub_resource type="Curve3D" id="Curve3D_82rsp"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-"tilts": PackedFloat32Array(0, 0)
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, -2),
+"tilts": PackedFloat32Array(0, 0, 0)
 }
-point_count = 2
+point_count = 3
 
 [sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_yjjgc"]
 constant = Color(0.4, 0.243137, 0, 1)
@@ -113,16 +115,16 @@ shader = SubResource("VisualShader_blifi")
 script = ExtResource("1_346co")
 
 [node name="CSGPolygon3D" type="CSGPolygon3D" parent="."]
-material_override = SubResource("ShaderMaterial_w0j5q")
-polygon = PackedVector2Array(0.5, 0, 0.46194, 0.191342, 0.353553, 0.353553, 0.191342, 0.46194, -2.18557e-08, 0.5, -0.191342, 0.46194, -0.353553, 0.353553, -0.46194, 0.191342, -0.5, -4.37114e-08, -0.46194, -0.191342, -0.353553, -0.353553, -0.191342, -0.46194, 5.96244e-09, -0.5, 0.191342, -0.46194, 0.353553, -0.353553, 0.46194, -0.191342)
+material_override = SubResource("ShaderMaterial_eml2u")
+polygon = PackedVector2Array(0.5, 0, 0.353553, 0.353553, -2.18557e-08, 0.5, -0.353553, 0.353553, -0.5, -4.37114e-08, -0.353553, -0.353553, 5.96244e-09, -0.5, 0.353553, -0.353553)
 mode = 2
 path_node = NodePath("../Path3D")
-path_interval_type = 0
-path_interval = 1.0
+path_interval_type = 1
+path_interval = 0.5
 path_simplify_angle = 0.0
 path_rotation = 2
-path_local = false
-path_continuous_u = true
+path_local = true
+path_continuous_u = false
 path_u_distance = 1.0
 path_joined = false
 
@@ -130,6 +132,8 @@ path_joined = false
 curve = SubResource("Curve3D_82rsp")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.5, 0, 0, 0, -2.18557e-08, -0.5, 0, 0.5, -2.18557e-08, 0, 0, -0.5)
+visible = false
 material_override = SubResource("ShaderMaterial_8r5tg")
 mesh = SubResource("CylinderMesh_yarku")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
