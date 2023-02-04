@@ -30,6 +30,8 @@ var sneqs_alive: int
 var fininszed: bool
 
 func _ready() -> void:
+	get_tree().auto_accept_quit = false
+	
 	snakes.child_entered_tree.connect(func(sn):
 		sneqs_alive += 1
 		sn.owner = self
@@ -195,3 +197,11 @@ func update_score() -> void:
 			
 			$UI/Label.show()
 			$UI/Label/AnimationPlayer.play(&"urthebest")
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+		if fininszed:
+			get_tree().auto_accept_quit = false
+			get_tree().change_scene_to_file("res://Scenes/TitleScreen.tscn")
+		else:
+			get_tree().quit()
