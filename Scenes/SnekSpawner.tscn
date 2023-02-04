@@ -11,7 +11,7 @@ func spawn_snek() -> bool:
 	if busy:
 		return false
 	
-	var snek := preload(\"res://Scenes/Snake2.tscn\").instantiate()
+	var snek := preload(\"res://Scenes/Snake.tscn\").instantiate()
 	snek.position = position
 	snek.up_direction = up_direction
 	owner.snakes.add_child(snek)

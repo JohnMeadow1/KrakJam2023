@@ -1,122 +1,182 @@
-[gd_scene load_steps=15 format=3 uid="uid://gcggqnbh7abd"]
+[gd_scene load_steps=13 format=3 uid="uid://b6dbbu4210xbb"]
 
-[ext_resource type="Script" path="res://Scripts/Snake.gd" id="1_346co"]
-[ext_resource type="Shader" uid="uid://dkrooat6kxleh" path="res://Resources/snake_visual_shader.tres" id="2_h61f7"]
+[ext_resource type="Material" uid="uid://0hmxtpijjwj4" path="res://Resources/SnakeBronw.material" id="2_dtsnv"]
+[ext_resource type="Material" uid="uid://dxs26fv8yrl3r" path="res://Resources/SnakeBronwGlow.material" id="3_5suqn"]
+[ext_resource type="Texture2D" uid="uid://mcwlau316m3t" path="res://Textures/Leaf.png" id="4_fpi77"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_eml2u"]
-resource_local_to_scene = true
-render_priority = 0
-shader = ExtResource("2_h61f7")
-shader_parameter/vertex_count = 1
+[sub_resource type="GDScript" id="GDScript_06823"]
+script/source = "extends Node3D
 
-[sub_resource type="Curve3D" id="Curve3D_82rsp"]
-_data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, -2),
-"tilts": PackedFloat32Array(0, 0, 0)
-}
-point_count = 3
+@onready var curve: Curve3D = $Path3D.curve
+@onready var body: CSGPolygon3D = $CSGPolygon3D
+@onready var head: MeshInstance3D = $MeshInstance3D
+@onready var front_raycast: RayCast3D = $FrontRaycast
+@onready var down_raycast: RayCast3D = $BackRaycast
+@onready var glow: MeshInstance3D = %MeshInstance3D2
+@onready var leaves: GPUParticles3D = $GPUParticles3D
 
-[sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_yjjgc"]
-constant = Color(0.4, 0.243137, 0, 1)
+@export var up_direction: Vector3
 
-[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_gndh7"]
-input_name = "vertex"
+var is_current: bool:
+	set(current):
+		is_current = current
+		glow.visible = current
 
-[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_x80yx"]
-operator = 2
+var disable_raycasts: int = 60
+var down_timeout: float
 
-[sub_resource type="VisualShaderNodeVectorCompose" id="VisualShaderNodeVectorCompose_lcyrl"]
-default_input_values = [0, 1.0, 1, 1.0, 2, 1.0]
+var direction: Vector3 = Vector3.UP
+var head_position: Vector3
+var current_point := 1
 
-[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_ct7bt"]
-input_name = "vertex"
+var μtimer = randf_range(3, 8)
 
-[sub_resource type="VisualShaderNodeVectorDecompose" id="VisualShaderNodeVectorDecompose_wfdqf"]
+signal deded
 
-[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_vqv2w"]
-default_input_values = [0, 0.0, 1, 1.0]
+func _ready() -> void:
+	head_position = direction * 0.01
+	curve = curve.duplicate()
+	$Path3D.curve = curve
+	curve.set_point_position(current_point, head_position)
+	head.position = curve.get_point_position(current_point) + direction * 0.5
+	head.rotation.y = get_forward_rotation()
 
-[sub_resource type="VisualShader" id="VisualShader_blifi"]
-code = "shader_type spatial;
+func _physics_process(delta: float) -> void:
+	head_position += direction * 2 * delta
+	curve.set_point_position(current_point, head_position)
+	head.position = head_position
+	leaves.position = head_position
+	leaves.look_at(direction)
+	
+	front_raycast.position = head_position
+	front_raycast.target_position = direction * 0.6
+	down_raycast.position = head_position - direction * 0.2
+	down_raycast.target_position = -up_direction * 0.6
 
+#	if not body.get_meshes().is_empty():
+#		body.set_instance_shader_parameter(\"total_vertices\",(body.get_meshes()[1].get_faces().size()))
+#
 
+	if disable_raycasts > 0:
+		disable_raycasts -= 1
+		return
+	
+	if front_raycast.is_colliding():
+		if front_raycast.get_collider().get_meta(&\"snek\", false):
+			set_physics_process(false)
+			glow.hide()
+			deded.emit()
+			leaves.emitting = false
+			return
+		
+		var prev := direction
+		rotate_to(up_direction)
+		up_direction = -prev
+		disable_raycasts = 30
+	
+	if not down_raycast.is_colliding():
+		down_timeout += delta
+		
+		if down_timeout >= 0.05:
+			var prev := direction
+			rotate_to(-up_direction)
+			up_direction = prev
+			disable_raycasts = 30
+	else:
+		down_timeout = 0
+	
+	μtimer -= delta
+	if μtimer <= 0:
+		μtimer = randf_range(3, 8)
+		var μsnake = load(\"res://Scenes/MicroSnake.tscn\").instantiate()
+		μsnake.position = global_position + head_position
+		μsnake.direction = direction.rotated(up_direction, PI/2)
+		μsnake.up_direction = up_direction
+		owner.add_child(μsnake)
 
-void vertex() {
-// Input:2
-	vec3 n_out2p0 = VERTEX;
+func _process(delta: float) -> void:
+	if not is_current:
+		return
+	
+	if Input.is_action_just_pressed(&\"ui_left\"):
+		rotate_head(PI/2)
+	
+	if Input.is_action_just_pressed(&\"ui_right\"):
+		rotate_head(-PI/2)
 
+func rotate_head(angle: float):
+	rotate_to(direction.rotated(up_direction, angle))
 
-// Input:5
-	vec3 n_out5p0 = VERTEX;
+func rotate_to(dir: Vector3):
+	curve.set_point_position(current_point, head_position - direction * 0.5)
+	curve.add_point((head_position - direction * 0.5).lerp(head_position + dir * 0.5, 0.5))
+	direction = dir
+	curve.add_point(head_position + direction * 0.5)
+	curve.add_point(head_position + direction * 0.51)
+	current_point = curve.point_count - 1
+	head_position = curve.get_point_position(current_point)
 
-
-// VectorDecompose:6
-	float n_out6p0 = n_out5p0.x;
-	float n_out6p1 = n_out5p0.y;
-	float n_out6p2 = n_out5p0.z;
-
-
-// FloatOp:7
-	float n_in7p1 = 1.00000;
-	float n_out7p0 = n_out6p1 + n_in7p1;
-
-
-// VectorCompose:4
-	float n_in4p1 = 1.00000;
-	vec3 n_out4p0 = vec3(n_out7p0, n_in4p1, n_out7p0);
-
-
-// VectorOp:3
-	vec3 n_out3p0 = n_out2p0 * n_out4p0;
-
-
-// Output:0
-	VERTEX = n_out3p0;
-
-
-}
-
-void fragment() {
-// ColorConstant:2
-	vec4 n_out2p0 = vec4(0.400000, 0.243137, 0.000000, 1.000000);
-
-
-// Output:0
-	ALBEDO = vec3(n_out2p0.xyz);
-
-
-}
+func get_forward_rotation() -> float:
+	if direction.is_equal_approx(Vector3.RIGHT):
+		return -PI / 2
+	elif direction.is_equal_approx(Vector3.LEFT):
+		return PI / 2
+	elif direction.is_equal_approx(Vector3.FORWARD):
+		return 0
+	elif direction.is_equal_approx(Vector3.BACK):
+		return PI
+	return 0
 "
-graph_offset = Vector2(-266, 56)
-nodes/vertex/2/node = SubResource("VisualShaderNodeInput_gndh7")
-nodes/vertex/2/position = Vector2(-340, 100)
-nodes/vertex/3/node = SubResource("VisualShaderNodeVectorOp_x80yx")
-nodes/vertex/3/position = Vector2(40, 100)
-nodes/vertex/4/node = SubResource("VisualShaderNodeVectorCompose_lcyrl")
-nodes/vertex/4/position = Vector2(-200, 200)
-nodes/vertex/5/node = SubResource("VisualShaderNodeInput_ct7bt")
-nodes/vertex/5/position = Vector2(-960, 200)
-nodes/vertex/6/node = SubResource("VisualShaderNodeVectorDecompose_wfdqf")
-nodes/vertex/6/position = Vector2(-660, 200)
-nodes/vertex/7/node = SubResource("VisualShaderNodeFloatOp_vqv2w")
-nodes/vertex/7/position = Vector2(-400, 220)
-nodes/vertex/connections = PackedInt32Array(2, 0, 3, 0, 3, 0, 0, 0, 4, 0, 3, 1, 5, 0, 6, 0, 6, 1, 7, 0, 7, 0, 4, 0, 7, 0, 4, 2)
-nodes/fragment/2/node = SubResource("VisualShaderNodeColorConstant_yjjgc")
-nodes/fragment/2/position = Vector2(100, 140)
-nodes/fragment/connections = PackedInt32Array(2, 0, 0, 0)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_8r5tg"]
-render_priority = 0
-shader = SubResource("VisualShader_blifi")
+[sub_resource type="Curve3D" id="Curve3D_h4x1m"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_yarku"]
+[sub_resource type="SphereMesh" id="SphereMesh_sceb8"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_ce5gt"]
+radius = 0.6
+
+[sub_resource type="Curve" id="Curve_ua7m8"]
+_data = [Vector2(0, 0), 0.0, 97.903, 0, 0, Vector2(0.034264, 1), 6.61528e-07, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_8gmgs"]
+curve = SubResource("Curve_ua7m8")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dtpg7"]
+particle_flag_rotate_y = true
+direction = Vector3(1, 1, 0)
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+angle_max = 360.0
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_8gmgs")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g2jvj"]
+transparency = 1
+cull_mode = 2
+albedo_texture = ExtResource("4_fpi77")
+
+[sub_resource type="QuadMesh" id="QuadMesh_qfnn8"]
+material = SubResource("StandardMaterial3D_g2jvj")
+size = Vector2(0.6, 0.3)
+center_offset = Vector3(0.6, 0, 0)
+orientation = 1
 
 [node name="Snake" type="Node3D"]
-script = ExtResource("1_346co")
+script = SubResource("GDScript_06823")
+up_direction = Vector3(0, 0, 1)
+metadata/_edit_lock_ = true
 
 [node name="CSGPolygon3D" type="CSGPolygon3D" parent="."]
-material_override = SubResource("ShaderMaterial_eml2u")
-polygon = PackedVector2Array(0.5, 0, 0.353553, 0.353553, -2.18557e-08, 0.5, -0.353553, 0.353553, -0.5, -4.37114e-08, -0.353553, -0.353553, 5.96244e-09, -0.5, 0.353553, -0.353553)
+material_override = ExtResource("2_dtsnv")
+use_collision = true
+collision_mask = 0
+polygon = PackedVector2Array(0.25, 0, 0.176777, 0.176777, -1.09278e-08, 0.25, -0.176777, 0.176777, -0.25, -2.18557e-08, -0.176777, -0.176777, 2.98122e-09, -0.25, 0.176777, -0.176777)
 mode = 2
 path_node = NodePath("../Path3D")
 path_interval_type = 1
@@ -127,13 +187,33 @@ path_local = true
 path_continuous_u = false
 path_u_distance = 1.0
 path_joined = false
+metadata/snek = true
 
 [node name="Path3D" type="Path3D" parent="."]
-curve = SubResource("Curve3D_82rsp")
+curve = SubResource("Curve3D_h4x1m")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-visible = false
-material_override = SubResource("ShaderMaterial_8r5tg")
-mesh = SubResource("CylinderMesh_yarku")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+material_override = ExtResource("2_dtsnv")
+gi_mode = 2
+mesh = SubResource("SphereMesh_sceb8")
 
-[node name="RayCast3D" type="RayCast3D" parent="."]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D"]
+unique_name_in_owner = true
+visible = false
+material_override = ExtResource("3_5suqn")
+gi_mode = 2
+mesh = SubResource("SphereMesh_ce5gt")
+skeleton = NodePath("../..")
+
+[node name="FrontRaycast" type="RayCast3D" parent="."]
+
+[node name="BackRaycast" type="RayCast3D" parent="."]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+amount = 1000
+lifetime = 300.0
+visibility_aabb = AABB(-9999, -9999, -9999, 99999, 99999, 99999)
+draw_order = 1
+process_material = SubResource("ParticleProcessMaterial_dtpg7")
+draw_pass_1 = SubResource("QuadMesh_qfnn8")
