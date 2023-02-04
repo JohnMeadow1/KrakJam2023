@@ -127,6 +127,8 @@ _data = {
 point_count = 2
 
 [sub_resource type="SphereMesh" id="SphereMesh_4aj2m"]
+radial_segments = 8
+rings = 4
 
 [sub_resource type="SphereMesh" id="SphereMesh_buada"]
 radius = 0.6
@@ -151,6 +153,7 @@ path_local = true
 path_continuous_u = false
 path_u_distance = 1.0
 path_joined = false
+smooth_faces = true
 metadata/snek = true
 
 [node name="Path3D" type="Path3D" parent="."]
