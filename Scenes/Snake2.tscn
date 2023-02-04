@@ -1,0 +1,148 @@
+[gd_scene load_steps=11 format=3 uid="uid://bg2eiux2wqf3v"]
+
+[ext_resource type="Texture2D" uid="uid://bc15ycqgwgt2k" path="res://Textures/bark_brown_01_diff_2k.jpg" id="1_m0j5c"]
+[ext_resource type="Texture2D" uid="uid://bn4sf5ug7akrj" path="res://Textures/bark_brown_01_disp_2k.png" id="2_j5vqo"]
+[ext_resource type="Texture2D" uid="uid://d1e3d7ctk7vxt" path="res://Textures/bark_brown_01_rough_2k.jpg" id="3_edcqv"]
+
+[sub_resource type="GDScript" id="GDScript_0ehyi"]
+script/source = "extends Node3D
+
+@onready var curve: Curve3D = $Path3D.curve
+@onready var body: CSGPolygon3D = $CSGPolygon3D
+@onready var head: MeshInstance3D = $MeshInstance3D
+@onready var front_raycast: ShapeCast3D = $FrontRaycast
+@onready var down_raycast: ShapeCast3D = $BackRaycast
+
+@export var up_direction: Vector3
+
+var is_current: bool
+var disable_raycasts: int = 30
+
+var direction: Vector3 = Vector3.UP
+var head_position: Vector3
+var current_point := 1
+
+func _ready() -> void:
+	head_position = direction * 0.01
+	curve = curve.duplicate()
+	$Path3D.curve = curve
+	curve.set_point_position(current_point, head_position)
+	head.position = curve.get_point_position(current_point) + direction * 0.5
+	head.rotation.y = get_forward_rotation()
+
+func _physics_process(delta: float) -> void:
+	head_position += direction * 2 * delta
+	curve.set_point_position(current_point, head_position)
+	head.position = head_position
+	
+	front_raycast.position = head_position
+	front_raycast.target_position = direction
+	down_raycast.position = head_position
+	down_raycast.target_position = -up_direction
+	
+	if disable_raycasts > 0:
+		disable_raycasts -= 1
+		return
+	
+	if front_raycast.is_colliding():
+		var prev := direction
+		rotate_to(up_direction)
+		up_direction = -prev
+		disable_raycasts = 30
+	
+	if not down_raycast.is_colliding():
+		var prev := direction
+		rotate_to(-up_direction)
+		up_direction = prev
+		disable_raycasts = 30
+
+func _process(delta: float) -> void:
+	if not is_current:
+		return
+	
+	if Input.is_action_just_pressed(&\"ui_left\"):
+		rotate_head(PI/2)
+	
+	if Input.is_action_just_pressed(&\"ui_right\"):
+		rotate_head(-PI/2)
+
+func rotate_head(angle: float):
+	rotate_to(direction.rotated(up_direction, angle))
+
+func rotate_to(dir: Vector3):
+	direction = dir
+	curve.add_point(head_position + direction * 0.01)
+	current_point += 1
+
+func get_forward_rotation() -> float:
+	if direction.is_equal_approx(Vector3.RIGHT):
+		return -PI / 2
+	elif direction.is_equal_approx(Vector3.LEFT):
+		return PI / 2
+	elif direction.is_equal_approx(Vector3.FORWARD):
+		return 0
+	elif direction.is_equal_approx(Vector3.BACK):
+		return PI
+	return 0
+"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_la18a"]
+albedo_color = Color(0.443137, 0.309804, 0, 1)
+albedo_texture = ExtResource("1_m0j5c")
+roughness_texture = ExtResource("3_edcqv")
+normal_enabled = true
+normal_texture = ExtResource("2_j5vqo")
+
+[sub_resource type="Curve3D" id="Curve3D_82rsp"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[sub_resource type="SphereMesh" id="SphereMesh_4aj2m"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_8aoj6"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_mhm8k"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_e4cvk"]
+
+[node name="Snake" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.419005)
+script = SubResource("GDScript_0ehyi")
+up_direction = Vector3(0, 0, 1)
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="."]
+material_override = SubResource("StandardMaterial3D_la18a")
+polygon = PackedVector2Array(0.5, 0, 0.353553, 0.353553, -2.18557e-08, 0.5, -0.353553, 0.353553, -0.5, -4.37114e-08, -0.353553, -0.353553, 5.96244e-09, -0.5, 0.353553, -0.353553)
+mode = 2
+path_node = NodePath("../Path3D")
+path_interval_type = 1
+path_interval = 0.5
+path_simplify_angle = 0.0
+path_rotation = 2
+path_local = true
+path_continuous_u = false
+path_u_distance = 1.0
+path_joined = false
+
+[node name="Path3D" type="Path3D" parent="."]
+curve = SubResource("Curve3D_82rsp")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+material_override = SubResource("StandardMaterial3D_la18a")
+mesh = SubResource("SphereMesh_4aj2m")
+
+[node name="FrontRaycast" type="ShapeCast3D" parent="."]
+shape = SubResource("SphereShape3D_8aoj6")
+
+[node name="64988" type="MeshInstance3D" parent="FrontRaycast"]
+mesh = SubResource("ArrayMesh_mhm8k")
+
+[node name="BackRaycast" type="ShapeCast3D" parent="."]
+shape = SubResource("SphereShape3D_8aoj6")
+
+[node name="65705" type="MeshInstance3D" parent="BackRaycast"]
+mesh = SubResource("ArrayMesh_e4cvk")
