@@ -50,7 +50,7 @@ func _physics_process(delta: float) -> void:
 	down_raycast.position = head_position - direction * 0.2
 	down_raycast.target_position = -up_direction * 0.6
 	if not body.get_meshes().is_empty():
-		body.material_override.set_shader_parameter("total_vertices",(body.get_meshes()[1].get_faces().size()))
+		body.material_override.set_shader_parameter("total_vertices",(body.get_meshes()[1].get_faces().size()*3))
 		
 	if disable_raycasts > 0:
 		disable_raycasts -= 1
