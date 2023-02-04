@@ -43,8 +43,12 @@ func camera_handle_height(delta: float):
 	if camera_height_direction == 0 and abs(camera_height_factor)<0.01:
 		camera_height_factor = 0.0
 	else:
-		camera_pivot.position.y += camera_height_factor
-		update_current_snake()
+		if camera_height_factor > 0:
+			camera_pivot.position.y += camera_height_factor
+			update_current_snake()
+		elif camera_pivot.position.y > 1:
+			camera_pivot.position.y += camera_height_factor
+			update_current_snake()
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
