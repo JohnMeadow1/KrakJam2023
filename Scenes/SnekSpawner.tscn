@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://dnn0pmqdsvulh"]
+
+[sub_resource type="GDScript" id="GDScript_j2fcv"]
+script/source = "extends Marker3D
+
+@export var up_direction: Vector3
+
+var busy: bool
+
+func spawn_snek() -> bool:
+	if busy:
+		return false
+	
+	var snek := preload(\"res://Scenes/Snake2.tscn\").instantiate()
+	snek.position = position
+	snek.up_direction = up_direction
+	owner.snakes.add_child(snek)
+	busy = true
+	
+	return true
+"
+
+[node name="SnekSpawner" type="Marker3D"]
+script = SubResource("GDScript_j2fcv")

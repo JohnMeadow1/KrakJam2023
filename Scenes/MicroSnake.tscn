@@ -5,6 +5,8 @@
 [sub_resource type="GDScript" id="GDScript_0ehyi"]
 script/source = "extends Node3D
 
+const MAXLEN = 15
+
 @onready var curve: Curve3D = $Path3D.curve
 @onready var body: CSGPolygon3D = $CSGPolygon3D
 @onready var head: MeshInstance3D = $MeshInstance3D
@@ -65,6 +67,10 @@ func _physics_process(delta: float) -> void:
 			disable_raycasts = 30
 	else:
 		down_timeout = 0
+	
+	if curve.get_baked_length() >= MAXLEN:
+		set_physics_process(false)
+		deded.emit()
 
 func rotate_head(angle: float):
 	rotate_to(direction.rotated(up_direction, angle))

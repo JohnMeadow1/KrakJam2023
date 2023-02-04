@@ -19,7 +19,7 @@ func pressed() -> void:
 "
 
 [node name="TitleScreen" type="TextureRect"]
-self_modulate = Color(1, 1, 1, 0.462745)
+self_modulate = Color(0.6, 0.6, 0.6, 0.462745)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

@@ -1,10 +1,17 @@
 extends Node3D
 
+var SNEKOUNT = 10
+const MAXNEKS_AT_ONCE = 3
+
 @onready var camera_pivot: Node3D = $CameraPivot
 @onready var camera_3d: Camera3D = %Camera3D
 @onready var snakes: Node3D = $Snakes
+@onready var snek_spawners: Node3D = $SnekSpawners
 
+@onready var max_snakes: Label = %Snekountur
+@onready var current_sneaks: Label = %Snekountur2
 @onready var total: Label = %Total
+@onready var timer: Timer = %Timer
 
 var current_snake: Node3D
 var camera_height_direction = 0.0
@@ -18,17 +25,50 @@ var mouse_LMB_pressed = false
 var mouse_RMB_pressed = false
 var mouse_MMB_pressed = false
 
+var sneqs_alive: int
+var fininszed: bool
+
 func _ready() -> void:
-	update_current_snake()
-	
-	for snek in snakes.get_children():
-		snek.deded.connect(func():
-			if snek == current_snake:
+	snakes.child_entered_tree.connect(func(sn):
+		sneqs_alive += 1
+		sn.owner = self
+		
+		sn.deded.connect(func():
+			sneqs_alive -= 1
+			if sneqs_alive < MAXNEKS_AT_ONCE:
+				make_sneak()
+			
+			if sn == current_snake:
 				current_snake = null
 				update_current_snake()
 		)
+	)
+	
+	for i in MAXNEKS_AT_ONCE:
+		make_sneak()
+	
+	update_current_snake()
+
+func make_sneak():
+	if SNEKOUNT == 0:
+		if sneqs_alive == 0:
+			%Summary.show()
+			timer.stop()
+			update_score()
+			fininszed = true
+		
+		return
+	
+	for i in 1000:
+		if snek_spawners.get_child(randi() % snek_spawners.get_child_count()).spawn_snek():
+			SNEKOUNT -= 1
+			break
 
 func _process(delta: float) -> void:
+	if fininszed:
+		camera_orbit_direction += delta * 3
+		return
+	
 	camera_handle_orbit(delta)
 	camera_handle_height(delta)
 
@@ -129,4 +169,11 @@ func update_current_snake():
 			current_snake.is_current = true
 
 func update_score() -> void:
-	total.text = "%0.2fm" % snakes.get_children().reduce(func(value, snek): return value + snek.curve.get_baked_length(), 0.0)
+	var snenght: float = snakes.get_children().reduce(func(value, snek): return value + snek.curve.get_baked_length(), 0.0)
+	total.text = "%0.2fm" % snenght
+	max_snakes.text = str(SNEKOUNT)
+	current_sneaks.text = str(sneqs_alive)
+	
+	if timer.is_stopped():
+		%FinalFinal.text %= snenght
+		$UI/PanelContainer.hide()
