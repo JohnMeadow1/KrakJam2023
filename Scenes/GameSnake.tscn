@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c514njor17cvc"]
+[gd_scene load_steps=18 format=3 uid="uid://c514njor17cvc"]
 
 [ext_resource type="Script" path="res://Scripts/GameSnake.gd" id="1_jj3oq"]
 [ext_resource type="Environment" uid="uid://bixdvg8dmhm74" path="res://Resources/WorldEnvironment.tres" id="2_pa1ip"]
@@ -8,6 +8,11 @@
 [ext_resource type="PackedScene" uid="uid://csgsunvcqns3p" path="res://FBX/scene_tree_inside_001.fbx" id="6_mdnbd"]
 [ext_resource type="PackedScene" uid="uid://dwyuickai1e2r" path="res://FBX/scene_tree_inside_002.fbx" id="7_pr504"]
 [ext_resource type="PackedScene" uid="uid://5c7kh0goii2g" path="res://FBX/scene_tree_outside_001.fbx" id="8_r45ex"]
+[ext_resource type="PackedScene" uid="uid://cmnos7ix5kg67" path="res://Resources/Model_Columns_/ColumnBase001Lp.tscn" id="9_7ut4g"]
+[ext_resource type="PackedScene" uid="uid://duihga4yco1sk" path="res://Resources/towers/TowerLp.tscn" id="10_44y7y"]
+[ext_resource type="Texture2D" uid="uid://bsd1jjs1bic4w" path="res://Resources/towers/txt/Tower_lp_Tower_lp_BaseColor.png" id="11_ke6cn"]
+[ext_resource type="Texture2D" uid="uid://cvnpv0d66742w" path="res://Resources/towers/txt/Tower_lp_Tower_lp_OcclusionRoughnessMetallic.png" id="12_ih4a4"]
+[ext_resource type="Texture2D" uid="uid://cc8s7tqawawkg" path="res://Resources/towers/txt/Tower_lp_Tower_lp_Normal.png" id="13_6ef1u"]
 
 [sub_resource type="Animation" id="Animation_jy2qt"]
 length = 0.001
@@ -94,6 +99,15 @@ _data = {
 "RESET": SubResource("Animation_jy2qt"),
 "urthebest": SubResource("Animation_i1wio")
 }
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v0n2l"]
+albedo_texture = ExtResource("11_ke6cn")
+roughness_texture = ExtResource("12_ih4a4")
+roughness_texture_channel = 1
+normal_enabled = true
+normal_texture = ExtResource("13_6ef1u")
+ao_enabled = true
+ao_texture = ExtResource("12_ih4a4")
 
 [node name="GameSnake" type="Node3D"]
 script = ExtResource("1_jj3oq")
@@ -371,5 +385,47 @@ speed_scale = 10.0
 libraries = {
 "": SubResource("AnimationLibrary_oav40")
 }
+
+[node name="Column_Base_001_lp002" parent="." instance=ExtResource("9_7ut4g")]
+transform = Transform3D(1, 0, 0, 0, 1, -4.37114e-08, 0, 4.37114e-08, 1, 14.7975, 2.74136, -6.98071)
+
+[node name="Column_Base_001_lp003" parent="." instance=ExtResource("9_7ut4g")]
+transform = Transform3D(1, 0, 0, 0, 1, -4.37114e-08, 0, 4.37114e-08, 1, 14.7975, 2.74136, -11.5835)
+
+[node name="Column_Base_001_lp004" parent="." instance=ExtResource("9_7ut4g")]
+transform = Transform3D(1, 0, 0, 0, 1, -4.37114e-08, 0, 4.37114e-08, 1, 14.7975, 2.74136, -19.2906)
+
+[node name="Column_Base_001_lp005" parent="." instance=ExtResource("9_7ut4g")]
+transform = Transform3D(1, 0, 0, 0, 1, -4.37114e-08, 0, 4.37114e-08, 1, 14.7975, 2.74136, -24.1371)
+
+[node name="Column_Base_001_lp006" parent="." instance=ExtResource("9_7ut4g")]
+transform = Transform3D(1, 0, 0, 0, 1, -4.37114e-08, 0, 4.37114e-08, 1, 9.21385, 2.74136, -24.1371)
+
+[node name="Column_Base_001_lp007" parent="." instance=ExtResource("9_7ut4g")]
+transform = Transform3D(-4.37114e-08, 4.37114e-08, 1, 0, 1, -4.37114e-08, -1, -1.91069e-15, -4.37114e-08, 2.96821, 2.74136, -24.1371)
+
+[node name="Column_Base_001_lp008" parent="." instance=ExtResource("9_7ut4g")]
+transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, -3.25869, 2.74136, -23.9657)
+
+[node name="Column_Base_001_lp009" parent="." instance=ExtResource("9_7ut4g")]
+transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, -3.25869, 2.74136, -19.1242)
+
+[node name="Column_Base_001_lp010" parent="." instance=ExtResource("9_7ut4g")]
+transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, -9.65538, 2.74136, -16.5834)
+
+[node name="Column_Base_001_lp011" parent="." instance=ExtResource("9_7ut4g")]
+transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, -9.65538, 2.74136, -13.5834)
+
+[node name="Tower_lp" parent="." instance=ExtResource("10_44y7y")]
+transform = Transform3D(1.11593, 0, 0, 0, 1.175, -5.13609e-08, 0, 5.13609e-08, 1.175, 12.1404, 10.1406, -21.703)
+material_override = SubResource("StandardMaterial3D_v0n2l")
+
+[node name="Tower_lp3" parent="." instance=ExtResource("10_44y7y")]
+transform = Transform3D(1.11593, 0, 0, 0, 1.175, -5.13609e-08, 0, 5.13609e-08, 1.175, -6.96544, 4.59996, -15.3413)
+material_override = SubResource("StandardMaterial3D_v0n2l")
+
+[node name="Tower_lp2" parent="." instance=ExtResource("10_44y7y")]
+transform = Transform3D(-1.11593, -4.49011e-15, -1.02722e-07, 0, 1.175, -5.13609e-08, 9.7558e-08, -5.13609e-08, -1.175, 12.1404, 10.1406, -9.35548)
+material_override = SubResource("StandardMaterial3D_v0n2l")
 
 [connection signal="timeout" from="UI/Timer" to="." method="update_score"]
