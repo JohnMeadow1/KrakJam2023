@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bloaab5dv4uco"
-path.s3tc="res://.godot/imported/Floor_Cathedral_001_Albedo.png-38804f3bd435e9bc65d11bd13205f888.s3tc.ctex"
+path.s3tc="res://.godot/imported/Floor_Cathedral_001_Albedo.png-89935f252368d932fcdf91f27a191286.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Resources/Floors/Floor_Cathedral_001/Floor_Cathedral_001_Albedo.png"
-dest_files=["res://.godot/imported/Floor_Cathedral_001_Albedo.png-38804f3bd435e9bc65d11bd13205f888.s3tc.ctex"]
+source_file="res://Resources/Floor/Floor_Cathedral_001/Floor_Cathedral_001_Albedo.png"
+dest_files=["res://.godot/imported/Floor_Cathedral_001_Albedo.png-89935f252368d932fcdf91f27a191286.s3tc.ctex"]
 
 [params]
 
