@@ -1,51 +1,33 @@
-[gd_scene load_steps=8 format=3 uid="uid://c514njor17cvc"]
+[gd_scene load_steps=5 format=3 uid="uid://c514njor17cvc"]
 
 [ext_resource type="Script" path="res://Scripts/GameSnake.gd" id="1_jj3oq"]
 [ext_resource type="PackedScene" uid="uid://b6dbbu4210xbb" path="res://Scenes/Snake2.tscn" id="2_4mt42"]
-[ext_resource type="Texture2D" uid="uid://p5xbr0p7bxy6" path="res://Resources/dikhololo_night_4k.exr" id="2_64hvr"]
+[ext_resource type="Environment" uid="uid://c2bg5j0tkrmln" path="res://Resources/WorldEnvironment.tres" id="2_pa1ip"]
 [ext_resource type="PackedScene" uid="uid://b8dhj2a55t0sb" path="res://FBX/Catedral_Scene_no_Ivy_001.fbx" id="3_2542n"]
-
-[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_2e4nc"]
-panorama = ExtResource("2_64hvr")
-
-[sub_resource type="Sky" id="Sky_enxy5"]
-sky_material = SubResource("PanoramaSkyMaterial_2e4nc")
-process_mode = 1
-
-[sub_resource type="Environment" id="Environment_x331o"]
-background_mode = 2
-sky = SubResource("Sky_enxy5")
-ambient_light_source = 3
-ambient_light_color = Color(0.862745, 0.717647, 0.858824, 1)
-ambient_light_energy = 1.33
-reflected_light_source = 2
-tonemap_mode = 3
-tonemap_exposure = 1.67
-sdfgi_enabled = true
-glow_enabled = true
-fog_light_color = Color(0.141176, 0.156863, 0.180392, 1)
-adjustment_brightness = 2.55
 
 [node name="GameSnake" type="Node3D"]
 script = ExtResource("1_jj3oq")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_x331o")
+environment = ExtResource("2_pa1ip")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.576758, 0.509107, -0.638874, 0.0974163, 0.733614, 0.672548, 0.811086, -0.450134, 0.373522, -0.534582, 20.8289, -25.7803)
-light_color = Color(1, 0.741176, 0.478431, 1)
-light_energy = 0.262
-light_volumetric_fog_energy = 1.161
+transform = Transform3D(-0.896304, 0.43568, -0.082601, 0.331689, 0.782322, 0.527214, 0.294317, 0.445146, -0.845708, -0.534582, 20.8289, -25.7803)
+light_intensity_lux = 10.0
+light_temperature = 5203.0
+light_color = Color(1, 0.917647, 0.788235, 1)
+light_energy = 0.1
+light_indirect_energy = 4.717
+light_volumetric_fog_energy = 0.323
 shadow_enabled = true
 shadow_bias = 0.01
-shadow_normal_bias = 0.283
-shadow_blur = 2.616
-directional_shadow_split_1 = 0.039
-directional_shadow_split_2 = 0.129
-directional_shadow_split_3 = 0.278
+shadow_normal_bias = 0.384
+shadow_transmittance_bias = 0.373
+shadow_blur = 5.051
 directional_shadow_blend_splits = true
-directional_shadow_max_distance = 973.3
+directional_shadow_fade_start = 0.265
+directional_shadow_max_distance = 103.2
+directional_shadow_pancake_size = 87.0
 
 [node name="CameraPivot" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.44245, 0, -13.6713)
@@ -64,3 +46,27 @@ current = true
 [node name="Snake2" parent="Snakes" instance=ExtResource("2_4mt42")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.56372, 0, -2.75951)
 up_direction = Vector3(-1, 0, 0)
+
+[node name="Catedral_Scene_no_Ivy_002" parent="." instance=ExtResource("3_2542n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.4481, -0.0454907, -55.4699)
+
+[node name="Catedral_Scene_no_Ivy_003" parent="." instance=ExtResource("3_2542n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.5754, -0.0454907, -55.4699)
+
+[node name="Catedral_Scene_no_Ivy_004" parent="." instance=ExtResource("3_2542n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 98.2475, -0.0454907, -55.4699)
+
+[node name="Catedral_Scene_no_Ivy_005" parent="." instance=ExtResource("3_2542n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 98.2475, -0.0454907, -0.645847)
+
+[node name="Catedral_Scene_no_Ivy_006" parent="." instance=ExtResource("3_2542n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 53.2463, -0.0454907, -0.645847)
+
+[node name="Catedral_Scene_no_Ivy_007" parent="." instance=ExtResource("3_2542n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 53.2463, -0.0454907, 55.8806)
+
+[node name="Catedral_Scene_no_Ivy_008" parent="." instance=ExtResource("3_2542n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 111.678, -0.0454907, 55.8806)
+
+[node name="Catedral_Scene_no_Ivy_009" parent="." instance=ExtResource("3_2542n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.87377, -0.0454907, 55.8806)
