@@ -35,6 +35,7 @@ func _ready() -> void:
 	head.position = curve.get_point_position(current_point) + direction * 0.5
 	head.rotation.y = get_forward_rotation()
 	audio.play(randf() * audio.stream.get_length())
+	body.material_override = body.material_override.duplicate()
 
 func _physics_process(delta: float) -> void:
 	head_position += direction * 2 * delta
@@ -48,7 +49,9 @@ func _physics_process(delta: float) -> void:
 	front_raycast.target_position = direction * 0.6
 	down_raycast.position = head_position - direction * 0.2
 	down_raycast.target_position = -up_direction * 0.6
-	
+	if not body.get_meshes().is_empty():
+		body.material_override.set_shader_parameter("total_vertices",(body.get_meshes()[1].get_faces().size()))
+		
 	if disable_raycasts > 0:
 		disable_raycasts -= 1
 		return
