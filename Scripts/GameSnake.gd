@@ -8,6 +8,8 @@ const MAXNEKS_AT_ONCE = 3
 @onready var snakes: Node3D = $Snakes
 @onready var snek_spawners: Node3D = $SnekSpawners
 
+@onready var max_snakes: Label = %Snekountur
+@onready var current_sneaks: Label = %Snekountur2
 @onready var total: Label = %Total
 
 var current_snake: Node3D
@@ -46,6 +48,9 @@ func _ready() -> void:
 	update_current_snake()
 
 func make_sneak():
+	if SNEKOUNT == 0:
+		return
+	
 	for i in 1000:
 		if snek_spawners.get_child(randi() % snek_spawners.get_child_count()).spawn_snek():
 			SNEKOUNT -= 1
@@ -153,3 +158,5 @@ func update_current_snake():
 
 func update_score() -> void:
 	total.text = "%0.2fm" % snakes.get_children().reduce(func(value, snek): return value + snek.curve.get_baked_length(), 0.0)
+	max_snakes.text = str(SNEKOUNT)
+	current_sneaks.text = str(sneqs_alive)

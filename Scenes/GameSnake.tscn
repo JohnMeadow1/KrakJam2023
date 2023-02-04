@@ -144,6 +144,33 @@ grow_horizontal = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/PanelContainer"]
 layout_mode = 2
 
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UI/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Remaining Sneks"
+horizontal_alignment = 1
+
+[node name="Snekountur" type="Label" parent="UI/PanelContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+text = "0"
+horizontal_alignment = 1
+
+[node name="Snekountur2" type="Label" parent="UI/PanelContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+text = "0"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="UI/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Currently Active"
+horizontal_alignment = 1
+
 [node name="Label" type="Label" parent="UI/PanelContainer/VBoxContainer"]
 layout_mode = 2
 text = "Total Length"
