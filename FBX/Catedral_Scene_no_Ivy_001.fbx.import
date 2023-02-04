@@ -3,7 +3,7 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://b4gare4rs3tiu"
+uid="uid://dkovggyxbxvt8"
 path="res://.godot/imported/Catedral_Scene_no_Ivy_001.fbx-606160c068c21769d6d1b27358cbbb13.scn"
 
 [deps]
@@ -164,7 +164,7 @@ _subresources={
 },
 "PATH:RootNode/Object013": {
 "generate/physics": true,
-"physics/shape_type": 1
+"physics/shape_type": 2
 },
 "PATH:RootNode/Plane001": {
 "generate/physics": true,

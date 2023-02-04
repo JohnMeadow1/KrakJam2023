@@ -5,7 +5,7 @@
 [sub_resource type="GDScript" id="GDScript_0ehyi"]
 script/source = "extends Node3D
 
-const MAXLEN = 15
+var rototions := 3
 
 @onready var curve: Curve3D = $Path3D.curve
 @onready var body: CSGPolygon3D = $CSGPolygon3D
@@ -68,14 +68,13 @@ func _physics_process(delta: float) -> void:
 	else:
 		down_timeout = 0
 	
-	if curve.get_baked_length() >= MAXLEN:
-		set_physics_process(false)
-		deded.emit()
-
-func rotate_head(angle: float):
-	rotate_to(direction.rotated(up_direction, angle))
 
 func rotate_to(dir: Vector3):
+	rototions -= 1
+	if rototions == 0:
+		set_physics_process(false)
+		return
+	
 	curve.set_point_position(current_point, head_position - direction * 0.5)
 	curve.add_point((head_position - direction * 0.5).lerp(head_position + dir * 0.5, 0.5))
 	direction = dir

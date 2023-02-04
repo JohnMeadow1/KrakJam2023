@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/GameSnake.gd" id="1_jj3oq"]
 [ext_resource type="Environment" uid="uid://bixdvg8dmhm74" path="res://Resources/WorldEnvironment.tres" id="2_pa1ip"]
-[ext_resource type="PackedScene" uid="uid://b4gare4rs3tiu" path="res://FBX/Catedral_Scene_no_Ivy_001.fbx" id="3_2542n"]
+[ext_resource type="PackedScene" uid="uid://dkovggyxbxvt8" path="res://FBX/Catedral_Scene_no_Ivy_001.fbx" id="3_2542n"]
 [ext_resource type="PackedScene" uid="uid://dnn0pmqdsvulh" path="res://Scenes/SnekSpawner.tscn" id="5_sb6wk"]
 [ext_resource type="PackedScene" uid="uid://cjomg44iilqkm" path="res://FBX/stone_sculpts.fbx" id="5_sioen"]
 [ext_resource type="PackedScene" uid="uid://csgsunvcqns3p" path="res://FBX/scene_tree_inside_001.fbx" id="6_mdnbd"]

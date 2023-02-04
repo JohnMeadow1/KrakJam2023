@@ -1,12 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://co5nwgi4etmcl"]
+[gd_scene load_steps=4 format=3 uid="uid://co5nwgi4etmcl"]
 
 [ext_resource type="Texture2D" uid="uid://b1i8pprnjjjs4" path="res://Textures/Title.png" id="1_gjkd8"]
+[ext_resource type="AudioStream" uid="uid://l6rrog8136wn" path="res://Audio/Title.ogg" id="2_620a1"]
 
 [sub_resource type="GDScript" id="GDScript_jj4ef"]
 script/source = "extends Control
 
 func _ready() -> void:
 	$VBoxContainer/Button.grab_focus.call_deferred()
+	
+	var f := FileAccess.open(\"user://best\", FileAccess.READ)
+	if f:
+		$Best.text %= f.get_line().to_float()
+	else:
+		$Best.queue_free()
 
 func play() -> void:
 	get_tree().change_scene_to_file(\"res://Scenes/GameSnake.tscn\")
@@ -46,6 +53,21 @@ grow_horizontal = 2
 theme_override_colors/font_color = Color(0.501961, 0.223529, 0, 1)
 theme_override_font_sizes/font_size = 100
 text = "Rootsnek"
+
+[node name="Best" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -218.05
+offset_bottom = -160.05
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.866667, 0.87451, 0, 1)
+theme_override_font_sizes/font_size = 40
+text = "Best Score: %0.4f"
+horizontal_alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -87,6 +109,10 @@ Your task: wrap the building.
 There is many rootsneks. The one closest to the camera is controlled.
 Snek dies if it collides with itself or another snek."
 horizontal_alignment = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_620a1")
+autoplay = true
 
 [connection signal="pressed" from="VBoxContainer/Button" to="." method="play"]
 [connection signal="pressed" from="VBoxContainer/Button2" to="." method="exit"]
