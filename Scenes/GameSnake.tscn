@@ -1,7 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://c514njor17cvc"]
+[gd_scene load_steps=14 format=3 uid="uid://c514njor17cvc"]
 
 [ext_resource type="Script" path="res://Scripts/GameSnake.gd" id="1_jj3oq"]
+[ext_resource type="Texture2D" uid="uid://bc15ycqgwgt2k" path="res://Textures/bark_brown_01_diff_2k.jpg" id="2_vmdi2"]
 [ext_resource type="PackedScene" uid="uid://dx04esqm7ed0" path="res://FBX/Catedral_Scene_no_Ivy_001.fbx" id="3_2542n"]
+[ext_resource type="Texture2D" uid="uid://bn4sf5ug7akrj" path="res://Textures/bark_brown_01_disp_2k.png" id="3_bgksp"]
+[ext_resource type="Texture2D" uid="uid://d1e3d7ctk7vxt" path="res://Textures/bark_brown_01_rough_2k.jpg" id="4_34gnw"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_73e1h"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -98,6 +101,13 @@ func get_forward_rotation() -> float:
 	return 0
 "
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_la18a"]
+albedo_color = Color(0.443137, 0.309804, 0, 1)
+albedo_texture = ExtResource("2_vmdi2")
+roughness_texture = ExtResource("4_34gnw")
+normal_enabled = true
+normal_texture = ExtResource("3_bgksp")
+
 [sub_resource type="Curve3D" id="Curve3D_82rsp"]
 _data = {
 "points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0),
@@ -134,6 +144,7 @@ script = SubResource("GDScript_0ehyi")
 up_direction = Vector3(0, 0, 1)
 
 [node name="CSGPolygon3D" type="CSGPolygon3D" parent="Snakes/Snake"]
+material_override = SubResource("StandardMaterial3D_la18a")
 polygon = PackedVector2Array(0.5, 0, 0.353553, 0.353553, -2.18557e-08, 0.5, -0.353553, 0.353553, -0.5, -4.37114e-08, -0.353553, -0.353553, 5.96244e-09, -0.5, 0.353553, -0.353553)
 mode = 2
 path_node = NodePath("../Path3D")
@@ -151,6 +162,7 @@ curve = SubResource("Curve3D_82rsp")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Snakes/Snake"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+material_override = SubResource("StandardMaterial3D_la18a")
 mesh = SubResource("SphereMesh_4aj2m")
 
 [node name="FrontRaycast" type="ShapeCast3D" parent="Snakes/Snake"]
@@ -163,4 +175,3 @@ shape = SubResource("SphereShape3D_8aoj6")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.072348, 0.560673, -0.824871, 0, 0.827038, 0.562146, 0.997379, -0.0406701, 0.0598346, -20.2152, 25.2673, -10.0663)
-current = true
