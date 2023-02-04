@@ -5,6 +5,8 @@
 [sub_resource type="GDScript" id="GDScript_0ehyi"]
 script/source = "extends Node3D
 
+const SPEED = 1.0
+
 var rototions := 3
 
 @onready var curve: Curve3D = $Path3D.curve
@@ -33,7 +35,7 @@ func _ready() -> void:
 	head.rotation.y = get_forward_rotation()
 
 func _physics_process(delta: float) -> void:
-	head_position += direction * 2 * delta
+	head_position += direction * SPEED * delta
 	curve.set_point_position(current_point, head_position)
 	head.position = head_position
 	
