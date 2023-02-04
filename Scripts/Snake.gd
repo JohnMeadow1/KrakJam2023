@@ -39,7 +39,7 @@ func _physics_process(delta: float) -> void:
 	curve.set_point_position(current_point, head_position)
 	head.position = head_position
 	leaves.position = head_position
-	leaves.look_at(leaves.global_position + direction)
+	leaves.look_at(leaves.global_position + direction, up_direction)
 	
 	front_raycast.position = head_position
 	front_raycast.target_position = direction * 0.6

@@ -182,3 +182,13 @@ func update_score() -> void:
 	if timer.is_stopped():
 		%FinalFinal.text %= snenght
 		$UI/PanelContainer.hide()
+		
+		var best := 0
+		
+		var f := FileAccess.open("user://best", FileAccess.READ)
+		if f:
+			best = f.get_line().to_float()
+		
+		if snenght > best:
+			f = FileAccess.open("user://best", FileAccess.WRITE)
+			f.store_line(str(snenght))
