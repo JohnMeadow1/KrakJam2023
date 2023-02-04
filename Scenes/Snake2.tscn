@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://b6dbbu4210xbb"]
+[gd_scene load_steps=12 format=3 uid="uid://b6dbbu4210xbb"]
 
 [ext_resource type="Material" uid="uid://0hmxtpijjwj4" path="res://Resources/SnakeBronw.material" id="1_31vw0"]
 [ext_resource type="Material" uid="uid://dxs26fv8yrl3r" path="res://Resources/SnakeBronwGlow.material" id="2_3wfd7"]
@@ -12,6 +12,7 @@ script/source = "extends Node3D
 @onready var front_raycast: RayCast3D = $FrontRaycast
 @onready var down_raycast: RayCast3D = $BackRaycast
 @onready var glow: MeshInstance3D = %MeshInstance3D2
+@onready var leaves: GPUParticles3D = $GPUParticles3D
 
 @export var up_direction: Vector3
 
@@ -43,6 +44,7 @@ func _physics_process(delta: float) -> void:
 	head_position += direction * 2 * delta
 	curve.set_point_position(current_point, head_position)
 	head.position = head_position
+	leaves.position = head_position
 	
 	front_raycast.position = head_position
 	front_raycast.target_position = direction * 0.6
@@ -58,6 +60,7 @@ func _physics_process(delta: float) -> void:
 			set_physics_process(false)
 			glow.hide()
 			deded.emit()
+			leaves.emitting = false
 			return
 		
 		var prev := direction
@@ -127,11 +130,36 @@ _data = {
 point_count = 2
 
 [sub_resource type="SphereMesh" id="SphereMesh_4aj2m"]
-radial_segments = 8
-rings = 4
 
 [sub_resource type="SphereMesh" id="SphereMesh_buada"]
 radius = 0.6
+
+[sub_resource type="Curve" id="Curve_0y36v"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0518868, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_culr5"]
+curve = SubResource("Curve_0y36v")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lh8kb"]
+emission_shape = 6
+emission_ring_axis = Vector3(0, 1, 0)
+emission_ring_height = 0.0
+emission_ring_radius = 0.5
+emission_ring_inner_radius = 0.5
+particle_flag_rotate_y = true
+gravity = Vector3(0, 0, 0)
+angle_max = 360.0
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_culr5")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_83625"]
+albedo_color = Color(0, 1, 0.0392157, 1)
+emission_intensity = 1000.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_lyooq"]
+material = SubResource("StandardMaterial3D_83625")
+size = Vector3(0.2, 0.1, 0.1)
 
 [node name="Snake" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.419005)
@@ -153,7 +181,6 @@ path_local = true
 path_continuous_u = false
 path_u_distance = 1.0
 path_joined = false
-smooth_faces = true
 metadata/snek = true
 
 [node name="Path3D" type="Path3D" parent="."]
@@ -176,3 +203,10 @@ skeleton = NodePath("../..")
 [node name="FrontRaycast" type="RayCast3D" parent="."]
 
 [node name="BackRaycast" type="RayCast3D" parent="."]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+amount = 1000
+lifetime = 300.0
+visibility_aabb = AABB(-9999, -9999, -9999, 99999, 99999, 99999)
+process_material = SubResource("ParticleProcessMaterial_lh8kb")
+draw_pass_1 = SubResource("BoxMesh_lyooq")

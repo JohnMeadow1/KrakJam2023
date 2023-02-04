@@ -25,6 +25,7 @@ var mouse_LMB_pressed = false
 var mouse_RMB_pressed = false
 var mouse_MMB_pressed = false
 
+var nosneqqks: bool = true
 var sneqs_alive: int
 var fininszed: bool
 
@@ -32,6 +33,10 @@ func _ready() -> void:
 	snakes.child_entered_tree.connect(func(sn):
 		sneqs_alive += 1
 		sn.owner = self
+		
+		if nosneqqks:
+			nosneqqks = false
+			camera_pivot.rotation.y = Vector2(camera_pivot.global_position.x - sn.global_position.x, camera_pivot.global_position.y - sn.global_position.y).angle()
 		
 		sn.deded.connect(func():
 			sneqs_alive -= 1
@@ -66,7 +71,7 @@ func make_sneak():
 
 func _process(delta: float) -> void:
 	if fininszed:
-		camera_orbit_direction += delta * 3
+		camera_pivot.rotate_y(delta * 3)
 		return
 	
 	camera_handle_orbit(delta)

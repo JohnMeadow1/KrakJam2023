@@ -5,6 +5,9 @@
 [sub_resource type="GDScript" id="GDScript_jj4ef"]
 script/source = "extends Control
 
+func _ready() -> void:
+	$VBoxContainer/Button.grab_focus.call_deferred()
+
 func play() -> void:
 	get_tree().change_scene_to_file(\"res://Scenes/GameSnake.tscn\")
 
