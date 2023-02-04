@@ -10,6 +10,12 @@ var camera_height_factor = 0.0
 var camera_orbit_direction = 0.0
 var camera_orbit_factor = 0.0
 
+var mouse_orbit_direction = 0.0
+var mouse_height_direction = 0.0
+var mouse_LMB_pressed = false
+var mouse_RMB_pressed = false
+var mouse_MMB_pressed = false
+
 func _ready() -> void:
 	update_current_snake()
 	
@@ -21,7 +27,6 @@ func _ready() -> void:
 		)
 
 func _process(delta: float) -> void:
-
 	camera_handle_orbit(delta)
 	camera_handle_height(delta)
 
@@ -31,8 +36,8 @@ func camera_handle_orbit(delta: float):
 		camera_orbit_direction += delta * 3
 	if Input.is_key_pressed(KEY_A):
 		camera_orbit_direction -= delta * 3
-	camera_orbit_factor = lerp(camera_orbit_factor, camera_orbit_direction, 0.2)
-	
+	camera_orbit_factor = lerp(camera_orbit_factor, camera_orbit_direction + mouse_orbit_direction, 0.2)
+	mouse_orbit_direction = 0.0
 	if camera_orbit_direction == 0.0 and abs(camera_orbit_factor)<0.001:
 		camera_orbit_factor = 0.0
 	else:
@@ -45,8 +50,8 @@ func camera_handle_height(delta: float):
 		camera_height_direction += delta * 30.0
 	if Input.is_key_pressed(KEY_S):
 		camera_height_direction -= delta * 30.0
-	camera_height_factor = lerp(camera_height_factor, camera_height_direction,0.2)
-	
+	camera_height_factor = lerp(camera_height_factor, camera_height_direction + mouse_height_direction,0.2)
+	mouse_height_direction = 0.0
 	if camera_height_direction == 0 and abs(camera_height_factor)<0.01:
 		camera_height_factor = 0.0
 	else:
@@ -58,13 +63,45 @@ func camera_handle_height(delta: float):
 			update_current_snake()
 
 func _input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion:
+		if mouse_MMB_pressed:
+			mouse_orbit_direction -= event.relative.x * 0.001
+			mouse_height_direction -= event.relative.y * 0.0314159
+		if mouse_RMB_pressed:
+			camera_pivot.position -= Vector3(event.relative.x, 0, event.relative.y).rotated(Vector3.UP,camera_pivot.rotation.y) *0.01
+
 	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
-			camera_pivot.position.y += event.factor
-			update_current_snake()
-		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN or event.button_index == KEY_S:
-			camera_pivot.position.y -= event.factor
-			update_current_snake()
+		if event.pressed: 
+			if event.button_index == MOUSE_BUTTON_LEFT:
+				mouse_LMB_pressed = true
+			if event.button_index == MOUSE_BUTTON_RIGHT:
+				mouse_RMB_pressed = true
+			if event.button_index == MOUSE_BUTTON_MIDDLE:
+				mouse_MMB_pressed = true
+			Input.set_mouse_mode( Input.MOUSE_MODE_CAPTURED )
+
+		else:
+			if event.button_index == MOUSE_BUTTON_LEFT:
+				mouse_LMB_pressed = false
+			if event.button_index == MOUSE_BUTTON_RIGHT:
+				mouse_RMB_pressed = false
+			if event.button_index == MOUSE_BUTTON_MIDDLE:
+				mouse_MMB_pressed = false
+			Input.set_mouse_mode( Input.MOUSE_MODE_VISIBLE )
+
+		if event.pressed and event.button_index == MOUSE_BUTTON_WHEEL_UP:
+			mouse_height_direction += 2
+
+		if event.pressed and event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+			mouse_height_direction -= 2
+
+#	if event is InputEventMouseButton:
+#		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
+#			camera_pivot.position.y += event.factor
+#			update_current_snake()
+#		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN or event.button_index == KEY_S:
+#			camera_pivot.position.y -= event.factor
+#			update_current_snake()
 			
 
 func update_current_snake():
