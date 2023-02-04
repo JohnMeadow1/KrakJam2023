@@ -4,7 +4,7 @@
 [ext_resource type="Material" uid="uid://dxs26fv8yrl3r" path="res://Resources/SnakeBronwGlow.material" id="2_3wfd7"]
 [ext_resource type="Texture2D" uid="uid://mcwlau316m3t" path="res://Textures/Leaf.png" id="3_pifew"]
 
-[sub_resource type="GDScript" id="GDScript_0ehyi"]
+[sub_resource type="GDScript" id="GDScript_06823"]
 script/source = "extends Node3D
 
 @onready var curve: Curve3D = $Path3D.curve
@@ -124,51 +124,49 @@ func get_forward_rotation() -> float:
 	return 0
 "
 
-[sub_resource type="Curve3D" id="Curve3D_82rsp"]
+[sub_resource type="Curve3D" id="Curve3D_h4x1m"]
 _data = {
 "points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0),
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
 
-[sub_resource type="SphereMesh" id="SphereMesh_4aj2m"]
+[sub_resource type="SphereMesh" id="SphereMesh_sceb8"]
 
-[sub_resource type="SphereMesh" id="SphereMesh_buada"]
+[sub_resource type="SphereMesh" id="SphereMesh_ce5gt"]
 radius = 0.6
 
-[sub_resource type="Curve" id="Curve_0y36v"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0518868, 1), 0.0, 0.0, 0, 0]
+[sub_resource type="Curve" id="Curve_ua7m8"]
+_data = [Vector2(0, 0), 0.0, 97.903, 0, 0, Vector2(0.034264, 1), 6.61528e-07, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_culr5"]
-curve = SubResource("Curve_0y36v")
+[sub_resource type="CurveTexture" id="CurveTexture_8gmgs"]
+curve = SubResource("Curve_ua7m8")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lh8kb"]
-emission_shape = 6
-emission_ring_axis = Vector3(0, 1, 0)
-emission_ring_height = 0.0
-emission_ring_radius = 0.5
-emission_ring_inner_radius = 0.5
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dtpg7"]
 particle_flag_rotate_y = true
+direction = Vector3(1, 1, 0)
+spread = 180.0
 gravity = Vector3(0, 0, 0)
 angle_max = 360.0
 scale_max = 2.0
-scale_curve = SubResource("CurveTexture_culr5")
+scale_curve = SubResource("CurveTexture_8gmgs")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a7da0"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g2jvj"]
 transparency = 1
+cull_mode = 2
 albedo_texture = ExtResource("3_pifew")
-emission_intensity = 1000.0
 
-[sub_resource type="QuadMesh" id="QuadMesh_65n1w"]
-material = SubResource("StandardMaterial3D_a7da0")
+[sub_resource type="QuadMesh" id="QuadMesh_qfnn8"]
+material = SubResource("StandardMaterial3D_g2jvj")
 size = Vector2(0.6, 0.3)
+center_offset = Vector3(0.6, 0, 0)
 orientation = 1
 
 [node name="Snake" type="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.419005)
-script = SubResource("GDScript_0ehyi")
+script = SubResource("GDScript_06823")
 up_direction = Vector3(0, 0, 1)
+metadata/_edit_lock_ = true
 
 [node name="CSGPolygon3D" type="CSGPolygon3D" parent="."]
 material_override = ExtResource("1_31vw0")
@@ -188,20 +186,20 @@ path_joined = false
 metadata/snek = true
 
 [node name="Path3D" type="Path3D" parent="."]
-curve = SubResource("Curve3D_82rsp")
+curve = SubResource("Curve3D_h4x1m")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 material_override = ExtResource("1_31vw0")
 gi_mode = 2
-mesh = SubResource("SphereMesh_4aj2m")
+mesh = SubResource("SphereMesh_sceb8")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D"]
 unique_name_in_owner = true
 visible = false
 material_override = ExtResource("2_3wfd7")
 gi_mode = 2
-mesh = SubResource("SphereMesh_buada")
+mesh = SubResource("SphereMesh_ce5gt")
 skeleton = NodePath("../..")
 
 [node name="FrontRaycast" type="RayCast3D" parent="."]
@@ -212,5 +210,6 @@ skeleton = NodePath("../..")
 amount = 1000
 lifetime = 300.0
 visibility_aabb = AABB(-9999, -9999, -9999, 99999, 99999, 99999)
-process_material = SubResource("ParticleProcessMaterial_lh8kb")
-draw_pass_1 = SubResource("QuadMesh_65n1w")
+draw_order = 1
+process_material = SubResource("ParticleProcessMaterial_dtpg7")
+draw_pass_1 = SubResource("QuadMesh_qfnn8")
