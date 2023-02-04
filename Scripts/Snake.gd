@@ -3,6 +3,7 @@ extends Node3D
 @onready var curve: Curve3D = $Path3D.curve
 @onready var body: CSGPolygon3D = $CSGPolygon3D
 @onready var head: MeshInstance3D = $MeshInstance3D
+@onready var ray_cast: RayCast3D = $RayCast3D
 
 @export var up_direction: Vector3
 
@@ -14,17 +15,26 @@ var current_point := 1
 
 func _ready() -> void:
 	head_position = direction * 0.01
+	curve = curve.duplicate()
+	$Path3D.curve = curve
 	curve.set_point_position(current_point, head_position)
 	head.position = curve.get_point_position(current_point) + direction * 0.5
 	head.rotation.y = get_forward_rotation()
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	head_position += direction * 2 * delta
 	curve.set_point_position(current_point, head_position)
 #	head.position = head.position.lerp(curve.get_point_position(current_point) + direction * 0.8, 0.01)
 	head.position = head_position + direction * 0.5
 	head.rotation.y = lerp_angle(head.rotation.y, get_forward_rotation(), 0.1)
 	
+	ray_cast.position = head_position
+	ray_cast.target_position = direction
+	
+	if ray_cast.is_colliding():
+		rotate_to(Vector3.UP)
+
+func _process(delta: float) -> void:
 	if not is_current:
 		return
 	
@@ -35,7 +45,10 @@ func _process(delta: float) -> void:
 		rotate_head(-PI/2)
 
 func rotate_head(angle: float):
-	direction = direction.rotated(up_direction, angle)
+	rotate_to(direction.rotated(up_direction, angle))
+
+func rotate_to(dir: Vector3):
+	direction = dir
 	curve.add_point(head_position + direction * 0.01)
 	current_point += 1
 

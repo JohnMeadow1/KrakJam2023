@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://c514njor17cvc"]
+[gd_scene load_steps=8 format=3 uid="uid://c514njor17cvc"]
 
 [ext_resource type="PackedScene" path="res://Scenes/Snake.tscn" id="1_c55gu"]
 [ext_resource type="Script" path="res://Scripts/GameSnake.gd" id="1_jj3oq"]
@@ -19,6 +19,9 @@ glow_enabled = true
 [sub_resource type="BoxMesh" id="BoxMesh_mgm4x"]
 size = Vector3(5, 50, 5)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_gbg5n"]
+size = Vector3(1, 50, 1)
+
 [node name="GameSnake" type="Node3D"]
 script = ExtResource("1_jj3oq")
 
@@ -36,22 +39,66 @@ unique_name_in_owner = true
 transform = Transform3D(-0.046219, -0.417491, 0.907505, 0, 0.908476, 0.417937, -0.998931, 0.0193166, -0.0419888, 9.98971, 4.32691, -0.192844)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 25, 0)
 mesh = SubResource("BoxMesh_mgm4x")
 
 [node name="Snakes" type="Node3D" parent="."]
 
 [node name="Snake" parent="Snakes" instance=ExtResource("1_c55gu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.03273, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.68888, 0, 0)
 up_direction = Vector3(1, 0, 0)
+
+[node name="CSGPolygon3D" parent="Snakes/Snake" index="0"]
+material_override = null
+
+[node name="RayCast3D" type="RayCast3D" parent="Snakes/Snake"]
 
 [node name="Snake3" parent="Snakes" instance=ExtResource("1_c55gu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.09731, 0, 0)
 up_direction = Vector3(-1, 0, 0)
 
+[node name="CSGPolygon3D" parent="Snakes/Snake3" index="0"]
+material_override = null
+
+[node name="RayCast3D" type="RayCast3D" parent="Snakes/Snake3"]
+
 [node name="Snake2" parent="Snakes" instance=ExtResource("1_c55gu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.40757, 4.76837e-07, 3.14958)
 up_direction = Vector3(0, 0, 1)
 
+[node name="CSGPolygon3D" parent="Snakes/Snake2" index="0"]
+material_override = null
+
+[node name="RayCast3D" type="RayCast3D" parent="Snakes/Snake2"]
+
 [node name="Snake4" parent="Snakes" instance=ExtResource("1_c55gu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.40757, 4.76837e-07, -3.00896)
 up_direction = Vector3(0, 0, -1)
+
+[node name="CSGPolygon3D" parent="Snakes/Snake4" index="0"]
+material_override = null
+
+[node name="RayCast3D" type="RayCast3D" parent="Snakes/Snake4"]
+
+[node name="Borders" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Borders"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 25, 3)
+shape = SubResource("BoxShape3D_gbg5n")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Borders"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 25, 3)
+shape = SubResource("BoxShape3D_gbg5n")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="Borders"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 25, -3)
+shape = SubResource("BoxShape3D_gbg5n")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="Borders"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 25, -3)
+shape = SubResource("BoxShape3D_gbg5n")
+
+[editable path="Snakes/Snake"]
+[editable path="Snakes/Snake3"]
+[editable path="Snakes/Snake2"]
+[editable path="Snakes/Snake4"]
