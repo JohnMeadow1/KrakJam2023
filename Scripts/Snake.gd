@@ -3,11 +3,13 @@ extends Node3D
 @onready var curve: Curve3D = $Path3D.curve
 @onready var body: CSGPolygon3D = $CSGPolygon3D
 @onready var head: MeshInstance3D = $MeshInstance3D
-@onready var front_raycast: RayCast3D = $FrontRaycast
-@onready var down_raycast: RayCast3D = $BackRaycast
 @onready var glow: MeshInstance3D = %MeshInstance3D2
 @onready var leaves: GPUParticles3D = $GPUParticles3D
 @onready var audio: AudioStreamPlayer3D = $AudioStreamPlayer3D
+
+@onready var front_raycast: RayCast3D = $FrontRaycast
+@onready var down_raycast: RayCast3D = $BackRaycast
+@onready var down_raycast2: RayCast3D = down_raycast.duplicate()
 
 @export var up_direction: Vector3
 
@@ -28,6 +30,7 @@ var μtimer = randf_range(3, 8)
 signal deded
 
 func _ready() -> void:
+	add_child(down_raycast2)
 	head_position = direction * 0.01
 	curve = curve.duplicate()
 	$Path3D.curve = curve
@@ -41,16 +44,19 @@ func _physics_process(delta: float) -> void:
 	head_position += direction * 2 * delta
 	curve.set_point_position(current_point, head_position)
 	head.position = head_position
-	leaves.position = head_position
 	audio.position = head_position
+	leaves.position = head_position
 	leaves.look_at(leaves.global_position + direction, up_direction)
 	
 	front_raycast.position = head_position
-	front_raycast.target_position = direction * 0.6
-	down_raycast.position = head_position - direction * 0.2
+	front_raycast.target_position = direction * 0.4
+	down_raycast.position = head_position - direction * 0.5
 	down_raycast.target_position = -up_direction * 0.6
+	down_raycast2.position = head_position + direction * 0.5
+	down_raycast2.target_position = -up_direction * 0.6
+	
 	if not body.get_meshes().is_empty():
-		body.material_override.set_shader_parameter("total_vertices",(body.get_meshes()[1].get_faces().size()*3))
+		body.material_override.set_shader_parameter(&"total_vertices",(body.get_meshes()[1].get_faces().size()*3))
 		
 	if disable_raycasts > 0:
 		disable_raycasts -= 1
@@ -70,16 +76,12 @@ func _physics_process(delta: float) -> void:
 		up_direction = -prev
 		disable_raycasts = 30
 	
-	if not down_raycast.is_colliding():
-		down_timeout += delta
-		
-		if down_timeout >= 0.05:
-			var prev := direction
-			rotate_to(-up_direction)
-			up_direction = prev
-			disable_raycasts = 30
-	else:
-		down_timeout = 0
+	if not down_raycast.is_colliding() and not down_raycast2.is_colliding():
+		head_position -= direction * 0.05
+		var prev := direction
+		rotate_to(-up_direction)
+		up_direction = prev
+		disable_raycasts = 30
 	
 	μtimer -= delta
 	if μtimer <= 0:

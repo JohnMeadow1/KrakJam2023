@@ -1,0 +1,76 @@
+[gd_scene load_steps=10 format=3 uid="uid://du3jwf8th2i70"]
+
+[ext_resource type="PackedScene" uid="uid://dnn0pmqdsvulh" path="res://Scenes/SnekSpawner.tscn" id="1_kjwaa"]
+
+[sub_resource type="GDScript" id="GDScript_7rsim"]
+script/source = "extends Node3D
+
+var snakes = self
+
+func _ready() -> void:
+	Engine.time_scale = 0.1
+	$SnekSpawner.spawn_snek()
+	$Snake.μtimer = 9999
+"
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_rm64c"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_57ywh"]
+sky_material = SubResource("ProceduralSkyMaterial_rm64c")
+
+[sub_resource type="Environment" id="Environment_nkysj"]
+background_mode = 2
+sky = SubResource("Sky_57ywh")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_8d887"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ckdbj"]
+size = Vector3(10, 1, 10)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_i1il0"]
+data = PackedVector3Array(-5, 0.5, 5, 5, 0.5, 5, -5, -0.5, 5, 5, 0.5, 5, 5, -0.5, 5, -5, -0.5, 5, 5, 0.5, -5, -5, 0.5, -5, 5, -0.5, -5, -5, 0.5, -5, -5, -0.5, -5, 5, -0.5, -5, 5, 0.5, 5, 5, 0.5, -5, 5, -0.5, 5, 5, 0.5, -5, 5, -0.5, -5, 5, -0.5, 5, -5, 0.5, -5, -5, 0.5, 5, -5, -0.5, -5, -5, 0.5, 5, -5, -0.5, 5, -5, -0.5, -5, 5, 0.5, 5, -5, 0.5, 5, 5, 0.5, -5, -5, 0.5, 5, -5, 0.5, -5, 5, 0.5, -5, -5, -0.5, 5, 5, -0.5, 5, -5, -0.5, -5, 5, -0.5, 5, 5, -0.5, -5, -5, -0.5, -5)
+
+[sub_resource type="GDScript" id="GDScript_vreov"]
+script/source = "extends Camera3D
+
+func _process(delta: float) -> void:
+	var move = Vector2(float(Input.is_key_pressed(KEY_D)) - float(Input.is_key_pressed(KEY_A)), float(Input.is_key_pressed(KEY_S)) - float(Input.is_key_pressed(KEY_W)))
+	position -= Vector3(0, move.y, move.x) * delta * 5
+"
+
+[node name="SnekExam" type="Node3D"]
+script = SubResource("GDScript_7rsim")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_nkysj")
+camera_attributes = SubResource("CameraAttributesPractical_8d887")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 2.73416, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_ckdbj")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_i1il0")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -5.16503)
+mesh = SubResource("BoxMesh_ckdbj")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D2/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_i1il0")
+
+[node name="SnekSpawner" parent="." instance=ExtResource("1_kjwaa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.59189)
+up_direction = Vector3(0, 0, 1)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.140939, -0.638328, 0.756752, 0, 0.764382, 0.644764, -0.990018, -0.0908722, 0.107731, 1.99707, 2.47641, 4.86618)
+script = SubResource("GDScript_vreov")
