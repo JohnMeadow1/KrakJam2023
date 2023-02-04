@@ -1,5 +1,6 @@
-[gd_scene load_steps=13 format=3 uid="uid://b6dbbu4210xbb"]
+[gd_scene load_steps=15 format=3 uid="uid://b6dbbu4210xbb"]
 
+[ext_resource type="Shader" path="res://Resources/Final.gdshader" id="1_ofm4c"]
 [ext_resource type="Material" uid="uid://0hmxtpijjwj4" path="res://Resources/SnakeBronw.material" id="2_dtsnv"]
 [ext_resource type="Material" uid="uid://dxs26fv8yrl3r" path="res://Resources/SnakeBronwGlow.material" id="3_5suqn"]
 [ext_resource type="Texture2D" uid="uid://mcwlau316m3t" path="res://Textures/Leaf.png" id="4_fpi77"]
@@ -53,10 +54,10 @@ func _physics_process(delta: float) -> void:
 	down_raycast.position = head_position - direction * 0.2
 	down_raycast.target_position = -up_direction * 0.6
 
-#	if not body.get_meshes().is_empty():
-#		body.set_instance_shader_parameter(\"total_vertices\",(body.get_meshes()[1].get_faces().size()))
-#
-
+	if not body.get_meshes().is_empty():
+		body.material_override.set_shader_parameter(\"total_vertices\",(body.get_meshes()[1].get_faces().size()))
+#	print( (body.get_meshes()[1].get_faces().size()-36)/48 )
+	print(body.get_meshes()[1].get_faces().size())
 	if disable_raycasts > 0:
 		disable_raycasts -= 1
 		return
@@ -128,6 +129,13 @@ func get_forward_rotation() -> float:
 	return 0
 "
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lg7ra"]
+render_priority = 0
+shader = ExtResource("1_ofm4c")
+shader_parameter/albedo = null
+shader_parameter/roughness = null
+shader_parameter/total_vertices = 150
+
 [sub_resource type="Curve3D" id="Curve3D_h4x1m"]
 _data = {
 "points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0),
@@ -173,10 +181,11 @@ up_direction = Vector3(0, 0, 1)
 metadata/_edit_lock_ = true
 
 [node name="CSGPolygon3D" type="CSGPolygon3D" parent="."]
-material_override = ExtResource("2_dtsnv")
+material_override = SubResource("ShaderMaterial_lg7ra")
+snap = 0.0001
 use_collision = true
 collision_mask = 0
-polygon = PackedVector2Array(0.25, 0, 0.176777, 0.176777, -1.09278e-08, 0.25, -0.176777, 0.176777, -0.25, -2.18557e-08, -0.176777, -0.176777, 2.98122e-09, -0.25, 0.176777, -0.176777)
+polygon = PackedVector2Array(0.5, 0, 0.353553, 0.353553, -2.18557e-08, 0.5, -0.353553, 0.353553, -0.5, -4.37114e-08, -0.353553, -0.353553, 5.96244e-09, -0.5, 0.353553, -0.353553)
 mode = 2
 path_node = NodePath("../Path3D")
 path_interval_type = 1
@@ -187,6 +196,7 @@ path_local = true
 path_continuous_u = false
 path_u_distance = 1.0
 path_joined = false
+smooth_faces = true
 metadata/snek = true
 
 [node name="Path3D" type="Path3D" parent="."]
@@ -194,6 +204,7 @@ curve = SubResource("Curve3D_h4x1m")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
 material_override = ExtResource("2_dtsnv")
 gi_mode = 2
 mesh = SubResource("SphereMesh_sceb8")
@@ -211,6 +222,7 @@ skeleton = NodePath("../..")
 [node name="BackRaycast" type="RayCast3D" parent="."]
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+visible = false
 amount = 1000
 lifetime = 300.0
 visibility_aabb = AABB(-9999, -9999, -9999, 99999, 99999, 99999)
