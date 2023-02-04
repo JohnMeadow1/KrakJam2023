@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://uinf6rg0jnl0"]
+[gd_scene load_steps=18 format=3 uid="uid://uinf6rg0jnl0"]
 
 [sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_gndh7"]
 input_name = "vertex"
@@ -145,6 +145,19 @@ nodes/vertex/connections = PackedInt32Array(2, 0, 3, 0, 3, 0, 0, 0, 4, 0, 3, 1, 
 render_priority = 0
 shader = SubResource("VisualShader_k8si7")
 
+[sub_resource type="GDScript" id="GDScript_q2a48"]
+script/source = "@tool
+extends Polygon2D
+
+func _ready() -> void:
+	var p = []
+	
+	for i in 8:
+		p.append(Vector2.from_angle(TAU / 8 * i) * 0.5)
+	
+	polygon = p
+"
+
 [node name="Trash" type="Node3D"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -165,3 +178,7 @@ path_local = false
 path_continuous_u = true
 path_u_distance = 1.0
 path_joined = false
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(0.5, 0, 0.353553, 0.353553, -2.18557e-08, 0.5, -0.353553, 0.353553, -0.5, -4.37114e-08, -0.353553, -0.353553, 5.96244e-09, -0.5, 0.353553, -0.353553)
+script = SubResource("GDScript_q2a48")

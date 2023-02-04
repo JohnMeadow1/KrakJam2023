@@ -1,7 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://c514njor17cvc"]
+[gd_scene load_steps=10 format=3 uid="uid://c514njor17cvc"]
 
-[ext_resource type="PackedScene" uid="uid://gcggqnbh7abd" path="res://Scenes/Snake.tscn" id="1_c55gu"]
 [ext_resource type="Script" path="res://Scripts/GameSnake.gd" id="1_jj3oq"]
+[ext_resource type="PackedScene" uid="uid://dx04esqm7ed0" path="res://FBX/Catedral_Scene_no_Ivy_001.fbx" id="3_2542n"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_73e1h"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -16,11 +16,98 @@ sky = SubResource("Sky_enxy5")
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="BoxMesh" id="BoxMesh_mgm4x"]
-size = Vector3(5, 50, 5)
+[sub_resource type="GDScript" id="GDScript_0ehyi"]
+script/source = "extends Node3D
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_gbg5n"]
-size = Vector3(1, 50, 1)
+@onready var curve: Curve3D = $Path3D.curve
+@onready var body: CSGPolygon3D = $CSGPolygon3D
+@onready var head: MeshInstance3D = $MeshInstance3D
+@onready var front_raycast: ShapeCast3D = $FrontRaycast
+@onready var down_raycast: ShapeCast3D = $BackRaycast
+
+@export var up_direction: Vector3
+
+var is_current: bool
+var disable_raycasts: int = 30
+
+var direction: Vector3 = Vector3.UP
+var head_position: Vector3
+var current_point := 1
+
+func _ready() -> void:
+	head_position = direction * 0.01
+	curve = curve.duplicate()
+	$Path3D.curve = curve
+	curve.set_point_position(current_point, head_position)
+	head.position = curve.get_point_position(current_point) + direction * 0.5
+	head.rotation.y = get_forward_rotation()
+
+func _physics_process(delta: float) -> void:
+	head_position += direction * 2 * delta
+	curve.set_point_position(current_point, head_position)
+	head.position = head_position
+	
+	front_raycast.position = head_position
+	front_raycast.target_position = direction
+	down_raycast.position = head_position
+	down_raycast.target_position = -up_direction
+	
+	if disable_raycasts > 0:
+		disable_raycasts -= 1
+		return
+	
+	if front_raycast.is_colliding():
+		var prev := direction
+		rotate_to(up_direction)
+		up_direction = -prev
+		disable_raycasts = 30
+	
+	if not down_raycast.is_colliding():
+		var prev := direction
+		rotate_to(-up_direction)
+		up_direction = prev
+		disable_raycasts = 30
+
+func _process(delta: float) -> void:
+	if not is_current:
+		return
+	
+	if Input.is_action_just_pressed(&\"ui_left\"):
+		rotate_head(PI/2)
+	
+	if Input.is_action_just_pressed(&\"ui_right\"):
+		rotate_head(-PI/2)
+
+func rotate_head(angle: float):
+	rotate_to(direction.rotated(up_direction, angle))
+
+func rotate_to(dir: Vector3):
+	direction = dir
+	curve.add_point(head_position + direction * 0.01)
+	current_point += 1
+
+func get_forward_rotation() -> float:
+	if direction.is_equal_approx(Vector3.RIGHT):
+		return -PI / 2
+	elif direction.is_equal_approx(Vector3.LEFT):
+		return PI / 2
+	elif direction.is_equal_approx(Vector3.FORWARD):
+		return 0
+	elif direction.is_equal_approx(Vector3.BACK):
+		return PI
+	return 0
+"
+
+[sub_resource type="Curve3D" id="Curve3D_82rsp"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[sub_resource type="SphereMesh" id="SphereMesh_4aj2m"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_8aoj6"]
 
 [node name="GameSnake" type="Node3D"]
 script = ExtResource("1_jj3oq")
@@ -36,44 +123,44 @@ environment = SubResource("Environment_x331o")
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot"]
 unique_name_in_owner = true
-transform = Transform3D(-0.046219, -0.417491, 0.907505, 0, 0.908476, 0.417937, -0.998931, 0.0193166, -0.0419888, 9.98971, 4.32691, -0.192844)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 25, 0)
-mesh = SubResource("BoxMesh_mgm4x")
+transform = Transform3D(0.999981, 0.00470895, -0.00392274, 0, 0.640051, 0.768332, 0.0061288, -0.768318, 0.640039, -0.151418, 5.93466, 5.73172)
+current = true
 
 [node name="Snakes" type="Node3D" parent="."]
 
-[node name="Snake" parent="Snakes" instance=ExtResource("1_c55gu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.68888, 0, 0)
-up_direction = Vector3(1, 0, 0)
-
-[node name="Snake3" parent="Snakes" instance=ExtResource("1_c55gu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.09731, 0, 0)
-up_direction = Vector3(-1, 0, 0)
-
-[node name="Snake2" parent="Snakes" instance=ExtResource("1_c55gu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.40757, 4.76837e-07, 3.14958)
+[node name="Snake" type="Node3D" parent="Snakes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.419005)
+script = SubResource("GDScript_0ehyi")
 up_direction = Vector3(0, 0, 1)
 
-[node name="Snake4" parent="Snakes" instance=ExtResource("1_c55gu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.40757, 4.76837e-07, -3.00896)
-up_direction = Vector3(0, 0, -1)
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="Snakes/Snake"]
+polygon = PackedVector2Array(0.5, 0, 0.353553, 0.353553, -2.18557e-08, 0.5, -0.353553, 0.353553, -0.5, -4.37114e-08, -0.353553, -0.353553, 5.96244e-09, -0.5, 0.353553, -0.353553)
+mode = 2
+path_node = NodePath("../Path3D")
+path_interval_type = 1
+path_interval = 0.5
+path_simplify_angle = 0.0
+path_rotation = 2
+path_local = true
+path_continuous_u = false
+path_u_distance = 1.0
+path_joined = false
 
-[node name="Borders" type="StaticBody3D" parent="."]
+[node name="Path3D" type="Path3D" parent="Snakes/Snake"]
+curve = SubResource("Curve3D_82rsp")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Borders"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 25, 3)
-shape = SubResource("BoxShape3D_gbg5n")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Snakes/Snake"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("SphereMesh_4aj2m")
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="Borders"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 25, 3)
-shape = SubResource("BoxShape3D_gbg5n")
+[node name="FrontRaycast" type="ShapeCast3D" parent="Snakes/Snake"]
+shape = SubResource("SphereShape3D_8aoj6")
 
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="Borders"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 25, -3)
-shape = SubResource("BoxShape3D_gbg5n")
+[node name="BackRaycast" type="ShapeCast3D" parent="Snakes/Snake"]
+shape = SubResource("SphereShape3D_8aoj6")
 
-[node name="CollisionShape3D4" type="CollisionShape3D" parent="Borders"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 25, -3)
-shape = SubResource("BoxShape3D_gbg5n")
+[node name="Catedral_Scene_no_Ivy_001" parent="." instance=ExtResource("3_2542n")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.072348, 0.560673, -0.824871, 0, 0.827038, 0.562146, 0.997379, -0.0406701, 0.0598346, -20.2152, 25.2673, -10.0663)
+current = true
