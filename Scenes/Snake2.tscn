@@ -88,9 +88,13 @@ func rotate_head(angle: float):
 	rotate_to(direction.rotated(up_direction, angle))
 
 func rotate_to(dir: Vector3):
+	curve.set_point_position(current_point, head_position - direction * 0.5)
+	curve.add_point((head_position - direction * 0.5).lerp(head_position + dir * 0.5, 0.5))
 	direction = dir
-	curve.add_point(head_position + direction * 0.01)
-	current_point += 1
+	curve.add_point(head_position + direction * 0.5)
+	curve.add_point(head_position + direction * 0.51)
+	current_point = curve.point_count - 1
+	head_position = curve.get_point_position(current_point)
 
 func get_forward_rotation() -> float:
 	if direction.is_equal_approx(Vector3.RIGHT):
