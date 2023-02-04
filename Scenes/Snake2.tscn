@@ -27,6 +27,8 @@ var direction: Vector3 = Vector3.UP
 var head_position: Vector3
 var current_point := 1
 
+signal deded
+
 func _ready() -> void:
 	head_position = direction * 0.01
 	curve = curve.duplicate()
@@ -51,7 +53,10 @@ func _physics_process(delta: float) -> void:
 	
 	if front_raycast.is_colliding():
 		if front_raycast.get_collider().get_meta(&\"snek\", false):
-			queue_free()
+			set_physics_process(false)
+			glow.hide()
+			deded.emit()
+			return
 		
 		var prev := direction
 		rotate_to(up_direction)

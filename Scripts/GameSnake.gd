@@ -21,15 +21,19 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
 			camera_pivot.position.y += event.factor
+			update_current_snake()
 		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 			camera_pivot.position.y -= event.factor
+			update_current_snake()
 
 func update_current_snake():
 	var new_current: Node3D
 	
-	
 	var min_dist := INF
 	for snake in snakes.get_children():
+		if not snake.is_physics_processing():
+			continue
+		
 		var dist = snake.global_position.distance_squared_to(camera_3d.global_position)
 		if dist < min_dist:
 			new_current = snake
@@ -42,10 +46,10 @@ func update_current_snake():
 	if new_current != current_snake:
 		if current_snake:
 			current_snake.is_current = false
-			current_snake.tree_exited.disconnect(on_snek_ded)
+			current_snake.deded.disconnect(on_snek_ded)
 		
 		current_snake = new_current
 		
 		if current_snake:
 			current_snake.is_current = true
-			current_snake.tree_exited.connect(on_snek_ded)
+			current_snake.deded.connect(on_snek_ded)
