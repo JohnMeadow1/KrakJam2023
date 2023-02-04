@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://b6dbbu4210xbb"]
+[gd_scene load_steps=13 format=3 uid="uid://b6dbbu4210xbb"]
 
 [ext_resource type="Material" uid="uid://0hmxtpijjwj4" path="res://Resources/SnakeBronw.material" id="1_31vw0"]
 [ext_resource type="Material" uid="uid://dxs26fv8yrl3r" path="res://Resources/SnakeBronwGlow.material" id="2_3wfd7"]
+[ext_resource type="Texture2D" uid="uid://mcwlau316m3t" path="res://Textures/Leaf.png" id="3_pifew"]
 
 [sub_resource type="GDScript" id="GDScript_0ehyi"]
 script/source = "extends Node3D
@@ -45,6 +46,7 @@ func _physics_process(delta: float) -> void:
 	curve.set_point_position(current_point, head_position)
 	head.position = head_position
 	leaves.position = head_position
+	leaves.look_at(direction)
 	
 	front_raycast.position = head_position
 	front_raycast.target_position = direction * 0.6
@@ -153,13 +155,15 @@ angle_max = 360.0
 scale_max = 2.0
 scale_curve = SubResource("CurveTexture_culr5")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_83625"]
-albedo_color = Color(0, 1, 0.0392157, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a7da0"]
+transparency = 1
+albedo_texture = ExtResource("3_pifew")
 emission_intensity = 1000.0
 
-[sub_resource type="BoxMesh" id="BoxMesh_lyooq"]
-material = SubResource("StandardMaterial3D_83625")
-size = Vector3(0.2, 0.1, 0.1)
+[sub_resource type="QuadMesh" id="QuadMesh_65n1w"]
+material = SubResource("StandardMaterial3D_a7da0")
+size = Vector2(0.6, 0.3)
+orientation = 1
 
 [node name="Snake" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.419005)
@@ -209,4 +213,4 @@ amount = 1000
 lifetime = 300.0
 visibility_aabb = AABB(-9999, -9999, -9999, 99999, 99999, 99999)
 process_material = SubResource("ParticleProcessMaterial_lh8kb")
-draw_pass_1 = SubResource("BoxMesh_lyooq")
+draw_pass_1 = SubResource("QuadMesh_65n1w")
