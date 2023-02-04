@@ -1,8 +1,12 @@
 extends Node3D
 
+var SNEKOUNT = 10
+const MAXNEKS_AT_ONCE = 3
+
 @onready var camera_pivot: Node3D = $CameraPivot
 @onready var camera_3d: Camera3D = %Camera3D
 @onready var snakes: Node3D = $Snakes
+@onready var snek_spawners: Node3D = $SnekSpawners
 
 @onready var total: Label = %Total
 
@@ -18,15 +22,34 @@ var mouse_LMB_pressed = false
 var mouse_RMB_pressed = false
 var mouse_MMB_pressed = false
 
+var sneqs_alive: int
+
 func _ready() -> void:
-	update_current_snake()
-	
-	for snek in snakes.get_children():
-		snek.deded.connect(func():
-			if snek == current_snake:
+	snakes.child_entered_tree.connect(func(sn):
+		sneqs_alive += 1
+		sn.owner = self
+		
+		sn.deded.connect(func():
+			sneqs_alive -= 1
+			if sneqs_alive < MAXNEKS_AT_ONCE:
+				make_sneak()
+			
+			if sn == current_snake:
 				current_snake = null
 				update_current_snake()
 		)
+	)
+	
+	for i in MAXNEKS_AT_ONCE:
+		make_sneak()
+	
+	update_current_snake()
+
+func make_sneak():
+	for i in 1000:
+		if snek_spawners.get_child(randi() % snek_spawners.get_child_count()).spawn_snek():
+			SNEKOUNT -= 1
+			break
 
 func _process(delta: float) -> void:
 	camera_handle_orbit(delta)
