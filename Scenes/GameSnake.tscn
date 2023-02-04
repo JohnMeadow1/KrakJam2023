@@ -182,7 +182,32 @@ layout_mode = 2
 text = "0"
 horizontal_alignment = 1
 
+[node name="Summary" type="VBoxContainer" parent="UI"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="UI/Summary"]
+layout_mode = 2
+text = "END!"
+horizontal_alignment = 1
+
+[node name="FinalFinal" type="Label" parent="UI/Summary"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Final Score: %0.3f"
+horizontal_alignment = 1
+
 [node name="Timer" type="Timer" parent="UI"]
+unique_name_in_owner = true
 wait_time = 0.25
 autostart = true
 
