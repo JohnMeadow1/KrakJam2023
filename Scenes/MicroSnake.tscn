@@ -1,7 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://b6dbbu4210xbb"]
+[gd_scene load_steps=5 format=3 uid="uid://djqprv8eoqhol"]
 
-[ext_resource type="Material" uid="uid://0hmxtpijjwj4" path="res://Resources/SnakeBronw.material" id="1_31vw0"]
-[ext_resource type="Material" uid="uid://dxs26fv8yrl3r" path="res://Resources/SnakeBronwGlow.material" id="2_3wfd7"]
+[ext_resource type="Material" uid="uid://0hmxtpijjwj4" path="res://Resources/SnakeBronw.material" id="1_7prta"]
 
 [sub_resource type="GDScript" id="GDScript_0ehyi"]
 script/source = "extends Node3D
@@ -11,14 +10,8 @@ script/source = "extends Node3D
 @onready var head: MeshInstance3D = $MeshInstance3D
 @onready var front_raycast: RayCast3D = $FrontRaycast
 @onready var down_raycast: RayCast3D = $BackRaycast
-@onready var glow: MeshInstance3D = %MeshInstance3D2
 
 @export var up_direction: Vector3
-
-var is_current: bool:
-	set(current):
-		is_current = current
-		glow.visible = current
 
 var disable_raycasts: int = 60
 var down_timeout: float
@@ -26,8 +19,6 @@ var down_timeout: float
 var direction: Vector3 = Vector3.UP
 var head_position: Vector3
 var current_point := 1
-
-var μtimer = randf_range(3, 8)
 
 signal deded
 
@@ -56,7 +47,6 @@ func _physics_process(delta: float) -> void:
 	if front_raycast.is_colliding():
 		if front_raycast.get_collider().get_meta(&\"snek\", false):
 			set_physics_process(false)
-			glow.hide()
 			deded.emit()
 			return
 		
@@ -75,25 +65,6 @@ func _physics_process(delta: float) -> void:
 			disable_raycasts = 30
 	else:
 		down_timeout = 0
-	
-	μtimer -= delta
-	if μtimer <= 0:
-		μtimer = randf_range(3, 8)
-		var μsnake = load(\"res://Scenes/MicroSnake.tscn\").instantiate()
-		μsnake.position = global_position + head_position
-		μsnake.direction = direction.rotated(up_direction, PI/2)
-		μsnake.up_direction = up_direction
-		owner.add_child(μsnake)
-
-func _process(delta: float) -> void:
-	if not is_current:
-		return
-	
-	if Input.is_action_just_pressed(&\"ui_left\"):
-		rotate_head(PI/2)
-	
-	if Input.is_action_just_pressed(&\"ui_right\"):
-		rotate_head(-PI/2)
 
 func rotate_head(angle: float):
 	rotate_to(direction.rotated(up_direction, angle))
@@ -127,20 +98,19 @@ _data = {
 point_count = 2
 
 [sub_resource type="SphereMesh" id="SphereMesh_4aj2m"]
+radius = 0.25
+height = 0.5
 
-[sub_resource type="SphereMesh" id="SphereMesh_buada"]
-radius = 0.6
-
-[node name="Snake" type="Node3D"]
+[node name="MicroSnake" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.419005)
 script = SubResource("GDScript_0ehyi")
 up_direction = Vector3(0, 0, 1)
 
 [node name="CSGPolygon3D" type="CSGPolygon3D" parent="."]
-material_override = ExtResource("1_31vw0")
+material_override = ExtResource("1_7prta")
 use_collision = true
 collision_mask = 0
-polygon = PackedVector2Array(0.5, 0, 0.353553, 0.353553, -2.18557e-08, 0.5, -0.353553, 0.353553, -0.5, -4.37114e-08, -0.353553, -0.353553, 5.96244e-09, -0.5, 0.353553, -0.353553)
+polygon = PackedVector2Array(0.25, 0, 0.176777, 0.176777, -1.09278e-08, 0.25, -0.176777, 0.176777, -0.25, -2.18557e-08, -0.176777, -0.176777, 2.98122e-09, -0.25, 0.176777, -0.176777)
 mode = 2
 path_node = NodePath("../Path3D")
 path_interval_type = 1
@@ -158,17 +128,9 @@ curve = SubResource("Curve3D_82rsp")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-material_override = ExtResource("1_31vw0")
+material_override = ExtResource("1_7prta")
 gi_mode = 2
 mesh = SubResource("SphereMesh_4aj2m")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D"]
-unique_name_in_owner = true
-visible = false
-material_override = ExtResource("2_3wfd7")
-gi_mode = 2
-mesh = SubResource("SphereMesh_buada")
-skeleton = NodePath("../..")
 
 [node name="FrontRaycast" type="RayCast3D" parent="."]
 

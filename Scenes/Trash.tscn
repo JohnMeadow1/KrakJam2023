@@ -153,7 +153,7 @@ func _ready() -> void:
 	var p = []
 	
 	for i in 8:
-		p.append(Vector2.from_angle(TAU / 8 * i) * 0.5)
+		p.append(Vector2.from_angle(TAU / 8 * i) * 0.25)
 	
 	polygon = p
 "
@@ -180,5 +180,5 @@ path_u_distance = 1.0
 path_joined = false
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
-polygon = PackedVector2Array(0.5, 0, 0.353553, 0.353553, -2.18557e-08, 0.5, -0.353553, 0.353553, -0.5, -4.37114e-08, -0.353553, -0.353553, 5.96244e-09, -0.5, 0.353553, -0.353553)
+polygon = PackedVector2Array(0.25, 0, 0.176777, 0.176777, -1.09278e-08, 0.25, -0.176777, 0.176777, -0.25, -2.18557e-08, -0.176777, -0.176777, 2.98122e-09, -0.25, 0.176777, -0.176777)
 script = SubResource("GDScript_q2a48")

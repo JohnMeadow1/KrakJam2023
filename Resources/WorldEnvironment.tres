@@ -1,0 +1,64 @@
+[gd_resource type="Environment" load_steps=4 format=3 uid="uid://c2bg5j0tkrmln"]
+
+[ext_resource type="Texture2D" uid="uid://p5xbr0p7bxy6" path="res://Resources/dikhololo_night_4k.exr" id="1_64yp1"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_2e4nc"]
+panorama = ExtResource("1_64yp1")
+
+[sub_resource type="Sky" id="Sky_enxy5"]
+sky_material = SubResource("PanoramaSkyMaterial_2e4nc")
+process_mode = 1
+radiance_size = 2
+
+[resource]
+background_mode = 2
+background_intensity = 1.0
+sky = SubResource("Sky_enxy5")
+ambient_light_source = 1
+ambient_light_color = Color(0.592157, 0, 0.141176, 1)
+reflected_light_source = 2
+tonemap_mode = 2
+ssr_fade_out = 2.63901
+ssao_enabled = true
+ssao_radius = 11.78
+ssao_intensity = 0.83
+ssao_power = 1.60766
+ssao_horizon = 0.26
+ssao_sharpness = 1.0
+ssao_light_affect = 0.15
+ssil_enabled = true
+ssil_radius = 2.65
+ssil_intensity = 0.31
+ssil_sharpness = 0.07
+sdfgi_enabled = true
+sdfgi_cascades = 8
+sdfgi_min_cell_size = 0.873688
+sdfgi_energy = 0.476
+sdfgi_normal_bias = 0.2
+sdfgi_probe_bias = 0.5
+glow_enabled = true
+glow_levels/1 = 3.06
+glow_levels/2 = 3.6
+glow_levels/3 = 6.75
+glow_normalized = true
+glow_intensity = 1.81
+glow_bloom = 0.03
+glow_hdr_scale = 2.13
+fog_enabled = true
+fog_light_color = Color(0.141176, 0.156863, 0.180392, 1)
+fog_light_energy = 1.34
+fog_sun_scatter = 0.15
+fog_aerial_perspective = 0.147
+fog_sky_affect = 0.537
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0034
+volumetric_fog_emission_energy = 32.43
+volumetric_fog_gi_inject = 0.97
+volumetric_fog_anisotropy = 0.73
+volumetric_fog_length = 279.58
+volumetric_fog_detail_spread = 1.86607
+volumetric_fog_ambient_inject = 0.97
+volumetric_fog_sky_affect = 0.313
+adjustment_enabled = true
+adjustment_contrast = 1.08
+adjustment_saturation = 1.67
