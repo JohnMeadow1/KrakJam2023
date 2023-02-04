@@ -1,31 +1,37 @@
-[gd_scene load_steps=7 format=3 uid="uid://c514njor17cvc"]
+[gd_scene load_steps=8 format=3 uid="uid://c514njor17cvc"]
 
 [ext_resource type="Script" path="res://Scripts/GameSnake.gd" id="1_jj3oq"]
 [ext_resource type="PackedScene" uid="uid://bg2eiux2wqf3v" path="res://Scenes/Snake2.tscn" id="2_4mt42"]
-[ext_resource type="PackedScene" uid="uid://dx04esqm7ed0" path="res://FBX/Catedral_Scene_no_Ivy_001.fbx" id="3_2542n"]
+[ext_resource type="Texture2D" uid="uid://p5xbr0p7bxy6" path="res://Resources/dikhololo_night_4k.exr" id="2_64hvr"]
+[ext_resource type="PackedScene" uid="uid://b8dhj2a55t0sb" path="res://FBX/Catedral_Scene_no_Ivy_001.fbx" id="3_2542n"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_73e1h"]
-sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_2e4nc"]
+panorama = ExtResource("2_64hvr")
 
 [sub_resource type="Sky" id="Sky_enxy5"]
-sky_material = SubResource("ProceduralSkyMaterial_73e1h")
+sky_material = SubResource("PanoramaSkyMaterial_2e4nc")
 
 [sub_resource type="Environment" id="Environment_x331o"]
 background_mode = 2
 sky = SubResource("Sky_enxy5")
-tonemap_mode = 2
+ambient_light_source = 3
+reflected_light_source = 2
+sdfgi_enabled = true
 glow_enabled = true
+fog_light_color = Color(0.141176, 0.156863, 0.180392, 1)
+adjustment_brightness = 2.55
 
 [node name="GameSnake" type="Node3D"]
 script = ExtResource("1_jj3oq")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
-shadow_enabled = true
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_x331o")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 20.6904, -25.7803)
+light_color = Color(1, 0.741176, 0.478431, 1)
+light_energy = 0.1
+shadow_enabled = true
 
 [node name="CameraPivot" type="Node3D" parent="."]
 
@@ -34,6 +40,8 @@ unique_name_in_owner = true
 transform = Transform3D(0.999981, 0.00470895, -0.00392274, 0, 0.640051, 0.768332, 0.0061288, -0.768318, 0.640039, -0.151418, 5.93466, 5.73172)
 current = true
 
+[node name="Catedral_Scene_no_Ivy_001" parent="." instance=ExtResource("3_2542n")]
+
 [node name="Snakes" type="Node3D" parent="."]
 
 [node name="Snake" parent="Snakes" instance=ExtResource("2_4mt42")]
@@ -41,7 +49,5 @@ current = true
 [node name="Camera3D" type="Camera3D" parent="Snakes/Snake/MeshInstance3D" index="0"]
 transform = Transform3D(0.999799, -0.0100102, 0.0173701, 0, 0.866424, 0.499309, -0.0200481, -0.499209, 0.86625, -0.037334, 1.62622, 2.86664)
 current = true
-
-[node name="Catedral_Scene_no_Ivy_001" parent="." instance=ExtResource("3_2542n")]
 
 [editable path="Snakes/Snake"]
