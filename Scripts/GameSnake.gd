@@ -185,7 +185,7 @@ func update_score() -> void:
 		%FinalFinal.text %= snenght
 		$UI/PanelContainer.hide()
 		
-		var best := 0
+		var best := 0.0
 		
 		var f := FileAccess.open("user://best", FileAccess.READ)
 		if f:
