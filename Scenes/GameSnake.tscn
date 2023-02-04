@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://c514njor17cvc"]
+[gd_scene format=3 uid="uid://c514njor17cvc"]
 
 [ext_resource type="Script" path="res://Scripts/GameSnake.gd" id="1_jj3oq"]
 [ext_resource type="PackedScene" uid="uid://b6dbbu4210xbb" path="res://Scenes/Snake2.tscn" id="2_4mt42"]
@@ -8,6 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://csgsunvcqns3p" path="res://FBX/scene_tree_inside_001.fbx" id="6_mdnbd"]
 [ext_resource type="PackedScene" uid="uid://dwyuickai1e2r" path="res://FBX/scene_tree_inside_002.fbx" id="7_pr504"]
 [ext_resource type="PackedScene" uid="uid://5c7kh0goii2g" path="res://FBX/scene_tree_outside_001.fbx" id="8_r45ex"]
+[ext_resource type="Environment" uid="uid://bixdvg8dmhm74" path="res://Resources/WorldEnvironment.tres" id="2_pa1ip"]
+[ext_resource type="PackedScene" uid="uid://b4gare4rs3tiu" path="res://FBX/Catedral_Scene_no_Ivy_001.fbx" id="3_2542n"]
+[ext_resource type="PackedScene" uid="uid://dnn0pmqdsvulh" path="res://Scenes/SnekSpawner.tscn" id="5_sb6wk"]
 
 [node name="GameSnake" type="Node3D"]
 script = ExtResource("1_jj3oq")
@@ -35,6 +38,7 @@ directional_shadow_pancake_size = 87.0
 
 [node name="CameraPivot" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.44245, 0, -13.6713)
+metadata/_edit_group_ = true
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot"]
 unique_name_in_owner = true
@@ -44,15 +48,66 @@ current = true
 [node name="Catedral_Scene_no_Ivy_001" parent="." instance=ExtResource("3_2542n")]
 
 [node name="Snakes" type="Node3D" parent="."]
+metadata/_edit_group_ = true
 
-[node name="Snake" parent="Snakes" instance=ExtResource("2_4mt42")]
+[node name="SnekSpawners" type="Node3D" parent="."]
 
-[node name="Snake2" parent="Snakes" instance=ExtResource("2_4mt42")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.56372, 0, -2.75951)
+[node name="SnekSpawner" parent="SnekSpawners" instance=ExtResource("5_sb6wk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.77083, 0, -24.9924)
+up_direction = Vector3(0, 0, -1)
+
+[node name="SnekSpawner11" parent="SnekSpawners" instance=ExtResource("5_sb6wk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.99513, 0, -24.9924)
+up_direction = Vector3(0, 0, -1)
+
+[node name="SnekSpawner13" parent="SnekSpawners" instance=ExtResource("5_sb6wk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.74694, 0, -24.7013)
+up_direction = Vector3(0, 0, -1)
+
+[node name="SnekSpawner14" parent="SnekSpawners" instance=ExtResource("5_sb6wk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.480678, -0.0112903, -19.1131)
+up_direction = Vector3(0, 0, -1)
+
+[node name="SnekSpawner2" parent="SnekSpawners" instance=ExtResource("5_sb6wk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.74521, 0, -17.6443)
 up_direction = Vector3(-1, 0, 0)
 
 [node name="stone_sculpts" parent="." instance=ExtResource("5_sioen")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0127602, -22.2886, 39.4427)
+[node name="SnekSpawner12" parent="SnekSpawners" instance=ExtResource("5_sb6wk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.74521, 0, -12.8785)
+up_direction = Vector3(-1, 0, 0)
+
+[node name="SnekSpawner4" parent="SnekSpawners" instance=ExtResource("5_sb6wk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.86308, -4.76837e-07, -5.52968)
+up_direction = Vector3(0, 0, 1)
+
+[node name="SnekSpawner5" parent="SnekSpawners" instance=ExtResource("5_sb6wk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.98, 0, -5.532)
+up_direction = Vector3(0, 0, 1)
+
+[node name="SnekSpawner6" parent="SnekSpawners" instance=ExtResource("5_sb6wk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.46895, -7.15256e-07, -5.66979)
+up_direction = Vector3(0, 0, 1)
+
+[node name="SnekSpawner7" parent="SnekSpawners" instance=ExtResource("5_sb6wk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.2016, 0, -5.5672)
+up_direction = Vector3(0, 0, 1)
+
+[node name="SnekSpawner8" parent="SnekSpawners" instance=ExtResource("5_sb6wk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.3451, -4.76837e-07, -12.0437)
+up_direction = Vector3(1, 0, 0)
+
+[node name="SnekSpawner9" parent="SnekSpawners" instance=ExtResource("5_sb6wk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.3392, -4.76837e-07, -19.3993)
+up_direction = Vector3(1, 0, 0)
+
+[node name="SnekSpawner10" parent="SnekSpawners" instance=ExtResource("5_sb6wk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.243, -4.76837e-07, -23.8268)
+up_direction = Vector3(1, 0, 0)
+
+[node name="Catedral_Scene_no_Ivy_002" parent="." instance=ExtResource("3_2542n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.4481, -0.0454907, -55.4699)
 
 [node name="scene_tree_inside_001" parent="." instance=ExtResource("6_mdnbd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.933124, -9.70835, 10.678)
@@ -131,3 +186,72 @@ transform = Transform3D(0.99071, 0, -0.135992, 0, 1, 0, 0.135992, 0, 0.99071, 12
 
 [node name="scene_tree_outside_024" parent="." instance=ExtResource("8_r45ex")]
 transform = Transform3D(0.99071, 0, -0.135992, 0, 1, 0, 0.135992, 0, 0.99071, 125.795, -38.9143, 102.036)
+[node name="Catedral_Scene_no_Ivy_009" parent="." instance=ExtResource("3_2542n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.87377, -0.0454907, 55.8806)
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="PanelContainer" type="PanelContainer" parent="UI"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -48.5
+offset_right = 48.5
+offset_bottom = 56.0
+grow_horizontal = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/PanelContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UI/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Remaining Sneks"
+horizontal_alignment = 1
+
+[node name="Snekountur" type="Label" parent="UI/PanelContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+text = "0"
+horizontal_alignment = 1
+
+[node name="Snekountur2" type="Label" parent="UI/PanelContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+text = "0"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="UI/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Currently Active"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="UI/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Total Length"
+horizontal_alignment = 1
+
+[node name="Total" type="Label" parent="UI/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+
+[node name="Timer" type="Timer" parent="UI"]
+wait_time = 0.25
+autostart = true
+
+[connection signal="timeout" from="UI/Timer" to="." method="update_score"]

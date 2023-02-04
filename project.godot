@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Rootsnek"
-run/main_scene="res://Scenes/GameSnake.tscn"
+run/main_scene="res://Scenes/TitleScreen.tscn"
 config/features=PackedStringArray("4.0")
 
 [debug]
