@@ -8,6 +8,13 @@ var current_snake: Node3D
 
 func _ready() -> void:
 	update_current_snake()
+	
+	for snek in snakes.get_children():
+		snek.deded.connect(func():
+			if snek == current_snake:
+				current_snake = null
+				update_current_snake()
+		)
 
 func _process(delta: float) -> void:
 	if Input.is_key_pressed(KEY_D):
@@ -39,17 +46,11 @@ func update_current_snake():
 			new_current = snake
 			min_dist = dist
 	
-	var on_snek_ded = func():
-		current_snake = null
-		update_current_snake()
-	
 	if new_current != current_snake:
 		if current_snake:
 			current_snake.is_current = false
-			current_snake.deded.disconnect(on_snek_ded)
 		
 		current_snake = new_current
 		
 		if current_snake:
 			current_snake.is_current = true
-			current_snake.deded.connect(on_snek_ded)
