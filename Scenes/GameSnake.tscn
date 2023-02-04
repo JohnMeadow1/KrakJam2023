@@ -47,7 +47,7 @@ current = true
 [node name="Snake" parent="Snakes" instance=ExtResource("2_4mt42")]
 
 [node name="Camera3D" type="Camera3D" parent="Snakes/Snake/MeshInstance3D" index="0"]
-transform = Transform3D(0.999799, -0.0100102, 0.0173701, 0, 0.866424, 0.499309, -0.0200481, -0.499209, 0.86625, -0.037334, 1.62622, 2.86664)
+transform = Transform3D(0.761807, 0.323454, -0.561273, 1.36411e-08, 0.866424, 0.499309, 0.647804, -0.380377, 0.660048, -2.34686, 1.33409, 1.80725)
 current = true
 
 [editable path="Snakes/Snake"]
