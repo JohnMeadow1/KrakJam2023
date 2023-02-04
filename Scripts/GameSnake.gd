@@ -4,6 +4,8 @@ extends Node3D
 @onready var camera_3d: Camera3D = %Camera3D
 @onready var snakes: Node3D = $Snakes
 
+@onready var total: Label = %Total
+
 var current_snake: Node3D
 var camera_height_direction = 0.0
 var camera_height_factor = 0.0
@@ -125,3 +127,6 @@ func update_current_snake():
 		
 		if current_snake:
 			current_snake.is_current = true
+
+func update_score() -> void:
+	total.text = "%0.2fm" % snakes.get_children().reduce(func(value, snek): return value + snek.curve.get_baked_length(), 0.0)

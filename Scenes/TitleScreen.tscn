@@ -1,4 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://co5nwgi4etmcl"]
+[gd_scene load_steps=3 format=3 uid="uid://co5nwgi4etmcl"]
+
+[ext_resource type="Texture2D" uid="uid://b1i8pprnjjjs4" path="res://Textures/Title.png" id="1_gjkd8"]
 
 [sub_resource type="GDScript" id="GDScript_jj4ef"]
 script/source = "extends Control
@@ -8,15 +10,23 @@ func play() -> void:
 
 func exit() -> void:
 	get_tree().quit()
+
+func pressed() -> void:
+	if randi() % 2 == 0:
+		play()
+	else:
+		exit()
 "
 
-[node name="TitleScreen" type="Control"]
-layout_mode = 3
+[node name="TitleScreen" type="TextureRect"]
+self_modulate = Color(1, 1, 1, 0.462745)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("1_gjkd8")
+expand_mode = 1
 script = SubResource("GDScript_jj4ef")
 metadata/_edit_lock_ = true
 
@@ -56,5 +66,25 @@ text = "Play"
 layout_mode = 2
 text = "Don't Play"
 
+[node name="Button3" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Maybe"
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -104.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "You are a living snake-like root - the Rootsnek.
+Your task: wrap the building.
+There is many rootsneks. The one closest to the camera is controlled.
+Snek dies if it collides with itself or another snek."
+horizontal_alignment = 1
+
 [connection signal="pressed" from="VBoxContainer/Button" to="." method="play"]
 [connection signal="pressed" from="VBoxContainer/Button2" to="." method="exit"]
+[connection signal="pressed" from="VBoxContainer/Button3" to="." method="pressed"]
