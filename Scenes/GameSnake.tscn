@@ -10,12 +10,17 @@ panorama = ExtResource("2_64hvr")
 
 [sub_resource type="Sky" id="Sky_enxy5"]
 sky_material = SubResource("PanoramaSkyMaterial_2e4nc")
+process_mode = 1
 
 [sub_resource type="Environment" id="Environment_x331o"]
 background_mode = 2
 sky = SubResource("Sky_enxy5")
 ambient_light_source = 3
+ambient_light_color = Color(0.862745, 0.717647, 0.858824, 1)
+ambient_light_energy = 1.33
 reflected_light_source = 2
+tonemap_mode = 3
+tonemap_exposure = 1.67
 sdfgi_enabled = true
 glow_enabled = true
 fog_light_color = Color(0.141176, 0.156863, 0.180392, 1)
@@ -28,10 +33,19 @@ script = ExtResource("1_jj3oq")
 environment = SubResource("Environment_x331o")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 20.6904, -25.7803)
+transform = Transform3D(0.576758, 0.509107, -0.638874, 0.0974163, 0.733614, 0.672548, 0.811086, -0.450134, 0.373522, -0.534582, 20.8289, -25.7803)
 light_color = Color(1, 0.741176, 0.478431, 1)
-light_energy = 0.1
+light_energy = 0.262
+light_volumetric_fog_energy = 1.161
 shadow_enabled = true
+shadow_bias = 0.01
+shadow_normal_bias = 0.283
+shadow_blur = 2.616
+directional_shadow_split_1 = 0.039
+directional_shadow_split_2 = 0.129
+directional_shadow_split_3 = 0.278
+directional_shadow_blend_splits = true
+directional_shadow_max_distance = 973.3
 
 [node name="CameraPivot" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.44245, 0, -13.6713)
