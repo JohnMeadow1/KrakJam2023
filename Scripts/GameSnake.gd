@@ -17,12 +17,12 @@ func _process(delta: float) -> void:
 		camera_pivot.rotate_y(-delta)
 		update_current_snake()
 	
-	assert(current_snake)
-	
-	camera_pivot.position.y = lerpf(camera_pivot.position.y, current_snake.head_position.y, 0.01)
+	if current_snake:
+		camera_pivot.position.y = lerpf(camera_pivot.position.y, current_snake.head_position.y, 0.01)
 
 func update_current_snake():
 	var new_current: Node3D
+	
 	
 	var min_dist := INF
 	for snake in snakes.get_children():
@@ -31,9 +31,17 @@ func update_current_snake():
 			new_current = snake
 			min_dist = dist
 	
+	var on_snek_ded = func():
+		current_snake = null
+		update_current_snake()
+	
 	if new_current != current_snake:
 		if current_snake:
 			current_snake.is_current = false
+			current_snake.tree_exited.disconnect(on_snek_ded)
 		
 		current_snake = new_current
-		new_current.is_current = true
+		
+		if current_snake:
+			current_snake.is_current = true
+			current_snake.tree_exited.connect(on_snek_ded)

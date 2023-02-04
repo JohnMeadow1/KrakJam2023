@@ -46,6 +46,9 @@ func _physics_process(delta: float) -> void:
 		return
 	
 	if front_raycast.is_colliding():
+		if front_raycast.get_collider().get_meta(&\"snek\", false):
+			queue_free()
+		
 		var prev := direction
 		rotate_to(up_direction)
 		up_direction = -prev
@@ -116,7 +119,6 @@ up_direction = Vector3(0, 0, 1)
 [node name="CSGPolygon3D" type="CSGPolygon3D" parent="."]
 material_override = SubResource("StandardMaterial3D_la18a")
 use_collision = true
-collision_layer = 2
 collision_mask = 0
 polygon = PackedVector2Array(0.5, 0, 0.353553, 0.353553, -2.18557e-08, 0.5, -0.353553, 0.353553, -0.5, -4.37114e-08, -0.353553, -0.353553, 5.96244e-09, -0.5, 0.353553, -0.353553)
 mode = 2
@@ -129,6 +131,7 @@ path_local = true
 path_continuous_u = false
 path_u_distance = 1.0
 path_joined = false
+metadata/snek = true
 
 [node name="Path3D" type="Path3D" parent="."]
 curve = SubResource("Curve3D_82rsp")
