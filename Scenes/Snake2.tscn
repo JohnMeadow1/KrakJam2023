@@ -1,6 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://3iipu7fgxp0"]
+[gd_scene load_steps=7 format=3 uid="uid://b6dbbu4210xbb"]
 
-[ext_resource type="Material" path="res://Resources/SnakeBronw.material" id="1_31vw0"]
+[ext_resource type="Material" uid="uid://0hmxtpijjwj4" path="res://Resources/SnakeBronw.material" id="1_31vw0"]
 [ext_resource type="Material" uid="uid://dxs26fv8yrl3r" path="res://Resources/SnakeBronwGlow.material" id="2_3wfd7"]
 
 [sub_resource type="GDScript" id="GDScript_0ehyi"]
@@ -11,10 +11,15 @@ script/source = "extends Node3D
 @onready var head: MeshInstance3D = $MeshInstance3D
 @onready var front_raycast: RayCast3D = $FrontRaycast
 @onready var down_raycast: RayCast3D = $BackRaycast
+@onready var glow: MeshInstance3D = %MeshInstance3D2
 
 @export var up_direction: Vector3
 
-var is_current: bool
+var is_current: bool:
+	set(current):
+		is_current = current
+		glow.visible = current
+
 var disable_raycasts: int = 60
 var down_timeout: float
 
@@ -103,6 +108,9 @@ point_count = 2
 
 [sub_resource type="SphereMesh" id="SphereMesh_4aj2m"]
 
+[sub_resource type="SphereMesh" id="SphereMesh_buada"]
+radius = 0.6
+
 [node name="Snake" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.419005)
 script = SubResource("GDScript_0ehyi")
@@ -130,9 +138,17 @@ curve = SubResource("Curve3D_82rsp")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-material_override = ExtResource("2_3wfd7")
+material_override = ExtResource("1_31vw0")
 gi_mode = 2
 mesh = SubResource("SphereMesh_4aj2m")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D"]
+unique_name_in_owner = true
+visible = false
+material_override = ExtResource("2_3wfd7")
+gi_mode = 2
+mesh = SubResource("SphereMesh_buada")
+skeleton = NodePath("../..")
 
 [node name="FrontRaycast" type="RayCast3D" parent="."]
 

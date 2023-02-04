@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://c514njor17cvc"]
 
 [ext_resource type="Script" path="res://Scripts/GameSnake.gd" id="1_jj3oq"]
-[ext_resource type="PackedScene" uid="uid://bg2eiux2wqf3v" path="res://Scenes/Snake2.tscn" id="2_4mt42"]
+[ext_resource type="PackedScene" uid="uid://b6dbbu4210xbb" path="res://Scenes/Snake2.tscn" id="2_4mt42"]
 [ext_resource type="Texture2D" uid="uid://p5xbr0p7bxy6" path="res://Resources/dikhololo_night_4k.exr" id="2_64hvr"]
-[ext_resource type="PackedScene" uid="uid://dx04esqm7ed0" path="res://FBX/Catedral_Scene_no_Ivy_001.fbx" id="3_2542n"]
+[ext_resource type="PackedScene" uid="uid://b8dhj2a55t0sb" path="res://FBX/Catedral_Scene_no_Ivy_001.fbx" id="3_2542n"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_2e4nc"]
 panorama = ExtResource("2_64hvr")
