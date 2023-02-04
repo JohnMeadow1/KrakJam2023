@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://me2vweve4qew"
-path.s3tc="res://.godot/imported/Floor_Cathedral_001_Normal.png-55ca58f761175baace80261607fc782d.s3tc.ctex"
+path.s3tc="res://.godot/imported/Floor_Cathedral_001_Normal.png-620af46d835f0b13ac8804208589d3d3.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Resources/Floors/Floor_Cathedral_001/Floor_Cathedral_001_Normal.png"
-dest_files=["res://.godot/imported/Floor_Cathedral_001_Normal.png-55ca58f761175baace80261607fc782d.s3tc.ctex"]
+source_file="res://Resources/Floor/Floor_Cathedral_001/Floor_Cathedral_001_Normal.png"
+dest_files=["res://.godot/imported/Floor_Cathedral_001_Normal.png-620af46d835f0b13ac8804208589d3d3.s3tc.ctex"]
 
 [params]
 

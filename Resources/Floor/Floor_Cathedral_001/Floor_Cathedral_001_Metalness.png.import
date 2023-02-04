@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://0q3ohkyr7blt"
-path.s3tc="res://.godot/imported/Floor_Cathedral_001_Metalness.png-84449a167ddd4cb3cf9ece166c21afbf.s3tc.ctex"
+path.s3tc="res://.godot/imported/Floor_Cathedral_001_Metalness.png-4eb0c58634d4766dfe54c411f25ff10a.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Resources/Floors/Floor_Cathedral_001/Floor_Cathedral_001_Metalness.png"
-dest_files=["res://.godot/imported/Floor_Cathedral_001_Metalness.png-84449a167ddd4cb3cf9ece166c21afbf.s3tc.ctex"]
+source_file="res://Resources/Floor/Floor_Cathedral_001/Floor_Cathedral_001_Metalness.png"
+dest_files=["res://.godot/imported/Floor_Cathedral_001_Metalness.png-4eb0c58634d4766dfe54c411f25ff10a.s3tc.ctex"]
 
 [params]
 
