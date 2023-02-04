@@ -1,8 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://bg2eiux2wqf3v"]
+[gd_scene load_steps=6 format=3 uid="uid://3iipu7fgxp0"]
 
-[ext_resource type="Texture2D" uid="uid://bc15ycqgwgt2k" path="res://Textures/bark_brown_01_diff_2k.jpg" id="1_m0j5c"]
-[ext_resource type="Texture2D" uid="uid://bn4sf5ug7akrj" path="res://Textures/bark_brown_01_disp_2k.png" id="2_j5vqo"]
-[ext_resource type="Texture2D" uid="uid://d1e3d7ctk7vxt" path="res://Textures/bark_brown_01_rough_2k.jpg" id="3_edcqv"]
+[ext_resource type="Material" path="res://Resources/SnakeBronw.material" id="1_31vw0"]
+[ext_resource type="Material" uid="uid://dxs26fv8yrl3r" path="res://Resources/SnakeBronwGlow.material" id="2_3wfd7"]
 
 [sub_resource type="GDScript" id="GDScript_0ehyi"]
 script/source = "extends Node3D
@@ -95,13 +94,6 @@ func get_forward_rotation() -> float:
 	return 0
 "
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_la18a"]
-albedo_color = Color(0.443137, 0.309804, 0, 1)
-albedo_texture = ExtResource("1_m0j5c")
-roughness_texture = ExtResource("3_edcqv")
-normal_enabled = true
-normal_texture = ExtResource("2_j5vqo")
-
 [sub_resource type="Curve3D" id="Curve3D_82rsp"]
 _data = {
 "points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0),
@@ -117,7 +109,7 @@ script = SubResource("GDScript_0ehyi")
 up_direction = Vector3(0, 0, 1)
 
 [node name="CSGPolygon3D" type="CSGPolygon3D" parent="."]
-material_override = SubResource("StandardMaterial3D_la18a")
+material_override = ExtResource("1_31vw0")
 use_collision = true
 collision_mask = 0
 polygon = PackedVector2Array(0.5, 0, 0.353553, 0.353553, -2.18557e-08, 0.5, -0.353553, 0.353553, -0.5, -4.37114e-08, -0.353553, -0.353553, 5.96244e-09, -0.5, 0.353553, -0.353553)
@@ -138,7 +130,8 @@ curve = SubResource("Curve3D_82rsp")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-material_override = SubResource("StandardMaterial3D_la18a")
+material_override = ExtResource("2_3wfd7")
+gi_mode = 2
 mesh = SubResource("SphereMesh_4aj2m")
 
 [node name="FrontRaycast" type="RayCast3D" parent="."]
