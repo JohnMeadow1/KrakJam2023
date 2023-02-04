@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/GameSnake.gd" id="1_jj3oq"]
 [ext_resource type="PackedScene" uid="uid://b6dbbu4210xbb" path="res://Scenes/Snake2.tscn" id="2_4mt42"]
 [ext_resource type="Environment" uid="uid://c2bg5j0tkrmln" path="res://Resources/WorldEnvironment.tres" id="2_pa1ip"]
-[ext_resource type="PackedScene" uid="uid://b8dhj2a55t0sb" path="res://FBX/Catedral_Scene_no_Ivy_001.fbx" id="3_2542n"]
+[ext_resource type="PackedScene" uid="uid://b4gare4rs3tiu" path="res://FBX/Catedral_Scene_no_Ivy_001.fbx" id="3_2542n"]
 
 [node name="GameSnake" type="Node3D"]
 script = ExtResource("1_jj3oq")
@@ -31,6 +31,7 @@ directional_shadow_pancake_size = 87.0
 
 [node name="CameraPivot" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.44245, 0, -13.6713)
+metadata/_edit_group_ = true
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot"]
 unique_name_in_owner = true
@@ -40,11 +41,14 @@ current = true
 [node name="Catedral_Scene_no_Ivy_001" parent="." instance=ExtResource("3_2542n")]
 
 [node name="Snakes" type="Node3D" parent="."]
+metadata/_edit_group_ = true
 
 [node name="Snake" parent="Snakes" instance=ExtResource("2_4mt42")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.77083, 0, -24.9924)
+up_direction = Vector3(0, 0, -1)
 
 [node name="Snake2" parent="Snakes" instance=ExtResource("2_4mt42")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.56372, 0, -2.75951)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.74521, 0, -17.6443)
 up_direction = Vector3(-1, 0, 0)
 
 [node name="Catedral_Scene_no_Ivy_002" parent="." instance=ExtResource("3_2542n")]

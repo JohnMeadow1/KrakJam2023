@@ -3,7 +3,7 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://b8dhj2a55t0sb"
+uid="uid://b4gare4rs3tiu"
 path="res://.godot/imported/Catedral_Scene_no_Ivy_001.fbx-606160c068c21769d6d1b27358cbbb13.scn"
 
 [deps]
@@ -62,27 +62,87 @@ _subresources={
 "generate/physics": true,
 "physics/shape_type": 1
 },
-"PATH:RootNode/Object002": {
+"PATH:RootNode/Box009": {
 "generate/physics": true,
 "physics/shape_type": 1
 },
-"PATH:RootNode/Object003": {
+"PATH:RootNode/Box010": {
 "generate/physics": true,
 "physics/shape_type": 1
 },
-"PATH:RootNode/Object004": {
+"PATH:RootNode/Box014": {
 "generate/physics": true,
 "physics/shape_type": 1
 },
-"PATH:RootNode/Object005": {
+"PATH:RootNode/Box016": {
 "generate/physics": true,
 "physics/shape_type": 1
 },
-"PATH:RootNode/Object006": {
+"PATH:RootNode/Box017": {
 "generate/physics": true,
 "physics/shape_type": 1
 },
-"PATH:RootNode/Object007": {
+"PATH:RootNode/Box018": {
+"generate/physics": true,
+"physics/shape_type": 1
+},
+"PATH:RootNode/Box019": {
+"generate/physics": true,
+"physics/shape_type": 1
+},
+"PATH:RootNode/Box020": {
+"generate/physics": true,
+"physics/shape_type": 1
+},
+"PATH:RootNode/Box021": {
+"generate/physics": true,
+"physics/shape_type": 1
+},
+"PATH:RootNode/Box022": {
+"generate/physics": true,
+"physics/shape_type": 1
+},
+"PATH:RootNode/Box023": {
+"generate/physics": true,
+"physics/shape_type": 1
+},
+"PATH:RootNode/Box024": {
+"generate/physics": true,
+"physics/shape_type": 1
+},
+"PATH:RootNode/Box025": {
+"generate/physics": true,
+"physics/shape_type": 1
+},
+"PATH:RootNode/Box030": {
+"generate/physics": true,
+"physics/shape_type": 1
+},
+"PATH:RootNode/Box031": {
+"generate/physics": true,
+"physics/shape_type": 1
+},
+"PATH:RootNode/Box034": {
+"generate/physics": true,
+"physics/shape_type": 1
+},
+"PATH:RootNode/Box036": {
+"generate/physics": true,
+"physics/shape_type": 1
+},
+"PATH:RootNode/Box037": {
+"generate/physics": true,
+"physics/shape_type": 1
+},
+"PATH:RootNode/Box038": {
+"generate/physics": true,
+"physics/shape_type": 1
+},
+"PATH:RootNode/Box039": {
+"generate/physics": true,
+"physics/shape_type": 1
+},
+"PATH:RootNode/Box040": {
 "generate/physics": true,
 "physics/shape_type": 1
 },
@@ -91,10 +151,6 @@ _subresources={
 "physics/shape_type": 1
 },
 "PATH:RootNode/Object009": {
-"generate/physics": true,
-"physics/shape_type": 1
-},
-"PATH:RootNode/Object010": {
 "generate/physics": true,
 "physics/shape_type": 1
 },
@@ -107,10 +163,6 @@ _subresources={
 "physics/shape_type": 1
 },
 "PATH:RootNode/Object013": {
-"generate/physics": true,
-"physics/shape_type": 1
-},
-"PATH:RootNode/Object014": {
 "generate/physics": true,
 "physics/shape_type": 1
 },
