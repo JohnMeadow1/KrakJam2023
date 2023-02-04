@@ -71,7 +71,7 @@ func make_sneak():
 
 func _process(delta: float) -> void:
 	if fininszed:
-		camera_pivot.rotate_y(delta * 3)
+		camera_pivot.rotate_y(delta)
 		return
 	
 	camera_handle_orbit(delta)
@@ -176,7 +176,7 @@ func update_current_snake():
 func update_score() -> void:
 	var snenght: float = snakes.get_children().reduce(func(value, snek): return value + snek.curve.get_baked_length(), 0.0)
 	total.text = "%0.2fm" % snenght
-	max_snakes.text = str(SNEKOUNT)
+	max_snakes.text = str(SNEKOUNT + sneqs_alive)
 	current_sneaks.text = str(sneqs_alive)
 	
 	if timer.is_stopped():
@@ -192,3 +192,6 @@ func update_score() -> void:
 		if snenght > best:
 			f = FileAccess.open("user://best", FileAccess.WRITE)
 			f.store_line(str(snenght))
+			
+			$UI/Label.show()
+			$UI/Label/AnimationPlayer.play(&"urthebest")
