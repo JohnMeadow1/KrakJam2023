@@ -11,20 +11,60 @@ panorama = ExtResource("2_64hvr")
 [sub_resource type="Sky" id="Sky_enxy5"]
 sky_material = SubResource("PanoramaSkyMaterial_2e4nc")
 process_mode = 1
+radiance_size = 2
 
 [sub_resource type="Environment" id="Environment_x331o"]
 background_mode = 2
+background_intensity = 1.0
 sky = SubResource("Sky_enxy5")
-ambient_light_source = 3
-ambient_light_color = Color(0.862745, 0.717647, 0.858824, 1)
-ambient_light_energy = 1.33
+ambient_light_source = 1
+ambient_light_color = Color(0.592157, 0, 0.141176, 1)
 reflected_light_source = 2
-tonemap_mode = 3
-tonemap_exposure = 1.67
+tonemap_mode = 2
+ssr_fade_out = 2.63901
+ssao_enabled = true
+ssao_radius = 11.78
+ssao_intensity = 0.83
+ssao_power = 1.60766
+ssao_horizon = 0.26
+ssao_sharpness = 1.0
+ssao_light_affect = 0.15
+ssil_enabled = true
+ssil_radius = 2.65
+ssil_intensity = 0.31
+ssil_sharpness = 0.07
 sdfgi_enabled = true
+sdfgi_cascades = 8
+sdfgi_min_cell_size = 0.873688
+sdfgi_energy = 0.476
+sdfgi_normal_bias = 0.2
+sdfgi_probe_bias = 0.5
 glow_enabled = true
+glow_levels/1 = 3.06
+glow_levels/2 = 3.6
+glow_levels/3 = 6.75
+glow_normalized = true
+glow_intensity = 1.81
+glow_bloom = 0.03
+glow_hdr_scale = 2.13
+fog_enabled = true
 fog_light_color = Color(0.141176, 0.156863, 0.180392, 1)
-adjustment_brightness = 2.55
+fog_light_energy = 1.34
+fog_sun_scatter = 0.15
+fog_aerial_perspective = 0.147
+fog_sky_affect = 0.537
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0034
+volumetric_fog_emission_energy = 32.43
+volumetric_fog_gi_inject = 0.97
+volumetric_fog_anisotropy = 0.73
+volumetric_fog_length = 279.58
+volumetric_fog_detail_spread = 1.86607
+volumetric_fog_ambient_inject = 0.97
+volumetric_fog_sky_affect = 0.313
+adjustment_enabled = true
+adjustment_contrast = 1.08
+adjustment_saturation = 1.67
 
 [node name="GameSnake" type="Node3D"]
 script = ExtResource("1_jj3oq")
@@ -33,19 +73,22 @@ script = ExtResource("1_jj3oq")
 environment = SubResource("Environment_x331o")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.576758, 0.509107, -0.638874, 0.0974163, 0.733614, 0.672548, 0.811086, -0.450134, 0.373522, -0.534582, 20.8289, -25.7803)
-light_color = Color(1, 0.741176, 0.478431, 1)
-light_energy = 0.262
-light_volumetric_fog_energy = 1.161
+transform = Transform3D(-0.896304, 0.43568, -0.082601, 0.331689, 0.782322, 0.527214, 0.294317, 0.445146, -0.845708, -0.534582, 20.8289, -25.7803)
+light_intensity_lux = 10.0
+light_temperature = 5203.0
+light_color = Color(1, 0.917647, 0.788235, 1)
+light_energy = 0.1
+light_indirect_energy = 4.717
+light_volumetric_fog_energy = 0.323
 shadow_enabled = true
 shadow_bias = 0.01
-shadow_normal_bias = 0.283
-shadow_blur = 2.616
-directional_shadow_split_1 = 0.039
-directional_shadow_split_2 = 0.129
-directional_shadow_split_3 = 0.278
+shadow_normal_bias = 0.384
+shadow_transmittance_bias = 0.373
+shadow_blur = 5.051
 directional_shadow_blend_splits = true
-directional_shadow_max_distance = 973.3
+directional_shadow_fade_start = 0.265
+directional_shadow_max_distance = 103.2
+directional_shadow_pancake_size = 87.0
 
 [node name="CameraPivot" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.44245, 0, -13.6713)
@@ -64,3 +107,27 @@ current = true
 [node name="Snake2" parent="Snakes" instance=ExtResource("2_4mt42")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.56372, 0, -2.75951)
 up_direction = Vector3(-1, 0, 0)
+
+[node name="Catedral_Scene_no_Ivy_002" parent="." instance=ExtResource("3_2542n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.4481, -0.0454907, -55.4699)
+
+[node name="Catedral_Scene_no_Ivy_003" parent="." instance=ExtResource("3_2542n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.5754, -0.0454907, -55.4699)
+
+[node name="Catedral_Scene_no_Ivy_004" parent="." instance=ExtResource("3_2542n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 98.2475, -0.0454907, -55.4699)
+
+[node name="Catedral_Scene_no_Ivy_005" parent="." instance=ExtResource("3_2542n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 98.2475, -0.0454907, -0.645847)
+
+[node name="Catedral_Scene_no_Ivy_006" parent="." instance=ExtResource("3_2542n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 53.2463, -0.0454907, -0.645847)
+
+[node name="Catedral_Scene_no_Ivy_007" parent="." instance=ExtResource("3_2542n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 53.2463, -0.0454907, 55.8806)
+
+[node name="Catedral_Scene_no_Ivy_008" parent="." instance=ExtResource("3_2542n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 111.678, -0.0454907, 55.8806)
+
+[node name="Catedral_Scene_no_Ivy_009" parent="." instance=ExtResource("3_2542n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.87377, -0.0454907, 55.8806)
