@@ -5,19 +5,21 @@ var camera_target             = Vector3(0,0,0)
 var camera_up_vector          = Vector3(0,1,0)
 var mouse_LMB_pressed = false
 var mouse_RMB_pressed = false
+var mouse_MMB_pressed = false
 
 var ignore_mouse  = false
-var camera_distance_to_center = 50
+var camera_distance_to_center = 5
 
 var yaw         = 0
 var pitch       = 25
 
 var sensitivity = 0.05
-var scoll_speed = 5
+var scoll_speed = 0.2
 var target_id   = 0
 
 func _ready():
-	camera_target = $"../Cube/Lajkonik".transform.origin
+	camera_target = $"../SnekSpawner".position
+
 
 func _physics_process( delta ):
 	var x = camera_distance_to_center * sin(deg_to_rad(yaw)) * cos(deg_to_rad(pitch))
@@ -29,7 +31,7 @@ func _physics_process( delta ):
 func _input(event):
 	
 	if event is InputEventMouseMotion:
-		if mouse_LMB_pressed:
+		if mouse_MMB_pressed:
 			yaw     -= event.relative.x * sensitivity
 			pitch    = clamp ( pitch + event.relative.y * sensitivity,-80,80)
 		if mouse_RMB_pressed:
@@ -41,6 +43,8 @@ func _input(event):
 				mouse_LMB_pressed = true
 			if event.button_index == MOUSE_BUTTON_RIGHT and !ignore_mouse:
 				mouse_RMB_pressed = true
+			if event.button_index == MOUSE_BUTTON_MIDDLE and !ignore_mouse:
+				mouse_MMB_pressed = true
 			Input.set_mouse_mode( Input.MOUSE_MODE_CAPTURED )
 			
 		else:
@@ -48,6 +52,8 @@ func _input(event):
 				mouse_LMB_pressed = false
 			if event.button_index == MOUSE_BUTTON_RIGHT:
 				mouse_RMB_pressed = false
+			if event.button_index == MOUSE_BUTTON_MIDDLE:
+				mouse_MMB_pressed = false
 			if ignore_mouse:
 				ignore_mouse = false
 			else:
@@ -55,7 +61,7 @@ func _input(event):
 			
 			
 		if event.pressed and event.button_index == MOUSE_BUTTON_WHEEL_UP:
-			camera_distance_to_center = clamp( camera_distance_to_center - scoll_speed, 4, 400)
+			camera_distance_to_center = clamp( camera_distance_to_center - scoll_speed*camera_distance_to_center, 1, 400)
 
 		if event.pressed and event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
-			camera_distance_to_center = clamp( camera_distance_to_center + scoll_speed, 4, 400)
+			camera_distance_to_center = clamp( camera_distance_to_center + scoll_speed*camera_distance_to_center , 1, 400)
