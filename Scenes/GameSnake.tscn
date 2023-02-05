@@ -1,4 +1,4 @@
-[gd_scene load_steps=89 format=3 uid="uid://c514njor17cvc"]
+[gd_scene load_steps=93 format=3 uid="uid://c514njor17cvc"]
 
 [ext_resource type="Script" path="res://Scripts/GameSnake.gd" id="1_jj3oq"]
 [ext_resource type="Environment" uid="uid://bixdvg8dmhm74" path="res://Resources/WorldEnvironment.tres" id="2_pa1ip"]
@@ -288,6 +288,18 @@ heightmap_texture = ExtResource("66_gv8oq")
 uv1_scale = Vector3(2, 2, 2)
 texture_filter = 1
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_os7f8"]
+size = Vector3(7, 16, 14.25)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_e4pnj"]
+size = Vector3(7, 16, 6.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3ftj6"]
+size = Vector3(7, 7, 7.25)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_i63dy"]
+size = Vector3(19, 16, 18)
+
 [sub_resource type="Animation" id="Animation_gexgt"]
 resource_name = "Najazd"
 length = 4.0
@@ -388,47 +400,39 @@ metadata/_edit_group_ = true
 [node name="SnekSpawners" type="Node3D" parent="."]
 
 [node name="SnekSpawner" parent="SnekSpawners" instance=ExtResource("5_sb6wk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.77083, 0, -25.0533)
-up_direction = Vector3(0, 0, -1)
-
-[node name="SnekSpawner11" parent="SnekSpawners" instance=ExtResource("5_sb6wk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.99513, 0, -25.0713)
-up_direction = Vector3(0, 0, -1)
-
-[node name="SnekSpawner13" parent="SnekSpawners" instance=ExtResource("5_sb6wk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.74694, 0, -24.6215)
-up_direction = Vector3(0, 0, -1)
-
-[node name="SnekSpawner14" parent="SnekSpawners" instance=ExtResource("5_sb6wk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.480678, -0.0112903, -18.9338)
-up_direction = Vector3(0, 0, -1)
-
-[node name="SnekSpawner2" parent="SnekSpawners" instance=ExtResource("5_sb6wk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.68651, 0, -17.6443)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.55676, 0, -27.0313)
 up_direction = Vector3(-1, 0, 0)
 
-[node name="SnekSpawner12" parent="SnekSpawners" instance=ExtResource("5_sb6wk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.74521, 0, -12.8785)
+[node name="SnekSpawner11" parent="SnekSpawners" instance=ExtResource("5_sb6wk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.0456, 0, -27.2363)
+up_direction = Vector3(0, 0, 1)
+
+[node name="SnekSpawner13" parent="SnekSpawners" instance=ExtResource("5_sb6wk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.05822, 0, -31.246)
+up_direction = Vector3(-1, 0, 0)
+
+[node name="SnekSpawner14" parent="SnekSpawners" instance=ExtResource("5_sb6wk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.32623, -0.0112903, -11.0675)
+up_direction = Vector3(0, 0, 1)
+
+[node name="SnekSpawner2" parent="SnekSpawners" instance=ExtResource("5_sb6wk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.62064, 0, -21.434)
 up_direction = Vector3(-1, 0, 0)
 
 [node name="SnekSpawner4" parent="SnekSpawners" instance=ExtResource("5_sb6wk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.86308, -4.76837e-07, -5.55649)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0164356, -4.76837e-07, -5.25121)
 up_direction = Vector3(0, 0, 1)
 
 [node name="SnekSpawner7" parent="SnekSpawners" instance=ExtResource("5_sb6wk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.1042, 0, -5.72963)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.4026, 0, -4.97621)
 up_direction = Vector3(0, 0, 1)
 
 [node name="SnekSpawner8" parent="SnekSpawners" instance=ExtResource("5_sb6wk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.39, 0.775017, -11.7379)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.2742, 0.775017, -13.3313)
 up_direction = Vector3(1, 0, 0)
 
 [node name="SnekSpawner9" parent="SnekSpawners" instance=ExtResource("5_sb6wk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.1225, -4.76837e-07, -19.5779)
-up_direction = Vector3(1, 0, 0)
-
-[node name="SnekSpawner10" parent="SnekSpawners" instance=ExtResource("5_sb6wk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.26451, -4.76837e-07, -15.5461)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.7941, -4.76837e-07, -17.8615)
 up_direction = Vector3(1, 0, 0)
 
 [node name="UI" type="Control" parent="."]
@@ -874,6 +878,10 @@ material_override = SubResource("StandardMaterial3D_uog1g")
 transform = Transform3D(-0.933056, -4.41087e-15, -8.74228e-08, 1.44898e-22, 1.15426, -4.37114e-08, 8.15703e-08, -5.04544e-08, -1, -0.0927734, 13.2585, -24.0352)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
+[node name="wall_001_lp18" parent="ModelCollider" instance=ExtResource("14_h23bo")]
+transform = Transform3D(4.07852e-08, -5.04545e-08, -1, 8.15703e-08, -1.15426, 4.37114e-08, -0.933056, -1.00909e-07, -4.37114e-08, -3.20455, 13.2598, -21.0556)
+material_override = SubResource("StandardMaterial3D_uog1g")
+
 [node name="wall_001_lp9" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(0.933056, 1.00909e-07, 8.74228e-08, 8.15703e-08, -1.15426, 4.37114e-08, 8.15703e-08, -5.04545e-08, -1, -0.291892, 7.99744, -24.1169)
 material_override = SubResource("StandardMaterial3D_uog1g")
@@ -884,10 +892,6 @@ material_override = SubResource("StandardMaterial3D_uog1g")
 
 [node name="wall_001_lp17" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(4.07852e-08, -5.04545e-08, -1, 8.15703e-08, -1.15426, 4.37114e-08, -0.933056, -1.00909e-07, -4.37114e-08, -3.20455, 2.27982, -21.0556)
-material_override = SubResource("StandardMaterial3D_uog1g")
-
-[node name="wall_001_lp18" parent="ModelCollider" instance=ExtResource("14_h23bo")]
-transform = Transform3D(4.07852e-08, -5.04545e-08, -1, 8.15703e-08, -1.15426, 4.37114e-08, -0.933056, -1.00909e-07, -4.37114e-08, -3.20455, 13.2598, -21.0556)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
 [node name="wall_001_lp19" parent="ModelCollider" instance=ExtResource("14_h23bo")]
@@ -1756,6 +1760,32 @@ transform = Transform3D(1.42776, 0, 0, 0, -6.24094e-08, 1, 0, -1.42776, -4.37114
 material_override = SubResource("StandardMaterial3D_p50mi")
 gi_mode = 2
 gi_lightmap_scale = 1
+
+[node name="FakeCollider" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FakeCollider"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.25, 8, 1.125)
+shape = SubResource("BoxShape3D_os7f8")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="FakeCollider"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.25, 8, -27.5389)
+shape = SubResource("BoxShape3D_e4pnj")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="FakeCollider"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5, 8, -15.2889)
+shape = SubResource("BoxShape3D_e4pnj")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="FakeCollider"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.25, 19.75, -2.66394)
+shape = SubResource("BoxShape3D_3ftj6")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="FakeCollider"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.25, 19.75, -20.1639)
+shape = SubResource("BoxShape3D_3ftj6")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="FakeCollider"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 8, -15.2889)
+shape = SubResource("BoxShape3D_i63dy")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 process_mode = 3
