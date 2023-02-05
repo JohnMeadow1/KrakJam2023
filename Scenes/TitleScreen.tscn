@@ -73,6 +73,7 @@ script = SubResource("GDScript_jj4ef")
 metadata/_edit_lock_ = true
 
 [node name="TextureRect" type="TextureRect" parent="."]
+self_modulate = Color(0.6, 0.6, 0.6, 0.627451)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

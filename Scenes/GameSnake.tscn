@@ -1,4 +1,4 @@
-[gd_scene load_steps=97 format=3 uid="uid://c514njor17cvc"]
+[gd_scene load_steps=98 format=3 uid="uid://c514njor17cvc"]
 
 [ext_resource type="Script" path="res://Scripts/GameSnake.gd" id="1_jj3oq"]
 [ext_resource type="Environment" uid="uid://bixdvg8dmhm74" path="res://Resources/WorldEnvironment.tres" id="2_pa1ip"]
@@ -386,6 +386,9 @@ _data = {
 "Najazd": SubResource("Animation_gexgt"),
 "RESET": SubResource("Animation_b3w27")
 }
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dn5du"]
+size = Vector3(1000, 1000, 1)
 
 [node name="GameSnake" type="Node3D"]
 script = ExtResource("1_jj3oq")
@@ -2430,5 +2433,24 @@ shadow_normal_bias = 0.697
 shadow_blur = 7.768
 spot_range = 5.911
 spot_angle = 31.29
+
+[node name="SnakeEater" type="StaticBody3D" parent="."]
+metadata/snek = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SnakeEater"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -43.6903, -67.7375, 3.50609)
+shape = SubResource("BoxShape3D_dn5du")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="SnakeEater"]
+transform = Transform3D(-1, 0, -2.98023e-08, 0, 1, 0, 2.98023e-08, 0, -1, -11.6279, -67.7375, -77.3569)
+shape = SubResource("BoxShape3D_dn5du")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="SnakeEater"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 49.542, -67.7375, -83.5455)
+shape = SubResource("BoxShape3D_dn5du")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="SnakeEater"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.4093, -67.7375, 42.4855)
+shape = SubResource("BoxShape3D_dn5du")
 
 [connection signal="timeout" from="UI/Timer" to="." method="update_score"]
