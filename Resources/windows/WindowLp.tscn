@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://pcq0ur5444fh"]
+[gd_scene load_steps=4 format=3 uid="uid://pcq0ur5444fh"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pqno1"]
 resource_name = "Window_lp"
@@ -37,13 +37,7 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_ksgle")
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_tsjct"]
-size = Vector3(3, 5, 1)
-
 [node name="Window_lp" type="MeshInstance3D"]
 transform = Transform3D(1, 0, 0, 0, 1, -4.37114e-08, 0, 4.37114e-08, 1, 6.08583, 31.1006, -64.0576)
 mesh = SubResource("ArrayMesh_5kex1")
 skeleton = NodePath("")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("BoxShape3D_tsjct")
