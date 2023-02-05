@@ -216,7 +216,7 @@ func update_score() -> void:
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
 		if fininszed:
-			get_tree().auto_accept_quit = false
+			get_tree().auto_accept_quit = true
 			get_tree().change_scene_to_file("res://Scenes/TitleScreen.tscn")
 		else:
 			get_tree().quit()
