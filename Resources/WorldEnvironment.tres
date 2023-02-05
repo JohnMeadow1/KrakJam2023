@@ -28,7 +28,6 @@ ssao_power = 1.60766
 ssao_horizon = 0.26
 ssao_sharpness = 1.0
 ssao_light_affect = 0.15
-ssil_enabled = true
 ssil_radius = 2.87
 ssil_intensity = 0.51
 ssil_sharpness = 0.06

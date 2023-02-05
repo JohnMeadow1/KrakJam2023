@@ -18,6 +18,7 @@ var camera_height_direction = 0.0
 var camera_height_factor = 0.0
 var camera_orbit_direction = 0.0
 var camera_orbit_factor = 0.0
+var camera_distance := 0.0
 
 var mouse_orbit_direction = 0.0
 var mouse_height_direction = 0.0
@@ -55,7 +56,9 @@ func _ready() -> void:
 		make_sneak()
 	
 	update_current_snake()
-
+	
+	camera_distance = camera_3d.position.z
+	
 func make_sneak():
 	if SNEKOUNT == 0:
 		if sneqs_alive == 0:
@@ -78,6 +81,7 @@ func _process(delta: float) -> void:
 	
 	camera_handle_orbit(delta)
 	camera_handle_height(delta)
+	canera_handle_distance(delta)
 
 func camera_handle_orbit(delta: float):
 	camera_orbit_direction = 0.0
@@ -110,7 +114,10 @@ func camera_handle_height(delta: float):
 		elif camera_pivot.position.y > 1:
 			camera_pivot.position.y += camera_height_factor
 			update_current_snake()
-
+			
+func canera_handle_distance(delta):
+	camera_3d.position.z = lerp(camera_3d.position.z, camera_distance, 0.2)
+	
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		if mouse_MMB_pressed:
@@ -139,10 +146,10 @@ func _input(event: InputEvent) -> void:
 			Input.set_mouse_mode( Input.MOUSE_MODE_VISIBLE )
 
 		if event.pressed and event.button_index == MOUSE_BUTTON_WHEEL_UP:
-			mouse_height_direction += 2
+			camera_distance = max(camera_distance-1.0, 20.0)
 
 		if event.pressed and event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
-			mouse_height_direction -= 2
+			camera_distance = min(camera_distance+1.0, 40.0)
 
 #	if event is InputEventMouseButton:
 #		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
