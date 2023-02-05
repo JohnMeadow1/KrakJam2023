@@ -30,6 +30,10 @@ window/size/mode.movie=4
 movie_writer/movie_file="res://Rootsnek.avi"
 naming/scene_name_casing=1
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/fixexport/plugin.cfg")
+
 [rendering]
 
 lights_and_shadows/use_physical_light_units=true
