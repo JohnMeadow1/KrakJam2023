@@ -23,15 +23,14 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_y2brh"]
-points = PackedVector3Array(-20.2714, -19.5917, 0, 20.2714, -19.5917, 0, -20.2714, 34.7798, 0, 20.2714, 34.7798, 0)
+[sub_resource type="BoxShape3D" id="BoxShape3D_8h5se"]
+size = Vector3(40, 55, 0.001)
 
 [node name="Plane001" type="MeshInstance3D"]
 transform = Transform3D(1.42776, 0, 0, 0, 0, 1, 0, -1.42776, 0, 5.25853, 0, -8.91313)
 mesh = SubResource("ArrayMesh_heoj7")
 skeleton = NodePath("")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-shape = SubResource("ConvexPolygonShape3D_y2brh")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.5, 0)
+shape = SubResource("BoxShape3D_8h5se")

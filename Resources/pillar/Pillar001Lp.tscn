@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://wq3263u32lbb"]
+[gd_scene load_steps=5 format=3 uid="uid://wq3263u32lbb"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pcsi4"]
 resource_name = "pillar_001_lp"
@@ -37,7 +37,13 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_2rj8h")
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_20op0"]
+size = Vector3(1.5, 5.5, 1.5)
+
 [node name="pillar_001_lp" type="MeshInstance3D"]
 transform = Transform3D(1, 0, 0, 0, 1, -4.37114e-08, 0, 4.37114e-08, 1, 30.1712, 25.6166, -78.3149)
 mesh = SubResource("ArrayMesh_d6igp")
 skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_20op0")

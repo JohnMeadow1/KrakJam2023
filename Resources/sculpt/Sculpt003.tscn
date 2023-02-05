@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://dsdg5l6gmrfnh"]
+[gd_scene load_steps=5 format=3 uid="uid://dsdg5l6gmrfnh"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tbfj3"]
 resource_name = "Sculpt_003"
@@ -37,7 +37,13 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_525gv")
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_g440l"]
+size = Vector3(2, 9, 2)
+
 [node name="Sculpt_003" type="MeshInstance3D"]
 transform = Transform3D(1, 0, 0, 0, 1, -4.37114e-08, 0, 4.37114e-08, 1, 0, 0, 0)
 mesh = SubResource("ArrayMesh_r1foo")
 skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_g440l")

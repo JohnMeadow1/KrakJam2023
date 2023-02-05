@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://duihga4yco1sk"]
+[gd_scene load_steps=5 format=3 uid="uid://duihga4yco1sk"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ih0sx"]
 resource_name = "Tower_lp"
@@ -37,7 +37,13 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_2wxkh")
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_y8vx3"]
+size = Vector3(6, 9, 5)
+
 [node name="Tower_lp" type="MeshInstance3D"]
 transform = Transform3D(1, 0, 0, 0, 1, -4.37114e-08, 0, 4.37114e-08, 1, 6.13094, 42.7601, -49.2091)
 mesh = SubResource("ArrayMesh_jmnhd")
 skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_y8vx3")
