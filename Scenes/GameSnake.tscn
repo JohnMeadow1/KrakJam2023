@@ -1478,7 +1478,7 @@ transform = Transform3D(-1, -3.82137e-15, -8.74228e-08, 0, 1, -4.37114e-08, 8.74
 material_override = SubResource("StandardMaterial3D_627k1")
 
 [node name="pot_lp" parent="." instance=ExtResource("47_aqnca")]
-transform = Transform3D(1, 0, 0, 0, 1, -4.37114e-08, 0, 4.37114e-08, 1, 12.499, 0.558438, -33.2211)
+transform = Transform3D(1, 0, 0, 0, 1, -4.37114e-08, 0, 4.37114e-08, 1, 12.5106, 0.67459, -33.2479)
 material_override = SubResource("StandardMaterial3D_bke02")
 
 [node name="pot_lp2" parent="." instance=ExtResource("47_aqnca")]
@@ -1490,15 +1490,15 @@ transform = Transform3D(1, 0, 0, 0, 1, -4.37114e-08, 0, 4.37114e-08, 1, -12.501,
 material_override = SubResource("StandardMaterial3D_bke02")
 
 [node name="pot_lp3" parent="." instance=ExtResource("47_aqnca")]
-transform = Transform3D(-4.37114e-08, 4.37114e-08, 1, 0, 1, -4.37114e-08, -1, -1.91069e-15, -4.37114e-08, 20.8119, 0.558438, -44.413)
+transform = Transform3D(-4.37114e-08, 4.37114e-08, 1, 0, 1, -4.37114e-08, -1, -1.91069e-15, -4.37114e-08, 20.8119, 0.642894, -44.413)
 material_override = SubResource("StandardMaterial3D_bke02")
 
 [node name="pot_lp4" parent="." instance=ExtResource("47_aqnca")]
-transform = Transform3D(1, 0, 0, 0, 1, -4.37114e-08, 0, 4.37114e-08, 1, 18.2968, 0.558438, -21.7171)
+transform = Transform3D(1, 0, 0, 0, 1, -4.37114e-08, 0, 4.37114e-08, 1, 18.3054, 0.679487, -21.7303)
 material_override = SubResource("StandardMaterial3D_bke02")
 
 [node name="pot_lp5" parent="." instance=ExtResource("47_aqnca")]
-transform = Transform3D(1, 0, 0, 0, 1, -4.37114e-08, 0, 4.37114e-08, 1, 18.2968, 0.558438, -9.4574)
+transform = Transform3D(1, 0, 0, 0, 1, -4.37114e-08, 0, 4.37114e-08, 1, 18.2968, 0.706378, -9.4574)
 material_override = SubResource("StandardMaterial3D_bke02")
 
 [node name="Sculpt_001" parent="." instance=ExtResource("51_8482d")]
