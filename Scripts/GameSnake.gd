@@ -31,18 +31,15 @@ var sneqs_alive: int
 var fininszed: bool
 
 func _ready() -> void:
+	$UI.hide()
 	get_tree().auto_accept_quit = false
 	
 	snakes.child_entered_tree.connect(func(sn):
 		sneqs_alive += 1
 		sn.owner = self
 		
-		if nosneqqks:
-			nosneqqks = false
 #			camera_pivot.rotation.y = Vector2(camera_pivot.global_position.x - sn.global_position.x, camera_pivot.global_position.y - sn.global_position.y).angle()
 #			camera_pivot.rotation.y = sn.global_position
-			var vector_to_sn = camera_pivot.global_position - sn.global_position
-			camera_pivot.look_at(camera_pivot.global_position + Vector3(vector_to_sn.x,0.0, vector_to_sn.z))
 		
 		sn.deded.connect(func():
 			sneqs_alive -= 1
@@ -55,19 +52,24 @@ func _ready() -> void:
 		)
 	)
 	
-	for i in MAXNEKS_AT_ONCE:
+	$AnimationPlayer.play(&"Najazd")
+	await $AnimationPlayer.animation_finished
+	$AnimationPlayer.play(&"RESET")
+	$AnimationPlayer.advance(0)
+	$UI.show()
+	
+	var sn = snakes.get_child(0)
+	var vector_to_sn = camera_pivot.global_position - sn.global_position
+	camera_pivot.look_at(camera_pivot.global_position + Vector3(vector_to_sn.x,0.0, vector_to_sn.z))
+	
+	camera_distance = camera_3d.position.z
+	
+	for i in MAXNEKS_AT_ONCE - 1:
 		make_sneak()
 	
 	update_current_snake()
 	
-#	get_tree().paused = true
-#	$AnimationPlayer.play(&"Najazd")
-#	await $AnimationPlayer.animation_finished
-#	get_tree().paused = false
-	
-	camera_distance = camera_3d.position.z
-	
-func make_sneak():
+func make_sneak(force_spawner := -1):
 	if SNEKOUNT == 0:
 		if sneqs_alive == 0:
 			%Summary.show()
@@ -77,10 +79,20 @@ func make_sneak():
 		
 		return
 	
-	for i in 1000:
-		if snek_spawners.get_child(randi() % snek_spawners.get_child_count()).spawn_snek():
-			SNEKOUNT -= 1
-			break
+	if force_spawner > -1:
+		snek_spawners.get_child(force_spawner).spawn_snek()
+	else:
+		for i in 1000:
+			if snek_spawners.get_child(randi() % snek_spawners.get_child_count()).spawn_snek():
+				SNEKOUNT -= 1
+				break
+	
+	if nosneqqks:
+		nosneqqks = false
+		var sneq = snakes.get_child(0)
+		sneq.is_current = true
+#		sneq.direction = Vector3(1, 0, 0)
+#		sneq.up_direction = Vector3(0, 1, 0)
 
 func _process(delta: float) -> void:
 	if fininszed:

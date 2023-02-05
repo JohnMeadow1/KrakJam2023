@@ -339,6 +339,20 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector3(-0.260054, -2.81871, 0), Vector3(-0.258309, -3.12938, 0), Vector3(0.205949, 2.24449, 0), Vector3(0.0882638, 2.57262, 0), Vector3(-0.00523599, 3.19221, -0.0226893), Vector3(-0.00523599, 3.19221, -0.0226893)]
 }
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [2],
+"method": &"make_sneak"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_b3w27"]
 length = 0.001
@@ -418,11 +432,11 @@ up_direction = Vector3(-1, 0, 0)
 
 [node name="SnekSpawner11" parent="SnekSpawners" instance=ExtResource("5_sb6wk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.0456, 0, -27.2363)
-up_direction = Vector3(0, 0, 1)
+up_direction = Vector3(1, 0, 0)
 
 [node name="SnekSpawner13" parent="SnekSpawners" instance=ExtResource("5_sb6wk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.05822, 0, -31.246)
-up_direction = Vector3(-1, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.05822, 0, -31.3214)
+up_direction = Vector3(0, 0, -1)
 
 [node name="SnekSpawner14" parent="SnekSpawners" instance=ExtResource("5_sb6wk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.32623, -0.0112903, -11.0675)
@@ -446,6 +460,22 @@ up_direction = Vector3(1, 0, 0)
 
 [node name="SnekSpawner9" parent="SnekSpawners" instance=ExtResource("5_sb6wk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.7941, -4.76837e-07, -17.8615)
+up_direction = Vector3(1, 0, 0)
+
+[node name="SnekSpawner10" parent="SnekSpawners" instance=ExtResource("5_sb6wk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.0425, 1.7053e-13, -25.7764)
+up_direction = Vector3(0, 0, -1)
+
+[node name="SnekSpawner12" parent="SnekSpawners" instance=ExtResource("5_sb6wk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.6874, 1.7053e-13, -17.1502)
+up_direction = Vector3(-1, 0, 0)
+
+[node name="SnekSpawner15" parent="SnekSpawners" instance=ExtResource("5_sb6wk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.08753, 1.7053e-13, 9.06668)
+up_direction = Vector3(0, 0, 1)
+
+[node name="SnekSpawner16" parent="SnekSpawners" instance=ExtResource("5_sb6wk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.7247, 1.7053e-13, 3.67733)
 up_direction = Vector3(1, 0, 0)
 
 [node name="UI" type="Control" parent="."]
