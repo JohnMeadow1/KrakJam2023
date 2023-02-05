@@ -1,10 +1,8 @@
-[gd_scene load_steps=87 format=3 uid="uid://c514njor17cvc"]
+[gd_scene load_steps=86 format=3 uid="uid://c514njor17cvc"]
 
 [ext_resource type="Script" path="res://Scripts/GameSnake.gd" id="1_jj3oq"]
 [ext_resource type="Environment" uid="uid://bixdvg8dmhm74" path="res://Resources/WorldEnvironment.tres" id="2_pa1ip"]
-[ext_resource type="PackedScene" uid="uid://dkovggyxbxvt8" path="res://FBX/Catedral_Scene_no_Ivy_001.fbx" id="3_2542n"]
 [ext_resource type="PackedScene" uid="uid://dnn0pmqdsvulh" path="res://Scenes/SnekSpawner.tscn" id="5_sb6wk"]
-[ext_resource type="PackedScene" uid="uid://cjomg44iilqkm" path="res://FBX/stone_sculpts.fbx" id="5_sioen"]
 [ext_resource type="PackedScene" uid="uid://cmnos7ix5kg67" path="res://Resources/Model_Columns_/ColumnBase001Lp.tscn" id="9_7ut4g"]
 [ext_resource type="PackedScene" uid="uid://duihga4yco1sk" path="res://Resources/towers/TowerLp.tscn" id="10_44y7y"]
 [ext_resource type="Texture2D" uid="uid://bsd1jjs1bic4w" path="res://Resources/towers/txt/Tower_lp_Tower_lp_BaseColor.png" id="11_ke6cn"]
@@ -154,6 +152,20 @@ _data = {
 "RESET": SubResource("Animation_jy2qt"),
 "urthebest": SubResource("Animation_i1wio")
 }
+
+[sub_resource type="GDScript" id="GDScript_n3v5f"]
+resource_name = "ModelCollider"
+script/source = "extends StaticBody3D
+
+func _ready() -> void:
+	for node in get_children():
+		if node.get_child_count() == 0:
+			push_warning(\"Brak collidera: \" + str(node.name))
+		
+		for shape in node.get_children():
+			if shape is CollisionShape3D:
+				shape.reparent(self)
+"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v0n2l"]
 albedo_texture = ExtResource("11_ke6cn")
@@ -312,9 +324,6 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 0.894934, 0.446198, 0, -0.446198, 0.894934, 0, 5, 24)
 current = true
 
-[node name="Catedral_Scene_no_Ivy_001" parent="." instance=ExtResource("3_2542n")]
-visible = false
-
 [node name="Snakes" type="Node3D" parent="."]
 metadata/_edit_group_ = true
 
@@ -363,10 +372,6 @@ up_direction = Vector3(1, 0, 0)
 [node name="SnekSpawner10" parent="SnekSpawners" instance=ExtResource("5_sb6wk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.26451, -4.76837e-07, -15.5461)
 up_direction = Vector3(1, 0, 0)
-
-[node name="stone_sculpts" parent="." instance=ExtResource("5_sioen")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.204433, -22.2886, 39.4275)
-visible = false
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
@@ -480,1212 +485,1215 @@ libraries = {
 "": SubResource("AnimationLibrary_oav40")
 }
 
-[node name="Column_Base_001_lp002" parent="." instance=ExtResource("9_7ut4g")]
+[node name="ModelCollider" type="StaticBody3D" parent="."]
+script = SubResource("GDScript_n3v5f")
+
+[node name="Column_Base_001_lp002" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(1, 0, 0, 0, 1, -4.37114e-08, 0, 4.37114e-08, 1, 14.7975, 2.74136, -6.98071)
 
-[node name="Column_Base_001_lp016" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp016" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(1, 0, 0, 0, 1, -4.37114e-08, 0, 4.37114e-08, 1, 14.7975, 8.12139, -6.98071)
 
-[node name="Column_Base_001_lp017" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp017" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(1, 0, 0, 0, 1, -4.37114e-08, 0, 4.37114e-08, 1, 14.7975, 13.5216, -6.98071)
 
-[node name="Column_Base_001_lp003" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp003" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(1, 0, 0, 0, 1, -4.37114e-08, 0, 4.37114e-08, 1, 14.7975, 2.74136, -11.5835)
 
-[node name="Column_Base_001_lp014" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp014" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(1, 0, 0, 0, 1, -4.37114e-08, 0, 4.37114e-08, 1, 14.7975, 8.16944, -11.5835)
 
-[node name="Column_Base_001_lp015" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp015" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(1, 0, 0, 0, 1, -4.37114e-08, 0, 4.37114e-08, 1, 14.7975, 13.5726, -11.5835)
 
-[node name="Column_Base_001_lp004" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp004" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(1, 0, 0, 0, 1, -4.37114e-08, 0, 4.37114e-08, 1, 14.7975, 2.74136, -19.2906)
 
-[node name="Column_Base_001_lp012" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp012" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(1, 0, 0, 0, 1, -4.37114e-08, 0, 4.37114e-08, 1, 14.7975, 8.05647, -19.2906)
 
-[node name="Column_Base_001_lp013" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp013" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(1, 0, 0, 0, 1, -4.37114e-08, 0, 4.37114e-08, 1, 14.7975, 13.467, -19.2906)
 
-[node name="Column_Base_001_lp005" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp005" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(1, 0, 0, 0, 1, -4.37114e-08, 0, 4.37114e-08, 1, 15.4245, 2.74136, -23.992)
 
-[node name="Column_Base_001_lp018" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp018" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(1, 0, 0, 0, 1, -4.37114e-08, 0, 4.37114e-08, 1, 15.4245, 8.15611, -23.992)
 
-[node name="Column_Base_001_lp019" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp019" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(1, 0, 0, 0, 1, -4.37114e-08, 0, 4.37114e-08, 1, 15.4245, 13.5264, -23.992)
 
-[node name="Column_Base_001_lp006" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp006" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(1, 0, 0, 0, 1, -4.37114e-08, 0, 4.37114e-08, 1, 9.44199, 2.74136, -24.3391)
 
-[node name="Column_Base_001_lp020" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp020" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, 9.44199, 8.14553, -24.3391)
 
-[node name="Column_Base_001_lp021" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp021" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(1, 0, 0, 0, 1, -4.37114e-08, 0, 4.37114e-08, 1, 9.44199, 13.568, -24.3391)
 
-[node name="Column_Base_001_lp032" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp032" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, 9.44199, 2.74136, -30.0213)
 
-[node name="Column_Base_001_lp033" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp033" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-1, 3.82137e-15, 8.74228e-08, 0, 1, -4.37114e-08, -8.74228e-08, -4.37114e-08, -1, 9.44199, 8.14553, -30.0213)
 
-[node name="Column_Base_001_lp034" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp034" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, 9.44199, 13.568, -30.0213)
 
-[node name="Column_Base_001_lp035" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp035" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-1, 3.82137e-15, 8.74228e-08, 0, 1, -4.37114e-08, -8.74228e-08, -4.37114e-08, -1, 3.35805, 2.74136, -30.0213)
 
-[node name="Column_Base_001_lp074" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp074" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, -2.43968, 2.74136, -42.1248)
 
-[node name="Column_Base_001_lp075" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp075" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-1, 3.82137e-15, 8.74228e-08, 0, 1, -4.37114e-08, -8.74228e-08, -4.37114e-08, -1, 1.08054, 2.74136, -42.2255)
 
-[node name="Column_Base_001_lp076" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp076" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, -2.43968, 2.74136, -46.555)
 
-[node name="Column_Base_001_lp077" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp077" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-1, 3.82137e-15, 8.74228e-08, 0, 1, -4.37114e-08, -8.74228e-08, -4.37114e-08, -1, 1.08054, 2.74136, -46.6557)
 
-[node name="Column_Base_001_lp078" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp078" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, 10.6981, 2.74136, -42.1248)
 
-[node name="Column_Base_001_lp079" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp079" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-1, 3.82137e-15, 8.74228e-08, 0, 1, -4.37114e-08, -8.74228e-08, -4.37114e-08, -1, 14.2183, 2.74136, -42.2255)
 
-[node name="Column_Base_001_lp080" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp080" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, 10.6981, 2.74136, -46.555)
 
-[node name="Column_Base_001_lp081" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp081" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-1, 3.82137e-15, 8.74228e-08, 0, 1, -4.37114e-08, -8.74228e-08, -4.37114e-08, -1, 14.2183, 2.74136, -46.6557)
 
-[node name="Column_Base_001_lp082" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp082" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-1, 3.82137e-15, 8.74228e-08, 0, 1, -4.37114e-08, -8.74228e-08, -4.37114e-08, -1, 17.154, 2.74136, -57.8042)
 
-[node name="Column_Base_001_lp099" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp099" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-1, 3.82137e-15, 8.74228e-08, 0, 1, -4.37114e-08, -8.74228e-08, -4.37114e-08, -1, -4.64001, 2.74136, -57.8042)
 
-[node name="Column_Base_001_lp100" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp100" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-1, 3.82137e-15, 8.74228e-08, 0, 1, -4.37114e-08, -8.74228e-08, -4.37114e-08, -1, -14.6315, 2.74136, -57.8042)
 
-[node name="Column_Base_001_lp084" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp084" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-1, 3.82137e-15, 8.74228e-08, 0, 1, -4.37114e-08, -8.74228e-08, -4.37114e-08, -1, 26.3849, 2.74136, -57.8042)
 
-[node name="Column_Base_001_lp085" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp085" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-1, 3.82137e-15, 8.74228e-08, 0, 1, -4.37114e-08, -8.74228e-08, -4.37114e-08, -1, 32.4116, 2.74136, -49.5779)
 
-[node name="Column_Base_001_lp086" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp086" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-1, 3.82137e-15, 8.74228e-08, 0, 1, -4.37114e-08, -8.74228e-08, -4.37114e-08, -1, 32.4116, 2.74136, -37.9274)
 
-[node name="Column_Base_001_lp087" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp087" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-1, 3.82137e-15, 8.74228e-08, 0, 1, -4.37114e-08, -8.74228e-08, -4.37114e-08, -1, 32.4116, 2.74136, -25.5422)
 
-[node name="Column_Base_001_lp088" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp088" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-1, 3.82137e-15, 8.74228e-08, 0, 1, -4.37114e-08, -8.74228e-08, -4.37114e-08, -1, 32.4116, 2.74136, 4.40215)
 
-[node name="Column_Base_001_lp089" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp089" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-1, 3.82137e-15, 8.74228e-08, 0, 1, -4.37114e-08, -8.74228e-08, -4.37114e-08, -1, 23.3424, 2.74136, 17.8302)
 
-[node name="Column_Base_001_lp090" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp090" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-1, 3.82137e-15, 8.74228e-08, 0, 1, -4.37114e-08, -8.74228e-08, -4.37114e-08, -1, 15.6438, 2.74136, 17.8302)
 
-[node name="Column_Base_001_lp091" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp091" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-1, 3.82137e-15, 8.74228e-08, 0, 1, -4.37114e-08, -8.74228e-08, -4.37114e-08, -1, -4.65962, 2.74136, 17.8302)
 
-[node name="Column_Base_001_lp092" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp092" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-1, 3.82137e-15, 8.74228e-08, 0, 1, -4.37114e-08, -8.74228e-08, -4.37114e-08, -1, -13.2725, 2.74136, 17.8302)
 
-[node name="Column_Base_001_lp093" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp093" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-1, 3.82137e-15, 8.74228e-08, 0, 1, -4.37114e-08, -8.74228e-08, -4.37114e-08, -1, -22.0028, 2.74136, 9.77902)
 
-[node name="Column_Base_001_lp094" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp094" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-1, 3.82137e-15, 8.74228e-08, 0, 1, -4.37114e-08, -8.74228e-08, -4.37114e-08, -1, -22.0028, 2.74136, -0.283978)
 
-[node name="Column_Base_001_lp095" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp095" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-1, 3.82137e-15, 8.74228e-08, 0, 1, -4.37114e-08, -8.74228e-08, -4.37114e-08, -1, -22.0028, 2.74136, -24.5575)
 
-[node name="Column_Base_001_lp096" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp096" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-1, 3.82137e-15, 8.74228e-08, 0, 1, -4.37114e-08, -8.74228e-08, -4.37114e-08, -1, -22.0028, 2.74136, -34.4891)
 
-[node name="Column_Base_001_lp097" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp097" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-1, 3.82137e-15, 8.74228e-08, 0, 1, -4.37114e-08, -8.74228e-08, -4.37114e-08, -1, -22.0028, 2.74136, -45.0104)
 
-[node name="Column_Base_001_lp098" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp098" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-1.5255, 3.82137e-15, 1.20612e-07, 0, 1, -6.03062e-08, -1.33363e-07, -4.37114e-08, -1.37965, -22.0028, 2.74136, -58.0542)
 
-[node name="Column_Base_001_lp083" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp083" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-1.36596, 3.82137e-15, 1.05097e-07, 0, 1, -5.25486e-08, -1.19416e-07, -4.37114e-08, -1.20217, 32.3527, 2.74136, -57.0968)
 
-[node name="Column_Base_001_lp036" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp036" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(1.31134e-07, 4.37114e-08, 1, 0, 1, -4.37114e-08, -1, 5.73206e-15, 1.31134e-07, 3.35805, 8.14553, -30.0213)
 
-[node name="Column_Base_001_lp037" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp037" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-1, 3.82137e-15, 8.74228e-08, 0, 1, -4.37114e-08, -8.74228e-08, -4.37114e-08, -1, 3.35805, 13.568, -30.0213)
 
-[node name="Column_Base_001_lp111" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp111" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, 9.44199, 19.055, -30.0213)
 
-[node name="Column_Base_001_lp112" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp112" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-1, 3.82137e-15, 8.74228e-08, 0, 1, -4.37114e-08, -8.74228e-08, -4.37114e-08, -1, 3.35805, 19.055, -30.0213)
 
-[node name="Column_Base_001_lp007" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp007" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-4.37114e-08, 4.37114e-08, 1, 0, 1, -4.37114e-08, -1, -1.91069e-15, -4.37114e-08, 2.96821, 2.74136, -24.1371)
 
-[node name="Column_Base_001_lp022" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp022" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-4.37114e-08, 4.37114e-08, 1, 0, 1, -4.37114e-08, -1, -1.91069e-15, -4.37114e-08, 2.96821, 8.0806, -24.1371)
 
-[node name="Column_Base_001_lp023" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp023" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-4.37114e-08, 4.37114e-08, 1, 0, 1, -4.37114e-08, -1, -1.91069e-15, -4.37114e-08, 2.96821, 13.4398, -24.1371)
 
-[node name="Column_Base_001_lp008" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp008" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, -3.25869, 2.74136, -23.9657)
 
-[node name="Column_Base_001_lp024" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp024" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, -3.25869, 8.15992, -23.9657)
 
-[node name="Column_Base_001_lp025" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp025" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, -3.25869, 13.5261, -23.9657)
 
-[node name="Column_Base_001_lp009" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp009" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, -3.25869, 2.74136, -19.1242)
 
-[node name="Column_Base_001_lp026" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp026" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, -3.25869, 8.01747, -19.1242)
 
-[node name="Column_Base_001_lp027" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp027" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, -3.25869, 13.3693, -19.1242)
 
-[node name="Column_Base_001_lp122" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp122" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, -3.25869, 18.8138, -19.1242)
 
-[node name="Column_Base_001_lp010" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp010" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, -9.65538, 2.74136, -16.5834)
 
-[node name="Column_Base_001_lp011" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp011" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, -9.65538, 2.74136, -13.5834)
 
-[node name="Column_Base_001_lp028" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp028" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, -9.65538, 8.25797, -16.5834)
 
-[node name="Column_Base_001_lp029" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp029" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, -9.65538, 8.25797, -13.5834)
 
-[node name="Column_Base_001_lp030" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp030" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, -9.65538, 13.7376, -16.5834)
 
-[node name="Column_Base_001_lp031" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp031" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, -9.65538, 13.7376, -13.5834)
 
-[node name="Column_Base_001_lp123" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp123" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, -9.65538, 19.2488, -16.5834)
 
-[node name="Column_Base_001_lp124" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp124" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, -9.65538, 19.2488, -13.5834)
 
-[node name="Column_Base_001_lp038" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp038" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, -2.87492, 13.7376, -12.0048)
 
-[node name="Column_Base_001_lp039" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp039" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, -2.87492, 8.42202, -12.0048)
 
-[node name="Column_Base_001_lp040" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp040" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, -2.87492, 2.94516, -12.0048)
 
-[node name="Column_Base_001_lp041" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp041" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, -2.87492, 13.7376, -6.37)
 
-[node name="Column_Base_001_lp120" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp120" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, -2.87492, 19.1864, -6.37)
 
-[node name="Column_Base_001_lp042" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp042" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, -2.87492, 8.42202, -6.37)
 
-[node name="Column_Base_001_lp043" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp043" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, -2.87492, 2.94516, -6.37)
 
-[node name="Column_Base_001_lp050" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp050" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, 3.20332, 13.7376, 1.03508)
 
-[node name="Column_Base_001_lp068" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp068" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-4.37114e-08, -5.61587e-08, -1, 0, 1.28476, -4.37114e-08, 1, -2.45478e-15, -4.37114e-08, 3.35485, 19.9694, 1.03508)
 
-[node name="Column_Base_001_lp069" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp069" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-4.37114e-08, -5.61587e-08, -1, 0, 1.28476, -4.37114e-08, 1, -2.45478e-15, -4.37114e-08, 9.4322, 20.0864, 1.03508)
 
-[node name="Column_Base_001_lp070" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp070" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-4.37114e-08, -5.61587e-08, -1, 0, 1.28476, -4.37114e-08, 1, -2.45478e-15, -4.37114e-08, 9.4322, 20.0864, -6.37018)
 
-[node name="Column_Base_001_lp051" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp051" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, 3.20332, 8.42202, 1.03508)
 
-[node name="Column_Base_001_lp052" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp052" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, 3.20332, 2.94516, 1.03508)
 
-[node name="Column_Base_001_lp053" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp053" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, 3.20332, 13.7376, 7.73662)
 
-[node name="Column_Base_001_lp054" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp054" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, 3.20332, 8.42202, 7.73662)
 
-[node name="Column_Base_001_lp055" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp055" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, 3.20332, 2.94516, 7.73662)
 
-[node name="Column_Base_001_lp056" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp056" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, 3.20332, 13.7376, 7.73662)
 
-[node name="Column_Base_001_lp057" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp057" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, 3.20332, 8.42202, 7.73662)
 
-[node name="Column_Base_001_lp058" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp058" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, 3.20332, 2.94516, 7.73662)
 
-[node name="Column_Base_001_lp044" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp044" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, 2.71794, 13.7376, -5.79449)
 
-[node name="Column_Base_001_lp071" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp071" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-4.37114e-08, -5.69463e-08, -1, 0, 1.30278, -4.37114e-08, 1, -2.4892e-15, -4.37114e-08, 2.70715, 19.9127, -6.27251)
 
-[node name="Column_Base_001_lp108" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp108" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-4.37114e-08, -5.61587e-08, -1, 0, 1.28476, -4.37114e-08, 1, -2.45478e-15, -4.37114e-08, 9.4322, 26.9669, 1.03508)
 
-[node name="Column_Base_001_lp110" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp110" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-4.37114e-08, -5.69463e-08, -1, 0, 1.30278, -4.37114e-08, 1, -2.4892e-15, -4.37114e-08, 2.70715, 26.7932, -6.27251)
 
-[node name="Column_Base_001_lp045" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp045" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, 2.71794, 8.42202, -5.79449)
 
-[node name="Column_Base_001_lp046" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp046" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, 2.71794, 2.94516, -5.79449)
 
-[node name="Column_Base_001_lp047" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp047" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, 9.04379, 13.7376, -6.37)
 
-[node name="Column_Base_001_lp048" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp048" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, 9.04379, 8.42202, -6.37)
 
-[node name="Column_Base_001_lp049" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp049" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, 9.04379, 2.94516, -6.37)
 
-[node name="Tower_lp" parent="." instance=ExtResource("10_44y7y")]
+[node name="Tower_lp" parent="ModelCollider" instance=ExtResource("10_44y7y")]
 transform = Transform3D(1.11593, 0, 0, 0, 1.175, -5.13609e-08, 0, 5.13609e-08, 1.175, 12.1404, 10.1628, -21.703)
 material_override = SubResource("StandardMaterial3D_v0n2l")
 
-[node name="Tower_lp3" parent="." instance=ExtResource("10_44y7y")]
+[node name="Tower_lp3" parent="ModelCollider" instance=ExtResource("10_44y7y")]
 transform = Transform3D(1.11593, 0, 0, 0, 1.175, -5.13609e-08, 0, 5.13609e-08, 1.175, -6.96544, 4.59996, -15.3413)
 material_override = SubResource("StandardMaterial3D_v0n2l")
 
-[node name="Tower_lp2" parent="." instance=ExtResource("10_44y7y")]
+[node name="Tower_lp2" parent="ModelCollider" instance=ExtResource("10_44y7y")]
 transform = Transform3D(-1.11593, -4.49011e-15, -1.02722e-07, 0, 1.175, -5.13609e-08, 9.7558e-08, -5.13609e-08, -1.175, 12.1404, 10.1406, -9.35548)
 material_override = SubResource("StandardMaterial3D_v0n2l")
 
-[node name="wall_001_lp" parent="." instance=ExtResource("14_h23bo")]
+[node name="wall_001_lp" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(-4.9856e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1.14057, -1.91069e-15, -4.37114e-08, 14.9251, 2.20336, -15.439)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
-[node name="wall_001_lp2" parent="." instance=ExtResource("14_h23bo")]
+[node name="wall_001_lp2" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(-4.9856e-08, -5.04544e-08, -1, 0, 1.15426, -4.37114e-08, 1.14057, -2.20543e-15, -4.37114e-08, 14.8865, 7.39297, -15.5545)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
-[node name="wall_001_lp5" parent="." instance=ExtResource("14_h23bo")]
+[node name="wall_001_lp5" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(1.14057, -4.10077e-15, 0, 1.77124e-22, 1.15426, -4.37114e-08, -3.55271e-15, 5.04544e-08, 1, 12.0006, 2.30594, -23.8272)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
-[node name="wall_001_lp6" parent="." instance=ExtResource("14_h23bo")]
+[node name="wall_001_lp6" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(1.14057, -4.10077e-15, 0, 1.77124e-22, 1.15426, -4.37114e-08, -3.55271e-15, 5.04544e-08, 1, 12.0006, 7.99744, -24.343)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
-[node name="wall_001_lp7" parent="." instance=ExtResource("14_h23bo")]
+[node name="wall_001_lp7" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(-0.933056, -4.41087e-15, -8.74228e-08, 1.44898e-22, 1.15426, -4.37114e-08, 8.15703e-08, -5.04544e-08, -1, 6.05527, 8.04506, -24.1302)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
-[node name="wall_001_lp15" parent="." instance=ExtResource("14_h23bo")]
+[node name="wall_001_lp15" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(0.933056, 1.00909e-07, 8.74228e-08, 8.15703e-08, -1.15426, 4.37114e-08, 8.15703e-08, -5.04545e-08, -1, 6.05527, 2.03761, -24.0352)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
-[node name="wall_001_lp14" parent="." instance=ExtResource("14_h23bo")]
+[node name="wall_001_lp14" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(-0.933056, -4.41087e-15, -8.74228e-08, 1.44898e-22, 1.15426, -4.37114e-08, 8.15703e-08, -5.04544e-08, -1, -0.0927734, 13.2585, -24.0352)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
-[node name="wall_001_lp9" parent="." instance=ExtResource("14_h23bo")]
+[node name="wall_001_lp9" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(0.933056, 1.00909e-07, 8.74228e-08, 8.15703e-08, -1.15426, 4.37114e-08, 8.15703e-08, -5.04545e-08, -1, -0.291892, 7.99744, -24.1169)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
-[node name="wall_001_lp16" parent="." instance=ExtResource("14_h23bo")]
+[node name="wall_001_lp16" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(4.07852e-08, -5.04545e-08, -1, 8.15703e-08, -1.15426, 4.37114e-08, -0.933056, -1.00909e-07, -4.37114e-08, -3.20455, 7.99744, -21.0556)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
-[node name="wall_001_lp17" parent="." instance=ExtResource("14_h23bo")]
+[node name="wall_001_lp17" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(4.07852e-08, -5.04545e-08, -1, 8.15703e-08, -1.15426, 4.37114e-08, -0.933056, -1.00909e-07, -4.37114e-08, -3.20455, 2.27982, -21.0556)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
-[node name="wall_001_lp18" parent="." instance=ExtResource("14_h23bo")]
+[node name="wall_001_lp18" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(4.07852e-08, -5.04545e-08, -1, 8.15703e-08, -1.15426, 4.37114e-08, -0.933056, -1.00909e-07, -4.37114e-08, -3.20455, 13.2598, -21.0556)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
-[node name="wall_001_lp19" parent="." instance=ExtResource("14_h23bo")]
+[node name="wall_001_lp19" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(1.09174, 1.00909e-07, 8.74228e-08, 9.5443e-08, -1.15426, 4.37114e-08, 9.5443e-08, -5.04544e-08, -1, -6.75205, 12.6138, -17.9311)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
-[node name="wall_001_lp20" parent="." instance=ExtResource("14_h23bo")]
+[node name="wall_001_lp20" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(3.88844e-08, -5.04544e-08, -1, 7.77687e-08, -1.15426, 4.37114e-08, -0.88957, -1.00909e-07, -4.37114e-08, -9.41057, 13.2598, -15.4609)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
-[node name="wall_001_lp21" parent="." instance=ExtResource("14_h23bo")]
+[node name="wall_001_lp21" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(-1.00237, -1.13179e-07, -2.28319e-14, 8.76302e-08, -1.29462, 4.37114e-08, -2.67165e-14, 5.65897e-08, 1, -6.3323, 12.7662, -12.4478)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
-[node name="wall_001_lp22" parent="." instance=ExtResource("14_h23bo")]
+[node name="wall_001_lp22" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(-1.00237, -1.543e-07, -2.28319e-14, 8.76302e-08, -1.76498, 4.37114e-08, -2.67165e-14, 7.71498e-08, 1, -6.3323, 4.59929, -12.6331)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
-[node name="wall_001_lp32" parent="." instance=ExtResource("14_h23bo")]
+[node name="wall_001_lp32" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(4.38151e-08, -5.65897e-08, -1, 8.76302e-08, -1.29462, 4.37114e-08, -1.00237, -1.13179e-07, -4.37114e-08, -2.97259, 12.7662, -9.17595)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
-[node name="wall_001_lp33" parent="." instance=ExtResource("14_h23bo")]
+[node name="wall_001_lp33" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(4.38151e-08, -7.71498e-08, -1, 8.76302e-08, -1.76498, 4.37114e-08, -1.00237, -1.543e-07, -4.37114e-08, -2.78736, 4.59929, -9.17595)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
-[node name="wall_001_lp34" parent="." instance=ExtResource("14_h23bo")]
+[node name="wall_001_lp34" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(-1.00217, -1.14302e-07, -0.0202445, 8.76303e-08, -1.29462, 4.37114e-08, -0.0202925, 5.42868e-08, 0.999795, 0.231315, 12.7662, -6.42348)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
-[node name="wall_001_lp47" parent="." instance=ExtResource("14_h23bo")]
+[node name="wall_001_lp47" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(-1.00217, -1.14302e-07, -0.0202445, -0.0202925, 1.10876e-07, 0.999795, -8.67432e-08, 1.29462, -8.74138e-08, 6.30162, 15.8606, 4.03746)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
-[node name="wall_001_lp50" parent="." instance=ExtResource("14_h23bo")]
+[node name="wall_001_lp50" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(-1.00217, -1.14302e-07, -0.0202445, -0.0202925, 1.10876e-07, 0.999795, -8.67432e-08, 1.29462, -8.74138e-08, 6.30162, 15.8606, -2.91288)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
-[node name="wall_001_lp48" parent="." instance=ExtResource("14_h23bo")]
+[node name="wall_001_lp48" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(-1.00217, -1.14302e-07, -0.0202445, 8.76303e-08, -1.29462, 4.37114e-08, -0.0202925, 5.42868e-08, 0.999795, 6.30162, 12.7662, 7.76059)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
-[node name="wall_001_lp54" parent="." instance=ExtResource("14_h23bo")]
+[node name="wall_001_lp54" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(-1.00217, -1.14302e-07, -0.0202445, 8.76303e-08, -1.29462, 4.37114e-08, -0.0202925, 5.42868e-08, 0.999795, 6.30162, 19.2824, 0.471367)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
-[node name="wall_001_lp49" parent="." instance=ExtResource("14_h23bo")]
+[node name="wall_001_lp49" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(-1.00217, -1.66519e-07, -0.0202445, 8.76303e-08, -1.88606, 4.37114e-08, -0.0202925, 7.90873e-08, 0.999795, 6.30162, 3.96188, 7.76059)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
-[node name="wall_001_lp35" parent="." instance=ExtResource("14_h23bo")]
+[node name="wall_001_lp35" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(-1.00217, -1.5583e-07, -0.0202445, 8.76302e-08, -1.76498, 4.37114e-08, -0.0202925, 7.40103e-08, 0.999795, 0.235065, 4.59929, -6.60867)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
-[node name="wall_001_lp39" parent="." instance=ExtResource("14_h23bo")]
+[node name="wall_001_lp39" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(0.0202925, -5.42868e-08, -0.999795, 8.76303e-08, -1.29462, 4.37114e-08, -1.00217, -1.14302e-07, -0.0202445, 3.06079, 12.7662, -2.61754)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
-[node name="wall_001_lp40" parent="." instance=ExtResource("14_h23bo")]
+[node name="wall_001_lp40" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(0.0202926, -7.40103e-08, -0.999795, 8.76302e-08, -1.76498, 4.37114e-08, -1.00217, -1.5583e-07, -0.0202445, 3.24598, 4.59929, -2.61379)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
-[node name="wall_001_lp41" parent="." instance=ExtResource("14_h23bo")]
+[node name="wall_001_lp41" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(0.0202925, -5.42868e-08, -0.999795, 8.76303e-08, -1.29462, 4.37114e-08, -1.00217, -1.14302e-07, -0.0202445, 3.06079, 12.7662, 4.10903)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
-[node name="wall_001_lp42" parent="." instance=ExtResource("14_h23bo")]
+[node name="wall_001_lp42" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(0.0202926, -7.40103e-08, -0.999795, 8.76302e-08, -1.76498, 4.37114e-08, -1.00217, -1.5583e-07, -0.0202445, 3.24598, 4.59929, 4.11278)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
-[node name="Column_Base_001_lp059" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp059" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, 9.44074, 13.7376, 1.03508)
 
-[node name="Column_Base_001_lp060" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp060" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, 9.44074, 8.42202, 1.03508)
 
-[node name="Column_Base_001_lp061" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp061" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, 9.44074, 2.94516, 1.03508)
 
-[node name="Column_Base_001_lp062" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp062" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, 9.44074, 13.7376, 7.73662)
 
-[node name="Column_Base_001_lp118" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp118" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, 9.44074, 19.2224, 7.73662)
 
-[node name="Column_Base_001_lp063" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp063" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, 9.44074, 8.42202, 7.73662)
 
-[node name="Column_Base_001_lp064" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp064" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, 9.44074, 2.94516, 7.73662)
 
-[node name="Column_Base_001_lp065" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp065" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, 8.95536, 13.7376, -5.79449)
 
-[node name="Column_Base_001_lp066" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp066" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, 8.95536, 8.42202, -5.79449)
 
-[node name="Column_Base_001_lp067" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp067" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, 8.95536, 2.94516, -5.79449)
 
-[node name="wall_001_lp43" parent="." instance=ExtResource("14_h23bo")]
+[node name="wall_001_lp43" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(0.0202925, -5.42868e-08, -0.999795, 8.76303e-08, -1.29462, 4.37114e-08, -1.00217, -1.14302e-07, -0.0202445, 9.2982, 12.7662, -2.61754)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
-[node name="wall_001_lp51" parent="." instance=ExtResource("14_h23bo")]
+[node name="wall_001_lp51" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(-1.00217, -1.14302e-07, -0.0202445, -0.0202925, 1.10876e-07, 0.999795, -8.67432e-08, 1.29462, -8.74138e-08, 6.30162, 22.8395, -2.91288)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
-[node name="wall_001_lp52" parent="." instance=ExtResource("14_h23bo")]
+[node name="wall_001_lp52" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(0.0202925, -5.42868e-08, -0.999795, 8.76303e-08, -1.29462, 4.37114e-08, -1.00217, -1.14302e-07, -0.0202445, 3.06079, 19.5166, -2.61754)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
-[node name="wall_001_lp53" parent="." instance=ExtResource("14_h23bo")]
+[node name="wall_001_lp53" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(0.0202925, -5.42868e-08, -0.999795, 8.76303e-08, -1.29462, 4.37114e-08, -1.00217, -1.14302e-07, -0.0202445, 9.2982, 19.7451, -2.61754)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
-[node name="Column_Base_001_lp072" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp072" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-0.012182, 5.61546e-08, 0.999926, 0, 1.28476, -4.37114e-08, -0.999926, -6.84128e-10, -0.012182, 9.24346, 19.8516, -24.4709)
 
-[node name="Column_Base_001_lp073" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp073" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-0.012182, 5.61546e-08, 0.999926, 0, 1.28476, -4.37114e-08, -0.999926, -6.84128e-10, -0.012182, 3.00056, 19.7223, -24.1)
 
-[node name="Column_Base_001_lp101" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp101" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-0.012182, 5.61546e-08, 0.999926, 0, 1.28476, -4.37114e-08, -0.999926, -6.84128e-10, -0.012182, 3.00056, 19.7223, -16.9077)
 
-[node name="Column_Base_001_lp102" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp102" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-0.012182, 5.61546e-08, 0.999926, 0, 1.28476, -4.37114e-08, -0.999926, -6.84128e-10, -0.012182, 9.05827, 19.7223, -16.9077)
 
-[node name="Column_Base_001_lp106" parent="." instance=ExtResource("9_7ut4g")]
+[node name="Column_Base_001_lp106" parent="ModelCollider" instance=ExtResource("9_7ut4g")]
 transform = Transform3D(-0.012182, 5.61546e-08, 0.999926, 0, 1.28476, -4.37114e-08, -0.999926, -6.84128e-10, -0.012182, 9.05827, 26.7758, -16.9077)
 
-[node name="wall_001_lp55" parent="." instance=ExtResource("14_h23bo")]
+[node name="wall_001_lp55" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(1.00234, 1.13632e-07, 0.00806339, 8.76303e-08, -1.29462, 4.37114e-08, 0.00808251, -5.56752e-08, -0.999967, 6.13779, 19.2824, -23.5745)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
-[node name="wall_001_lp64" parent="." instance=ExtResource("14_h23bo")]
+[node name="wall_001_lp64" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(1.00234, 1.13632e-07, 0.00806339, 8.76303e-08, -1.29462, 4.37114e-08, 0.00808251, -5.56752e-08, -0.999967, 6.13779, 19.2824, -17.014)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
-[node name="wall_001_lp65" parent="." instance=ExtResource("14_h23bo")]
+[node name="wall_001_lp65" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(1.00234, 1.13632e-07, 0.00806339, 8.76303e-08, -1.29462, 4.37114e-08, 0.00808251, -5.56752e-08, -0.999967, 6.13779, 19.2824, -6.19561)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
-[node name="wall_001_lp56" parent="." instance=ExtResource("14_h23bo")]
+[node name="wall_001_lp56" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(1.00209, -0.0157711, 0.020243, -0.0202925, 1.10876e-07, 0.999795, -0.0122084, -1.29452, -0.000246533, 6.17901, 22.8395, -20.1905)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
-[node name="wall_001_lp57" parent="." instance=ExtResource("14_h23bo")]
+[node name="wall_001_lp57" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(-0.00808256, 5.56752e-08, 0.999968, 8.76303e-08, -1.29462, 4.37114e-08, 1.00234, 1.13632e-07, 0.00806343, 9.41601, 19.7451, -20.5253)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
-[node name="wall_001_lp58" parent="." instance=ExtResource("14_h23bo")]
+[node name="wall_001_lp58" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(-0.00808256, 5.56752e-08, 0.999968, 8.76303e-08, -1.29462, 4.37114e-08, 1.00234, 1.13632e-07, 0.00806343, 3.17905, 19.7451, -20.4493)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
-[node name="wall_001_lp44" parent="." instance=ExtResource("14_h23bo")]
+[node name="wall_001_lp44" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(0.0202926, -7.40103e-08, -0.999795, 8.76302e-08, -1.76498, 4.37114e-08, -1.00217, -1.5583e-07, -0.0202445, 9.4834, 4.59929, -2.61379)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
-[node name="wall_001_lp45" parent="." instance=ExtResource("14_h23bo")]
+[node name="wall_001_lp45" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(0.0202925, -5.42868e-08, -0.999795, 8.76303e-08, -1.29462, 4.37114e-08, -1.00217, -1.14302e-07, -0.0202445, 9.2982, 12.7662, 4.10903)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
-[node name="wall_001_lp46" parent="." instance=ExtResource("14_h23bo")]
+[node name="wall_001_lp46" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(0.0202926, -7.40103e-08, -0.999795, 8.76302e-08, -1.76498, 4.37114e-08, -1.00217, -1.5583e-07, -0.0202445, 9.4834, 4.59929, 4.11278)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
-[node name="wall_001_lp36" parent="." instance=ExtResource("14_h23bo")]
+[node name="wall_001_lp36" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(-1.00217, -1.14302e-07, -0.0202445, 8.76303e-08, -1.29462, 4.37114e-08, -0.0202925, 5.42868e-08, 0.999795, 11.8222, 12.7662, -6.55832)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
-[node name="wall_001_lp38" parent="." instance=ExtResource("14_h23bo")]
+[node name="wall_001_lp38" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(-1.00217, -1.14302e-07, -0.0202445, 8.76303e-08, -1.29462, 4.37114e-08, -0.0202925, 5.42868e-08, 0.999795, 11.8222, 12.7662, -6.55832)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
-[node name="wall_001_lp37" parent="." instance=ExtResource("14_h23bo")]
+[node name="wall_001_lp37" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(-1.00217, -1.5583e-07, -0.0202445, 8.76302e-08, -1.76498, 4.37114e-08, -0.0202925, 7.40103e-08, 0.999795, 11.8259, 4.59929, -6.74351)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
-[node name="wall_001_lp12" parent="." instance=ExtResource("14_h23bo")]
+[node name="wall_001_lp12" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(-0.933056, -4.41087e-15, -8.74228e-08, 1.44898e-22, 1.15426, -4.37114e-08, 8.15703e-08, -5.04544e-08, -1, -0.291892, 2.16078, -23.9912)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
-[node name="wall_001_lp8" parent="." instance=ExtResource("14_h23bo")]
+[node name="wall_001_lp8" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(-0.933056, -4.41087e-15, -8.74228e-08, 1.44898e-22, 1.15426, -4.37114e-08, 8.15703e-08, -5.04544e-08, -1, 6.05527, 13.3404, -24.0352)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
-[node name="wall_001_lp4" parent="." instance=ExtResource("14_h23bo")]
+[node name="wall_001_lp4" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(-4.9856e-08, -4.82001e-08, -1, 0, 1.10269, -4.37114e-08, 1.14057, -2.10689e-15, -4.37114e-08, 14.6905, 13.4279, -15.5545)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
-[node name="wall_001_lp3" parent="." instance=ExtResource("14_h23bo")]
+[node name="wall_001_lp3" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(-1.87285e-15, -1.27415, 8.74228e-08, -4.9856e-08, -1.11389e-07, -1, 1.14057, -2.43449e-15, -4.37114e-08, 11.6474, 15.9788, -15.5545)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
-[node name="wall_001_lp67" parent="." instance=ExtResource("14_h23bo")]
+[node name="wall_001_lp67" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(-1.72874e-15, -1.27415, 8.74228e-08, -4.60196e-08, -1.11389e-07, -1, 1.0528, -6.96117e-15, -4.37114e-08, 11.6474, 15.9788, -21.37)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
-[node name="wall_001_lp66" parent="." instance=ExtResource("14_h23bo")]
+[node name="wall_001_lp66" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(-1.87285e-15, -1.27415, 8.74228e-08, -4.9856e-08, -1.11389e-07, -1, 1.14057, -2.43449e-15, -4.37114e-08, 11.6474, 15.9624, -9.52172)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
-[node name="wall_001_lp10" parent="." instance=ExtResource("14_h23bo")]
+[node name="wall_001_lp10" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(-1.14055, 0.00702715, 4.32286e-08, -4.9856e-08, -1.11389e-07, -1, -0.00629046, -1.27413, 8.76625e-08, 5.87552, 15.9776, -20.823)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
-[node name="wall_001_lp59" parent="." instance=ExtResource("14_h23bo")]
+[node name="wall_001_lp59" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(-1.14055, 0.00702715, 4.32286e-08, -4.9856e-08, -1.11389e-07, -1, -0.00629046, -1.27413, 8.76625e-08, 5.87552, 15.9776, -14.0094)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
-[node name="wall_001_lp60" parent="." instance=ExtResource("14_h23bo")]
+[node name="wall_001_lp60" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(-1.14055, 0.00702715, 4.32286e-08, -4.9856e-08, -1.11389e-07, -1, -0.00629046, -1.27413, 8.76625e-08, 5.87552, 15.9776, -6.95812)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
-[node name="wall_001_lp31" parent="." instance=ExtResource("14_h23bo")]
+[node name="wall_001_lp31" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(-1.01909, 0.00702715, 3.79956e-08, -4.45466e-08, -1.11389e-07, -0.878946, -0.00562056, -1.27413, 7.70506e-08, 5.87552, 16.0886, -26.8785)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
-[node name="wall_001_lp11" parent="." instance=ExtResource("14_h23bo")]
+[node name="wall_001_lp11" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(-1.14055, 0.00702715, 4.32286e-08, -4.9856e-08, -1.11389e-07, -1, -0.00629046, -1.27413, 8.76625e-08, -0.332508, 15.9776, -20.823)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
-[node name="wall_001_lp61" parent="." instance=ExtResource("14_h23bo")]
+[node name="wall_001_lp61" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(-1.14055, 0.00702715, 4.32286e-08, -4.9856e-08, -1.11389e-07, -1, -0.00629046, -1.27413, 8.76625e-08, -0.312202, 15.9776, -14.1036)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
-[node name="wall_001_lp63" parent="." instance=ExtResource("14_h23bo")]
+[node name="wall_001_lp63" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(-0.933762, 0.00567413, 4.31853e-08, -4.08166e-08, -8.99423e-08, -0.999, -0.00514994, -1.02881, 8.75748e-08, -6.70276, 15.8197, -15.0934)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
-[node name="wall_001_lp62" parent="." instance=ExtResource("14_h23bo")]
+[node name="wall_001_lp62" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(-1.14055, 0.00702715, 4.32286e-08, -4.9856e-08, -1.11389e-07, -1, -0.00629046, -1.27413, 8.76625e-08, 0.11069, 15.9776, -9.61785)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
-[node name="window_frame_005" parent="." instance=ExtResource("18_2j04x")]
+[node name="window_frame_005" parent="ModelCollider" instance=ExtResource("18_2j04x")]
 transform = Transform3D(-7.0663e-08, -6.30461e-08, -1, 0, 1.44233, -4.37114e-08, 1.61658, -2.75583e-15, -4.37114e-08, 14.4604, 2.57384, -21.6132)
 material_override = SubResource("StandardMaterial3D_vx1ob")
 
-[node name="window_frame_006" parent="." instance=ExtResource("18_2j04x")]
+[node name="window_frame_006" parent="ModelCollider" instance=ExtResource("18_2j04x")]
 transform = Transform3D(-7.0663e-08, -6.30461e-08, -1, 0, 1.44233, -4.37114e-08, 1.61658, -2.75583e-15, -4.37114e-08, 14.4604, 7.76536, -21.6132)
 material_override = SubResource("StandardMaterial3D_vx1ob")
 
-[node name="window_frame_003" parent="." instance=ExtResource("18_2j04x")]
+[node name="window_frame_003" parent="ModelCollider" instance=ExtResource("18_2j04x")]
 transform = Transform3D(-8.3249e-08, -6.78897e-08, -1, 0, 1.55314, -4.37114e-08, 1.90451, -2.96755e-15, -4.37114e-08, 14.4316, 2.49217, -9.05508)
 material_override = SubResource("StandardMaterial3D_vx1ob")
 
-[node name="window_frame_004" parent="." instance=ExtResource("18_2j04x")]
+[node name="window_frame_004" parent="ModelCollider" instance=ExtResource("18_2j04x")]
 transform = Transform3D(-8.3249e-08, -6.78897e-08, -1, 0, 1.55314, -4.37114e-08, 1.90451, -2.96755e-15, -4.37114e-08, 14.3294, 7.90699, -9.05508)
 material_override = SubResource("StandardMaterial3D_vx1ob")
 
-[node name="Window_lp" parent="." instance=ExtResource("22_ycrm3")]
+[node name="Window_lp" parent="ModelCollider" instance=ExtResource("22_ycrm3")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, 15.3033, 7.88878, -15.5564)
 material_override = SubResource("StandardMaterial3D_no1ys")
 
-[node name="Window_lp3" parent="." instance=ExtResource("22_ycrm3")]
+[node name="Window_lp3" parent="ModelCollider" instance=ExtResource("22_ycrm3")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, 15.3181, 2.0998, -15.5564)
 material_override = SubResource("StandardMaterial3D_no1ys")
 
-[node name="Window_lp24" parent="." instance=ExtResource("22_ycrm3")]
+[node name="Window_lp24" parent="ModelCollider" instance=ExtResource("22_ycrm3")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, 15.085, 13.46, -15.5564)
 material_override = SubResource("StandardMaterial3D_no1ys")
 
-[node name="Window_lp6" parent="." instance=ExtResource("22_ycrm3")]
+[node name="Window_lp6" parent="ModelCollider" instance=ExtResource("22_ycrm3")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, 10.0093, 7.88878, -2.79152)
 material_override = SubResource("StandardMaterial3D_no1ys")
 
-[node name="Window_lp9" parent="." instance=ExtResource("22_ycrm3")]
+[node name="Window_lp9" parent="ModelCollider" instance=ExtResource("22_ycrm3")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, 10.0093, 13.4827, -2.79152)
 material_override = SubResource("StandardMaterial3D_no1ys")
 
-[node name="Window_lp22" parent="." instance=ExtResource("22_ycrm3")]
+[node name="Window_lp22" parent="ModelCollider" instance=ExtResource("22_ycrm3")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, 10.0093, 19.9088, -2.79152)
 material_override = SubResource("StandardMaterial3D_no1ys")
 
-[node name="Window_lp2" parent="." instance=ExtResource("22_ycrm3")]
+[node name="Window_lp2" parent="ModelCollider" instance=ExtResource("22_ycrm3")]
 transform = Transform3D(1, 0, 0, 0, 0.83, -6.52611e-08, 0, 3.62805e-08, 1.493, 12.265, 7.76828, -24.7024)
 material_override = SubResource("StandardMaterial3D_no1ys")
 
-[node name="Window_lp31" parent="." instance=ExtResource("22_ycrm3")]
+[node name="Window_lp31" parent="ModelCollider" instance=ExtResource("22_ycrm3")]
 transform = Transform3D(1, 0, 0, 0, 0.83, -6.52611e-08, 0, 3.62805e-08, 1.493, 12.265, 13.3287, -24.6463)
 material_override = SubResource("StandardMaterial3D_no1ys")
 
-[node name="Window_lp32" parent="." instance=ExtResource("22_ycrm3")]
+[node name="Window_lp32" parent="ModelCollider" instance=ExtResource("22_ycrm3")]
 transform = Transform3D(1, 0, 0, 0, 0.83, -6.52611e-08, 0, 3.62805e-08, 1.493, 12.265, 2.31902, -24.2243)
 material_override = SubResource("StandardMaterial3D_no1ys")
 
-[node name="Window_lp4" parent="." instance=ExtResource("22_ycrm3")]
+[node name="Window_lp4" parent="ModelCollider" instance=ExtResource("22_ycrm3")]
 transform = Transform3D(1, 0, 0, 0, 0.83, -6.52611e-08, 0, 3.62805e-08, 1.493, 5.87792, 7.76828, -24.7024)
 material_override = SubResource("StandardMaterial3D_no1ys")
 
-[node name="wall_001_lp13" parent="." instance=ExtResource("14_h23bo")]
+[node name="wall_001_lp13" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(-0.933056, -4.41087e-15, -8.74228e-08, 1.44898e-22, 1.15426, -4.37114e-08, 8.15703e-08, -5.04544e-08, -1, 6.05527, 8.04506, -30.0643)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
-[node name="wall_001_lp23" parent="." instance=ExtResource("14_h23bo")]
+[node name="wall_001_lp23" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(0.933056, 1.00909e-07, 8.74228e-08, 8.15703e-08, -1.15426, 4.37114e-08, 8.15703e-08, -5.04545e-08, -1, 6.05527, 2.03761, -29.9692)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
-[node name="wall_001_lp24" parent="." instance=ExtResource("14_h23bo")]
+[node name="wall_001_lp24" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(-0.933056, -4.41087e-15, -8.74228e-08, 1.44898e-22, 1.15426, -4.37114e-08, 8.15703e-08, -5.04544e-08, -1, 6.05527, 13.3404, -29.9692)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
-[node name="Window_lp7" parent="." instance=ExtResource("22_ycrm3")]
+[node name="Window_lp7" parent="ModelCollider" instance=ExtResource("22_ycrm3")]
 transform = Transform3D(1, 0, 0, 0, 0.83, -6.52611e-08, 0, 3.62805e-08, 1.493, 6.25187, 13.7683, -30.3329)
 material_override = SubResource("StandardMaterial3D_no1ys")
 
-[node name="Window_lp25" parent="." instance=ExtResource("22_ycrm3")]
+[node name="Window_lp25" parent="ModelCollider" instance=ExtResource("22_ycrm3")]
 transform = Transform3D(1, 0, 0, 0, 0.83, -6.52611e-08, 0, 3.62805e-08, 1.493, 6.25187, 8.37893, -30.4666)
 material_override = SubResource("StandardMaterial3D_no1ys")
 
-[node name="Window_lp26" parent="." instance=ExtResource("22_ycrm3")]
+[node name="Window_lp26" parent="ModelCollider" instance=ExtResource("22_ycrm3")]
 transform = Transform3D(1, 0, 0, 0, 0.83, -6.52611e-08, 0, 3.62805e-08, 1.493, 6.25187, 2.46715, -30.3585)
 material_override = SubResource("StandardMaterial3D_no1ys")
 
-[node name="Window_lp8" parent="." instance=ExtResource("22_ycrm3")]
+[node name="Window_lp8" parent="ModelCollider" instance=ExtResource("22_ycrm3")]
 transform = Transform3D(0, 3.62805e-08, 1.493, -9.1951e-16, 0.83, -6.52611e-08, -1, 3.55271e-15, 5.96046e-08, 3.0864, 2.45833, -27.1051)
 material_override = SubResource("StandardMaterial3D_no1ys")
 
-[node name="Window_lp27" parent="." instance=ExtResource("22_ycrm3")]
+[node name="Window_lp27" parent="ModelCollider" instance=ExtResource("22_ycrm3")]
 transform = Transform3D(0, 3.62805e-08, 1.493, -9.1951e-16, 0.83, -6.52611e-08, -1, 3.55271e-15, 5.96046e-08, 3.12623, 8.32691, -27.1051)
 material_override = SubResource("StandardMaterial3D_no1ys")
 
-[node name="Window_lp28" parent="." instance=ExtResource("22_ycrm3")]
+[node name="Window_lp28" parent="ModelCollider" instance=ExtResource("22_ycrm3")]
 transform = Transform3D(0, 3.62805e-08, 1.493, -9.1951e-16, 0.83, -6.52611e-08, -1, 3.55271e-15, 5.96046e-08, 3.22337, 13.6404, -27.1051)
 material_override = SubResource("StandardMaterial3D_no1ys")
 
-[node name="wall_001_lp25" parent="." instance=ExtResource("14_h23bo")]
+[node name="wall_001_lp25" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(-4.07852e-08, 5.04544e-08, 1, 1.44898e-22, 1.15426, -4.37114e-08, -0.933056, -6.3062e-15, -4.37114e-08, 8.80742, 8.04506, -26.4821)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
-[node name="wall_001_lp26" parent="." instance=ExtResource("14_h23bo")]
+[node name="wall_001_lp26" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(-1.22356e-07, 5.04544e-08, 1, 8.15703e-08, -1.15426, 4.37114e-08, 0.933056, 1.00909e-07, 1.31134e-07, 8.71239, 2.03761, -26.4821)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
-[node name="wall_001_lp27" parent="." instance=ExtResource("14_h23bo")]
+[node name="wall_001_lp27" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(-4.07852e-08, 5.04544e-08, 1, 1.44898e-22, 1.15426, -4.37114e-08, -0.933056, -6.3062e-15, -4.37114e-08, 8.71239, 13.3404, -26.4821)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
-[node name="wall_001_lp28" parent="." instance=ExtResource("14_h23bo")]
+[node name="wall_001_lp28" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(1.22356e-07, -5.04544e-08, -1, 1.44898e-22, 1.15426, -4.37114e-08, 0.933056, 1.07171e-14, 1.31134e-07, 3.51522, 8.04506, -26.5708)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
-[node name="wall_001_lp29" parent="." instance=ExtResource("14_h23bo")]
+[node name="wall_001_lp29" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(4.07852e-08, -5.04545e-08, -1, 8.15703e-08, -1.15426, 4.37114e-08, -0.933056, -1.00909e-07, -4.37114e-08, 3.61024, 2.03761, -26.5708)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
-[node name="wall_001_lp30" parent="." instance=ExtResource("14_h23bo")]
+[node name="wall_001_lp30" parent="ModelCollider" instance=ExtResource("14_h23bo")]
 transform = Transform3D(1.22356e-07, -5.04544e-08, -1, 1.44898e-22, 1.15426, -4.37114e-08, 0.933056, 1.07171e-14, 1.31134e-07, 3.61024, 13.3404, -26.5708)
 material_override = SubResource("StandardMaterial3D_uog1g")
 
-[node name="Window_lp5" parent="." instance=ExtResource("22_ycrm3")]
+[node name="Window_lp5" parent="ModelCollider" instance=ExtResource("22_ycrm3")]
 transform = Transform3D(1, 0, 0, 0, 0.83, -6.52611e-08, 0, 3.62805e-08, 1.493, -0.224319, 7.76828, -24.4747)
 material_override = SubResource("StandardMaterial3D_no1ys")
 
-[node name="Window_lp29" parent="." instance=ExtResource("22_ycrm3")]
+[node name="Window_lp29" parent="ModelCollider" instance=ExtResource("22_ycrm3")]
 transform = Transform3D(1, 0, 0, 0, 0.83, -6.52611e-08, 0, 3.62805e-08, 1.493, -0.224319, 13.6746, -24.4747)
 material_override = SubResource("StandardMaterial3D_no1ys")
 
-[node name="Window_lp30" parent="." instance=ExtResource("22_ycrm3")]
+[node name="Window_lp30" parent="ModelCollider" instance=ExtResource("22_ycrm3")]
 transform = Transform3D(1, 0, 0, 0, 0.83, -6.52611e-08, 0, 3.62805e-08, 1.493, -0.224319, 2.35566, -24.4747)
 material_override = SubResource("StandardMaterial3D_no1ys")
 
-[node name="Window_lp10" parent="." instance=ExtResource("22_ycrm3")]
+[node name="Window_lp10" parent="ModelCollider" instance=ExtResource("22_ycrm3")]
 transform = Transform3D(1, 0, 0, 0, 0.83, -6.52611e-08, 0, 3.62805e-08, 1.493, -7.10418, 7.79768, -18.2844)
 material_override = SubResource("StandardMaterial3D_no1ys")
 
-[node name="Window_lp11" parent="." instance=ExtResource("22_ycrm3")]
+[node name="Window_lp11" parent="ModelCollider" instance=ExtResource("22_ycrm3")]
 transform = Transform3D(1, 0, 0, 0, 0.83, -6.52611e-08, 0, 3.62805e-08, 1.493, -7.10418, 13.126, -18.2844)
 material_override = SubResource("StandardMaterial3D_no1ys")
 
-[node name="Window_lp12" parent="." instance=ExtResource("22_ycrm3")]
+[node name="Window_lp12" parent="ModelCollider" instance=ExtResource("22_ycrm3")]
 transform = Transform3D(-4.37114e-08, 3.62805e-08, 1.493, 0, 0.83, -6.52611e-08, -1, 1.36288e-15, -6.52611e-08, -3.37531, 13.4913, -9.03994)
 material_override = SubResource("StandardMaterial3D_no1ys")
 
-[node name="Window_lp23" parent="." instance=ExtResource("22_ycrm3")]
+[node name="Window_lp23" parent="ModelCollider" instance=ExtResource("22_ycrm3")]
 transform = Transform3D(-4.37114e-08, 3.62805e-08, 1.493, 0, 0.83, -6.52611e-08, -1, 1.36288e-15, -6.52611e-08, -3.37531, 2.4334, -9.03994)
 material_override = SubResource("StandardMaterial3D_no1ys")
 
-[node name="Window_lp13" parent="." instance=ExtResource("22_ycrm3")]
+[node name="Window_lp13" parent="ModelCollider" instance=ExtResource("22_ycrm3")]
 transform = Transform3D(-4.37114e-08, 3.62805e-08, 1.493, 0, 0.83, -6.52611e-08, -1, 1.36288e-15, -6.52611e-08, 2.63619, 13.126, -2.22015)
 material_override = SubResource("StandardMaterial3D_no1ys")
 
-[node name="Window_lp14" parent="." instance=ExtResource("22_ycrm3")]
+[node name="Window_lp14" parent="ModelCollider" instance=ExtResource("22_ycrm3")]
 transform = Transform3D(-4.37114e-08, 3.62805e-08, 1.493, 0, 0.83, -6.52611e-08, -1, 1.36288e-15, -6.52611e-08, 2.63619, 8.12595, -2.22015)
 material_override = SubResource("StandardMaterial3D_no1ys")
 
-[node name="Window_lp15" parent="." instance=ExtResource("22_ycrm3")]
+[node name="Window_lp15" parent="ModelCollider" instance=ExtResource("22_ycrm3")]
 transform = Transform3D(-4.37114e-08, 3.62805e-08, 1.493, 0, 0.83, -6.52611e-08, -1, 1.36288e-15, -6.52611e-08, 2.63619, 2.56985, -2.22015)
 material_override = SubResource("StandardMaterial3D_no1ys")
 
-[node name="Window_lp16" parent="." instance=ExtResource("22_ycrm3")]
+[node name="Window_lp16" parent="ModelCollider" instance=ExtResource("22_ycrm3")]
 transform = Transform3D(-4.37114e-08, 3.62805e-08, 1.493, 0, 0.83, -6.52611e-08, -1, 1.36288e-15, -6.52611e-08, 2.63619, 13.126, 4.48895)
 material_override = SubResource("StandardMaterial3D_no1ys")
 
-[node name="Window_lp17" parent="." instance=ExtResource("22_ycrm3")]
+[node name="Window_lp17" parent="ModelCollider" instance=ExtResource("22_ycrm3")]
 transform = Transform3D(-4.37114e-08, 3.62805e-08, 1.493, 0, 0.83, -6.52611e-08, -1, 1.36288e-15, -6.52611e-08, 2.63619, 8.12595, 4.48895)
 material_override = SubResource("StandardMaterial3D_no1ys")
 
-[node name="Window_lp18" parent="." instance=ExtResource("22_ycrm3")]
+[node name="Window_lp18" parent="ModelCollider" instance=ExtResource("22_ycrm3")]
 transform = Transform3D(-4.37114e-08, 3.62805e-08, 1.493, 0, 0.83, -6.52611e-08, -1, 1.36288e-15, -6.52611e-08, 2.63619, 2.56985, 4.48895)
 material_override = SubResource("StandardMaterial3D_no1ys")
 
-[node name="Window_lp19" parent="." instance=ExtResource("22_ycrm3")]
+[node name="Window_lp19" parent="ModelCollider" instance=ExtResource("22_ycrm3")]
 transform = Transform3D(1.31134e-07, -3.62805e-08, -1.493, 0, 0.83, -6.52611e-08, 1, 1.80886e-15, 1.95783e-07, 9.85624, 13.126, 4.48895)
 material_override = SubResource("StandardMaterial3D_no1ys")
 
-[node name="Window_lp20" parent="." instance=ExtResource("22_ycrm3")]
+[node name="Window_lp20" parent="ModelCollider" instance=ExtResource("22_ycrm3")]
 transform = Transform3D(1.31134e-07, -3.62805e-08, -1.493, 0, 0.83, -6.52611e-08, 1, 1.80886e-15, 1.95783e-07, 9.85624, 8.12595, 4.48895)
 material_override = SubResource("StandardMaterial3D_no1ys")
 
-[node name="Window_lp21" parent="." instance=ExtResource("22_ycrm3")]
+[node name="Window_lp21" parent="ModelCollider" instance=ExtResource("22_ycrm3")]
 transform = Transform3D(1.31134e-07, -3.62805e-08, -1.493, 0, 0.83, -6.52611e-08, 1, 1.80886e-15, 1.95783e-07, 9.85624, 2.56985, 4.48895)
 material_override = SubResource("StandardMaterial3D_no1ys")
 
-[node name="Trees_Outside_001_lp" parent="." instance=ExtResource("23_sqojo")]
+[node name="Trees_Outside_001_lp" parent="ModelCollider" instance=ExtResource("23_sqojo")]
 transform = Transform3D(1, 0, 0, 0, 1, -4.37114e-08, 0, 4.37114e-08, 1, -36.4977, 20.6996, -78.5228)
 material_override = SubResource("StandardMaterial3D_m518v")
 
-[node name="Trees_Outside_001_lp2" parent="." instance=ExtResource("23_sqojo")]
+[node name="Trees_Outside_001_lp2" parent="ModelCollider" instance=ExtResource("23_sqojo")]
 transform = Transform3D(1, 0, 0, 0, 1, -4.37114e-08, 0, 4.37114e-08, 1, -12.778, 20.6996, -83.5228)
 material_override = SubResource("StandardMaterial3D_m518v")
 
-[node name="Trees_Outside_001_lp26" parent="." instance=ExtResource("23_sqojo")]
+[node name="Trees_Outside_001_lp26" parent="ModelCollider" instance=ExtResource("23_sqojo")]
 transform = Transform3D(3.38221, 0, 0, 0, 1.75119, -5.94856e-08, 0, 7.6547e-08, 1.36087, -14.1313, 33.845, -81.1534)
 material_override = SubResource("StandardMaterial3D_m518v")
 
-[node name="Trees_Outside_001_lp27" parent="." instance=ExtResource("23_sqojo")]
+[node name="Trees_Outside_001_lp27" parent="ModelCollider" instance=ExtResource("23_sqojo")]
 transform = Transform3D(2.90908, -3.90472e-08, -0.694191, 0, 1.75119, -5.94856e-08, 1.72529, 6.58389e-08, 1.1705, 61.8687, 34.096, -81.1534)
 material_override = SubResource("StandardMaterial3D_m518v")
 
-[node name="Trees_Outside_001_lp28" parent="." instance=ExtResource("23_sqojo")]
+[node name="Trees_Outside_001_lp28" parent="ModelCollider" instance=ExtResource("23_sqojo")]
 transform = Transform3D(2.90908, -3.90472e-08, -0.694191, 0, 1.75119, -5.94856e-08, 1.72529, 6.58389e-08, 1.1705, 88.5387, 34.096, -18.2775)
 material_override = SubResource("StandardMaterial3D_m518v")
 
-[node name="Trees_Outside_001_lp3" parent="." instance=ExtResource("23_sqojo")]
+[node name="Trees_Outside_001_lp3" parent="ModelCollider" instance=ExtResource("23_sqojo")]
 transform = Transform3D(0.441005, 3.92312e-08, 0.897505, 0, 1, -4.37114e-08, -0.897505, 1.92769e-08, 0.441005, 13.222, 20.6996, -83.5228)
 material_override = SubResource("StandardMaterial3D_m518v")
 
-[node name="Trees_Outside_001_lp4" parent="." instance=ExtResource("23_sqojo")]
+[node name="Trees_Outside_001_lp4" parent="ModelCollider" instance=ExtResource("23_sqojo")]
 transform = Transform3D(0.533703, 3.69655e-08, 0.845672, 0, 1, -4.37114e-08, -0.845672, 2.33289e-08, 0.533703, 42.222, 20.6996, -83.5228)
 material_override = SubResource("StandardMaterial3D_m518v")
 
-[node name="Trees_Outside_001_lp5" parent="." instance=ExtResource("23_sqojo")]
+[node name="Trees_Outside_001_lp5" parent="ModelCollider" instance=ExtResource("23_sqojo")]
 transform = Transform3D(0.533703, 3.69655e-08, 0.845672, 0, 1, -4.37114e-08, -0.845672, 2.33289e-08, 0.533703, 47.4702, 20.6996, -60.453)
 material_override = SubResource("StandardMaterial3D_m518v")
 
-[node name="Trees_Outside_001_lp18" parent="." instance=ExtResource("23_sqojo")]
+[node name="Trees_Outside_001_lp18" parent="ModelCollider" instance=ExtResource("23_sqojo")]
 transform = Transform3D(0.533703, 3.69655e-08, 0.845672, 0, 1, -4.37114e-08, -0.845672, 2.33289e-08, 0.533703, 47.4702, 20.6996, -46.453)
 material_override = SubResource("StandardMaterial3D_m518v")
 
-[node name="Trees_Outside_001_lp19" parent="." instance=ExtResource("23_sqojo")]
+[node name="Trees_Outside_001_lp19" parent="ModelCollider" instance=ExtResource("23_sqojo")]
 transform = Transform3D(0.967392, 1.10714e-08, 0.253285, 0, 1, -4.37114e-08, -0.253285, 4.2286e-08, 0.967392, 47.4702, 20.6996, -21.453)
 material_override = SubResource("StandardMaterial3D_m518v")
 
-[node name="Trees_Outside_001_lp20" parent="." instance=ExtResource("23_sqojo")]
+[node name="Trees_Outside_001_lp20" parent="ModelCollider" instance=ExtResource("23_sqojo")]
 transform = Transform3D(0.967392, 1.10714e-08, 0.253285, 0, 1, -4.37114e-08, -0.253285, 4.2286e-08, 0.967392, 47.4702, 20.6996, -1.88228)
 material_override = SubResource("StandardMaterial3D_m518v")
 
-[node name="Trees_Outside_001_lp21" parent="." instance=ExtResource("23_sqojo")]
+[node name="Trees_Outside_001_lp21" parent="ModelCollider" instance=ExtResource("23_sqojo")]
 transform = Transform3D(0.967392, 1.10714e-08, 0.253285, 0, 1, -4.37114e-08, -0.253285, 4.2286e-08, 0.967392, 47.4702, 20.6996, -72.3602)
 material_override = SubResource("StandardMaterial3D_m518v")
 
-[node name="Trees_Outside_001_lp6" parent="." instance=ExtResource("23_sqojo")]
+[node name="Trees_Outside_001_lp6" parent="ModelCollider" instance=ExtResource("23_sqojo")]
 transform = Transform3D(0.99278, 5.24302e-09, 0.119946, 0, 1, -4.37114e-08, -0.119946, 4.33958e-08, 0.99278, 57.6034, 20.6996, -35.453)
 material_override = SubResource("StandardMaterial3D_m518v")
 
-[node name="Trees_Outside_001_lp7" parent="." instance=ExtResource("23_sqojo")]
+[node name="Trees_Outside_001_lp7" parent="ModelCollider" instance=ExtResource("23_sqojo")]
 transform = Transform3D(0.99278, 5.24302e-09, 0.119946, 0, 1, -4.37114e-08, -0.119946, 4.33958e-08, 0.99278, 57.6034, 20.6996, -15.453)
 material_override = SubResource("StandardMaterial3D_m518v")
 
-[node name="Trees_Outside_001_lp8" parent="." instance=ExtResource("23_sqojo")]
+[node name="Trees_Outside_001_lp8" parent="ModelCollider" instance=ExtResource("23_sqojo")]
 transform = Transform3D(0.99278, 5.24302e-09, 0.119946, 0, 1, -4.37114e-08, -0.119946, 4.33958e-08, 0.99278, 51.6059, 20.6996, 9.53837)
 material_override = SubResource("StandardMaterial3D_m518v")
 
-[node name="Trees_Outside_001_lp9" parent="." instance=ExtResource("23_sqojo")]
+[node name="Trees_Outside_001_lp9" parent="ModelCollider" instance=ExtResource("23_sqojo")]
 transform = Transform3D(0.99278, 5.24302e-09, 0.119946, 0, 1, -4.37114e-08, -0.119946, 4.33958e-08, 0.99278, 34.8806, 20.6996, 43.1847)
 material_override = SubResource("StandardMaterial3D_m518v")
 
-[node name="Trees_Outside_001_lp22" parent="." instance=ExtResource("23_sqojo")]
+[node name="Trees_Outside_001_lp22" parent="ModelCollider" instance=ExtResource("23_sqojo")]
 transform = Transform3D(0.889073, 2.00096e-08, 0.457765, 0, 1, -4.37114e-08, -0.457765, 3.88626e-08, 0.889073, 15.8806, 20.6996, 43.1847)
 material_override = SubResource("StandardMaterial3D_m518v")
 
-[node name="Trees_Outside_001_lp23" parent="." instance=ExtResource("23_sqojo")]
+[node name="Trees_Outside_001_lp23" parent="ModelCollider" instance=ExtResource("23_sqojo")]
 transform = Transform3D(0.436551, 3.93263e-08, 0.89968, 4.69973e-17, 1, -4.37114e-08, -0.89968, 1.90822e-08, 0.436551, 43.8806, 20.6996, 43.1847)
 material_override = SubResource("StandardMaterial3D_m518v")
 
-[node name="Trees_Outside_001_lp24" parent="." instance=ExtResource("23_sqojo")]
+[node name="Trees_Outside_001_lp24" parent="ModelCollider" instance=ExtResource("23_sqojo")]
 transform = Transform3D(0.436551, 3.93263e-08, 0.89968, 4.69973e-17, 1, -4.37114e-08, -0.89968, 1.90822e-08, 0.436551, -30.1194, 20.6996, 43.1847)
 material_override = SubResource("StandardMaterial3D_m518v")
 
-[node name="Trees_Outside_001_lp25" parent="." instance=ExtResource("23_sqojo")]
+[node name="Trees_Outside_001_lp25" parent="ModelCollider" instance=ExtResource("23_sqojo")]
 transform = Transform3D(-0.997853, 2.86267e-09, 0.0654903, -1.55115e-15, 1, -4.37114e-08, -0.0654903, -4.36176e-08, -0.997853, -58.1194, 20.6996, 43.1847)
 material_override = SubResource("StandardMaterial3D_m518v")
 
-[node name="Trees_Outside_001_lp10" parent="." instance=ExtResource("23_sqojo")]
+[node name="Trees_Outside_001_lp10" parent="ModelCollider" instance=ExtResource("23_sqojo")]
 transform = Transform3D(-0.130232, -4.33391e-08, -0.991484, 0, 1, -4.37114e-08, 0.991484, -5.69262e-09, -0.130232, 10.2511, 20.6996, 43.1847)
 material_override = SubResource("StandardMaterial3D_m518v")
 
-[node name="Trees_Outside_001_lp11" parent="." instance=ExtResource("23_sqojo")]
+[node name="Trees_Outside_001_lp11" parent="ModelCollider" instance=ExtResource("23_sqojo")]
 transform = Transform3D(-0.130232, -4.33391e-08, -0.991484, 0, 1, -4.37114e-08, 0.991484, -5.69262e-09, -0.130232, -21.1584, 20.6996, 43.1847)
 material_override = SubResource("StandardMaterial3D_m518v")
 
-[node name="Trees_Outside_001_lp12" parent="." instance=ExtResource("23_sqojo")]
+[node name="Trees_Outside_001_lp12" parent="ModelCollider" instance=ExtResource("23_sqojo")]
 transform = Transform3D(-0.987754, -6.81988e-09, -0.156021, 4.62677e-16, 1, -4.37114e-08, 0.156021, -4.31761e-08, -0.987754, -54.6503, 20.6996, 43.1847)
 material_override = SubResource("StandardMaterial3D_m518v")
 
-[node name="Trees_Outside_001_lp13" parent="." instance=ExtResource("23_sqojo")]
+[node name="Trees_Outside_001_lp13" parent="ModelCollider" instance=ExtResource("23_sqojo")]
 transform = Transform3D(-0.987754, -6.81988e-09, -0.156021, 4.62677e-16, 1, -4.37114e-08, 0.156021, -4.31761e-08, -0.987754, -54.6503, 20.6996, 12.357)
 material_override = SubResource("StandardMaterial3D_m518v")
 
-[node name="Trees_Outside_001_lp14" parent="." instance=ExtResource("23_sqojo")]
+[node name="Trees_Outside_001_lp14" parent="ModelCollider" instance=ExtResource("23_sqojo")]
 transform = Transform3D(-0.987754, -6.81988e-09, -0.156021, 4.62677e-16, 1, -4.37114e-08, 0.156021, -4.31761e-08, -0.987754, -54.6503, 20.6996, -24.643)
 material_override = SubResource("StandardMaterial3D_m518v")
 
-[node name="Trees_Outside_001_lp16" parent="." instance=ExtResource("23_sqojo")]
+[node name="Trees_Outside_001_lp16" parent="ModelCollider" instance=ExtResource("23_sqojo")]
 transform = Transform3D(-0.717227, 3.04598e-08, 0.69684, 4.62677e-16, 1, -4.37114e-08, -0.69684, -3.1351e-08, -0.717227, -54.6503, 20.6996, -20.7147)
 material_override = SubResource("StandardMaterial3D_m518v")
 
-[node name="Trees_Outside_001_lp17" parent="." instance=ExtResource("23_sqojo")]
+[node name="Trees_Outside_001_lp17" parent="ModelCollider" instance=ExtResource("23_sqojo")]
 transform = Transform3D(-0.717227, 3.04598e-08, 0.69684, 4.62677e-16, 1, -4.37114e-08, -0.69684, -3.1351e-08, -0.717227, -47.6503, 20.6996, -20.7147)
 material_override = SubResource("StandardMaterial3D_m518v")
 
-[node name="Trees_Outside_001_lp15" parent="." instance=ExtResource("23_sqojo")]
+[node name="Trees_Outside_001_lp15" parent="ModelCollider" instance=ExtResource("23_sqojo")]
 transform = Transform3D(0.876542, 2.10394e-08, 0.481325, 4.62677e-16, 1, -4.37114e-08, -0.481325, 3.83149e-08, 0.876542, -54.6503, 20.6996, -58.643)
 material_override = SubResource("StandardMaterial3D_m518v")
 
-[node name="Trees_Inside_001_lp" parent="." instance=ExtResource("27_6ynrf")]
+[node name="Trees_Inside_001_lp" parent="ModelCollider" instance=ExtResource("27_6ynrf")]
 transform = Transform3D(1, 0, 0, 0, 1, 6.12323e-17, 0, -6.12323e-17, 1, 0.199892, -39.3916, 41.3122)
 material_override = SubResource("StandardMaterial3D_7pf37")
 
-[node name="Trees_Inside_002_lp" parent="." instance=ExtResource("31_m0y5y")]
+[node name="Trees_Inside_002_lp" parent="ModelCollider" instance=ExtResource("31_m0y5y")]
 transform = Transform3D(1, 0, 0, 0, 1, 6.12323e-17, 0, -6.12323e-17, 1, 0.529, -67.157, 305.776)
 material_override = SubResource("StandardMaterial3D_hajow")
 
-[node name="pot_big_lp" parent="." instance=ExtResource("35_2gx7t")]
+[node name="pot_big_lp" parent="ModelCollider" instance=ExtResource("35_2gx7t")]
 transform = Transform3D(-4.37114e-08, 4.37114e-08, 0.809951, 0, 1, -3.54041e-08, -1, -1.91069e-15, -3.54041e-08, -7.50531, 0.827677, -53.7967)
 material_override = SubResource("StandardMaterial3D_o7qex")
 
-[node name="pot_big_lp2" parent="." instance=ExtResource("35_2gx7t")]
+[node name="pot_big_lp2" parent="ModelCollider" instance=ExtResource("35_2gx7t")]
 transform = Transform3D(1, 0, 0, 0, 1, -3.30457e-08, 0, 4.37114e-08, 0.755997, -20.3273, 0.685644, -48.1104)
 material_override = SubResource("StandardMaterial3D_o7qex")
 
-[node name="pot_big_lp3" parent="." instance=ExtResource("35_2gx7t")]
+[node name="pot_big_lp3" parent="ModelCollider" instance=ExtResource("35_2gx7t")]
 transform = Transform3D(1, 0, 0, 0, 1, -4.15455e-08, 0, 4.37114e-08, 0.950449, -20.3273, 0.700739, -28.1104)
 material_override = SubResource("StandardMaterial3D_o7qex")
 
-[node name="pot_big_lp4" parent="." instance=ExtResource("35_2gx7t")]
+[node name="pot_big_lp4" parent="ModelCollider" instance=ExtResource("35_2gx7t")]
 transform = Transform3D(1, 0, 0, 0, 1, -4.32672e-08, 0, 4.37114e-08, 0.989839, -20.3273, 0.83658, 5.54703)
 material_override = SubResource("StandardMaterial3D_o7qex")
 
-[node name="pot_big_lp5" parent="." instance=ExtResource("35_2gx7t")]
+[node name="pot_big_lp5" parent="ModelCollider" instance=ExtResource("35_2gx7t")]
 transform = Transform3D(1.03125e-07, -4.37114e-08, -0.759106, -1.22125e-22, 1, -3.31816e-08, 0.786411, 5.73206e-15, 9.95447e-08, -8.89678, 0.893231, 15.5407)
 material_override = SubResource("StandardMaterial3D_o7qex")
 
-[node name="pot_big_lp6" parent="." instance=ExtResource("35_2gx7t")]
+[node name="pot_big_lp6" parent="ModelCollider" instance=ExtResource("35_2gx7t")]
 transform = Transform3D(1.03125e-07, -4.37114e-08, -0.759106, -1.22125e-22, 1, -3.31816e-08, 0.786411, 5.73206e-15, 9.95447e-08, 17.6759, 0.893231, 15.5407)
 material_override = SubResource("StandardMaterial3D_o7qex")
 
-[node name="pot_big_lp7" parent="." instance=ExtResource("35_2gx7t")]
+[node name="pot_big_lp7" parent="ModelCollider" instance=ExtResource("35_2gx7t")]
 transform = Transform3D(0.969918, 7.7133e-15, 1.39449e-07, 2.60154e-22, 1.00923, -3.48622e-08, -1.69586e-07, 4.41149e-08, 0.797555, 28.5778, 0.893231, 5.62396)
 material_override = SubResource("StandardMaterial3D_o7qex")
 
-[node name="pot_big_lp8" parent="." instance=ExtResource("35_2gx7t")]
+[node name="pot_big_lp8" parent="ModelCollider" instance=ExtResource("35_2gx7t")]
 transform = Transform3D(0.969918, 7.7133e-15, 1.66056e-07, 2.60154e-22, 1.00923, -4.1514e-08, -1.69586e-07, 4.41149e-08, 0.94973, 28.5778, 0.893231, -29.6418)
 material_override = SubResource("StandardMaterial3D_o7qex")
 
-[node name="pot_big_lp9" parent="." instance=ExtResource("35_2gx7t")]
+[node name="pot_big_lp9" parent="ModelCollider" instance=ExtResource("35_2gx7t")]
 transform = Transform3D(0.969918, 7.7133e-15, 1.12763e-07, 2.60154e-22, 1.00923, -2.81907e-08, -1.69586e-07, 4.41149e-08, 0.644928, 28.5778, 0.893231, -49.5971)
 material_override = SubResource("StandardMaterial3D_o7qex")
 
-[node name="pot_big_lp10" parent="." instance=ExtResource("35_2gx7t")]
+[node name="pot_big_lp10" parent="ModelCollider" instance=ExtResource("35_2gx7t")]
 transform = Transform3D(-2.11982e-07, 4.41149e-08, 0.644928, 2.60154e-22, 1.00923, -2.81907e-08, -0.969918, -9.64162e-15, -1.40953e-07, 17.8613, 0.82252, -53.9398)
 material_override = SubResource("StandardMaterial3D_o7qex")
 
-[node name="pillar_001_lp" parent="." instance=ExtResource("39_wjdna")]
+[node name="pillar_001_lp" parent="ModelCollider" instance=ExtResource("39_wjdna")]
 transform = Transform3D(1, 0, 0, 0, 1, -4.37114e-08, 0, 4.37114e-08, 1, -10.4865, 2.80998, -55.0635)
 material_override = SubResource("StandardMaterial3D_my7x3")
 
-[node name="pillar_001_lp2" parent="." instance=ExtResource("39_wjdna")]
+[node name="pillar_001_lp2" parent="ModelCollider" instance=ExtResource("39_wjdna")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, -2.80356, 2.80998, -55.0635)
 material_override = SubResource("StandardMaterial3D_my7x3")
 
-[node name="pillar_001_lp3" parent="." instance=ExtResource("39_wjdna")]
+[node name="pillar_001_lp3" parent="ModelCollider" instance=ExtResource("39_wjdna")]
 transform = Transform3D(-1, 3.82137e-15, 8.74228e-08, 0, 1, -4.37114e-08, -8.74228e-08, -4.37114e-08, -1, 22.5444, 2.80998, -55.0635)
 material_override = SubResource("StandardMaterial3D_my7x3")
 
-[node name="pillar_001_lp4" parent="." instance=ExtResource("39_wjdna")]
+[node name="pillar_001_lp4" parent="ModelCollider" instance=ExtResource("39_wjdna")]
 transform = Transform3D(-1, 3.82137e-15, 8.74228e-08, 0, 1, -4.37114e-08, -8.74228e-08, -4.37114e-08, -1, 29.8599, 2.80998, -52.6388)
 material_override = SubResource("StandardMaterial3D_my7x3")
 
-[node name="pillar_001_lp5" parent="." instance=ExtResource("39_wjdna")]
+[node name="pillar_001_lp5" parent="ModelCollider" instance=ExtResource("39_wjdna")]
 transform = Transform3D(0.938427, -1.51013e-08, -0.345479, 0, 1, -4.37114e-08, 0.345479, 4.10199e-08, 0.938427, 30.1255, 2.76895, -38.6265)
 material_override = SubResource("StandardMaterial3D_my7x3")
 
-[node name="pillar_001_lp6" parent="." instance=ExtResource("39_wjdna")]
+[node name="pillar_001_lp6" parent="ModelCollider" instance=ExtResource("39_wjdna")]
 transform = Transform3D(1.31134e-07, 4.37114e-08, 1, 0, 1, -4.37114e-08, -1, 5.73206e-15, 1.31134e-07, 29.8599, 2.80998, -2.37695)
 material_override = SubResource("StandardMaterial3D_my7x3")
 
-[node name="pillar_001_lp7" parent="." instance=ExtResource("39_wjdna")]
+[node name="pillar_001_lp7" parent="ModelCollider" instance=ExtResource("39_wjdna")]
 transform = Transform3D(1, -3.55271e-15, -8.9407e-08, 0, 1, -4.37114e-08, 8.9407e-08, 4.37114e-08, 1, 29.8599, 2.80998, 6.32877)
 material_override = SubResource("StandardMaterial3D_my7x3")
 
-[node name="pillar_001_lp8" parent="." instance=ExtResource("39_wjdna")]
+[node name="pillar_001_lp8" parent="ModelCollider" instance=ExtResource("39_wjdna")]
 transform = Transform3D(-1.33118e-07, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -5.4634e-15, -1.33118e-07, 29.8599, 2.80998, 14.9685)
 material_override = SubResource("StandardMaterial3D_my7x3")
 
-[node name="Pillar_002_lp" parent="." instance=ExtResource("43_bfo3m")]
+[node name="Pillar_002_lp" parent="ModelCollider" instance=ExtResource("43_bfo3m")]
 transform = Transform3D(1, 0, 0, 0, 1, -4.37114e-08, 0, 4.37114e-08, 1, 13.9695, 2.37087, -54.7728)
 material_override = SubResource("StandardMaterial3D_627k1")
 
-[node name="Pillar_002_lp2" parent="." instance=ExtResource("43_bfo3m")]
+[node name="Pillar_002_lp2" parent="ModelCollider" instance=ExtResource("43_bfo3m")]
 transform = Transform3D(1, 0, 0, 0, 1, -4.37114e-08, 0, 4.37114e-08, 1, 30.0329, 2.37087, -44.2697)
 material_override = SubResource("StandardMaterial3D_627k1")
 
-[node name="Pillar_002_lp3" parent="." instance=ExtResource("43_bfo3m")]
+[node name="Pillar_002_lp3" parent="ModelCollider" instance=ExtResource("43_bfo3m")]
 transform = Transform3D(-4.37114e-08, 4.37114e-08, 1, 0, 1, -4.37114e-08, -1, -1.91069e-15, -4.37114e-08, 30.0329, 2.37087, -31.7772)
 material_override = SubResource("StandardMaterial3D_627k1")
 
-[node name="Pillar_002_lp7" parent="." instance=ExtResource("43_bfo3m")]
+[node name="Pillar_002_lp7" parent="ModelCollider" instance=ExtResource("43_bfo3m")]
 transform = Transform3D(-4.37114e-08, 4.37114e-08, 1, 0, 1, -4.37114e-08, -1, -1.91069e-15, -4.37114e-08, -19.6772, 2.37087, 6.33491)
 material_override = SubResource("StandardMaterial3D_627k1")
 
-[node name="Pillar_002_lp8" parent="." instance=ExtResource("43_bfo3m")]
+[node name="Pillar_002_lp8" parent="ModelCollider" instance=ExtResource("43_bfo3m")]
 transform = Transform3D(1, 0, 0, 0, 1, -4.37114e-08, 0, 4.37114e-08, 1, -19.6772, 2.37087, -2.28824)
 material_override = SubResource("StandardMaterial3D_627k1")
 
-[node name="Pillar_002_lp9" parent="." instance=ExtResource("43_bfo3m")]
+[node name="Pillar_002_lp9" parent="ModelCollider" instance=ExtResource("43_bfo3m")]
 transform = Transform3D(1, 0, 0, 0, 1, -4.37114e-08, 0, 4.37114e-08, 1, -19.6772, 2.37087, -19.6719)
 material_override = SubResource("StandardMaterial3D_627k1")
 
-[node name="Pillar_002_lp10" parent="." instance=ExtResource("43_bfo3m")]
+[node name="Pillar_002_lp10" parent="ModelCollider" instance=ExtResource("43_bfo3m")]
 transform = Transform3D(0.506549, -0.67987, 0.530268, 0.480809, 0.733243, 0.480809, -0.715703, 0.0114044, 0.698311, -20.659, 1.34875, -37.293)
 material_override = SubResource("StandardMaterial3D_627k1")
 
-[node name="Pillar_002_lp4" parent="." instance=ExtResource("43_bfo3m")]
+[node name="Pillar_002_lp4" parent="ModelCollider" instance=ExtResource("43_bfo3m")]
 transform = Transform3D(1.31134e-07, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, 5.73206e-15, 1.31134e-07, 30.0329, 2.37087, -24.0347)
 material_override = SubResource("StandardMaterial3D_627k1")
 
-[node name="Pillar_002_lp5" parent="." instance=ExtResource("43_bfo3m")]
+[node name="Pillar_002_lp5" parent="ModelCollider" instance=ExtResource("43_bfo3m")]
 transform = Transform3D(1.31134e-07, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, 5.73206e-15, 1.31134e-07, 21.1092, 2.37087, 16.4403)
 material_override = SubResource("StandardMaterial3D_627k1")
 
-[node name="Pillar_002_lp11" parent="." instance=ExtResource("43_bfo3m")]
+[node name="Pillar_002_lp11" parent="ModelCollider" instance=ExtResource("43_bfo3m")]
 transform = Transform3D(1.31134e-07, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, 5.73206e-15, 1.31134e-07, -19.5599, 2.37087, -44.2098)
 material_override = SubResource("StandardMaterial3D_627k1")
 
-[node name="Pillar_002_lp12" parent="." instance=ExtResource("43_bfo3m")]
+[node name="Pillar_002_lp12" parent="ModelCollider" instance=ExtResource("43_bfo3m")]
 transform = Transform3D(1.31134e-07, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, 5.73206e-15, 1.31134e-07, -19.5599, 2.37087, -28.7289)
 material_override = SubResource("StandardMaterial3D_627k1")
 
-[node name="Pillar_002_lp6" parent="." instance=ExtResource("43_bfo3m")]
+[node name="Pillar_002_lp6" parent="ModelCollider" instance=ExtResource("43_bfo3m")]
 transform = Transform3D(-1, -3.82137e-15, -8.74228e-08, 0, 1, -4.37114e-08, 8.74228e-08, -4.37114e-08, -1, -19.5307, 2.37087, 14.9799)
 material_override = SubResource("StandardMaterial3D_627k1")
 
-[node name="pot_lp" parent="." instance=ExtResource("47_aqnca")]
+[node name="pot_lp" parent="ModelCollider" instance=ExtResource("47_aqnca")]
 transform = Transform3D(1, 0, 0, 0, 1, -4.37114e-08, 0, 4.37114e-08, 1, 12.5106, 0.67459, -33.2479)
 material_override = SubResource("StandardMaterial3D_bke02")
 
-[node name="pot_lp2" parent="." instance=ExtResource("47_aqnca")]
+[node name="pot_lp2" parent="ModelCollider" instance=ExtResource("47_aqnca")]
 transform = Transform3D(1, 0, 0, 0, 1, -4.37114e-08, 0, 4.37114e-08, 1, -0.500998, 0.558438, -33.2211)
 material_override = SubResource("StandardMaterial3D_bke02")
 
-[node name="pot_lp6" parent="." instance=ExtResource("47_aqnca")]
+[node name="pot_lp6" parent="ModelCollider" instance=ExtResource("47_aqnca")]
 transform = Transform3D(1, 0, 0, 0, 1, -4.37114e-08, 0, 4.37114e-08, 1, -12.501, 0.558438, -44.3162)
 material_override = SubResource("StandardMaterial3D_bke02")
 
-[node name="pot_lp3" parent="." instance=ExtResource("47_aqnca")]
+[node name="pot_lp3" parent="ModelCollider" instance=ExtResource("47_aqnca")]
 transform = Transform3D(-4.37114e-08, 4.37114e-08, 1, 0, 1, -4.37114e-08, -1, -1.91069e-15, -4.37114e-08, 20.8119, 0.642894, -44.413)
 material_override = SubResource("StandardMaterial3D_bke02")
 
-[node name="pot_lp4" parent="." instance=ExtResource("47_aqnca")]
+[node name="pot_lp4" parent="ModelCollider" instance=ExtResource("47_aqnca")]
 transform = Transform3D(1, 0, 0, 0, 1, -4.37114e-08, 0, 4.37114e-08, 1, 18.3054, 0.679487, -21.7303)
 material_override = SubResource("StandardMaterial3D_bke02")
 
-[node name="pot_lp5" parent="." instance=ExtResource("47_aqnca")]
+[node name="pot_lp5" parent="ModelCollider" instance=ExtResource("47_aqnca")]
 transform = Transform3D(1, 0, 0, 0, 1, -4.37114e-08, 0, 4.37114e-08, 1, 18.2968, 0.706378, -9.4574)
 material_override = SubResource("StandardMaterial3D_bke02")
 
-[node name="Sculpt_001" parent="." instance=ExtResource("51_8482d")]
+[node name="Sculpt_001" parent="ModelCollider" instance=ExtResource("51_8482d")]
 transform = Transform3D(1, 0, 0, 0, 1, -4.37114e-08, 0, 4.37114e-08, 1, 21.5666, 4.98597, -44.0713)
 material_override = SubResource("StandardMaterial3D_f43g6")
 
-[node name="Sculpt_002" parent="." instance=ExtResource("51_8482d")]
+[node name="Sculpt_002" parent="ModelCollider" instance=ExtResource("51_8482d")]
 transform = Transform3D(-0.258819, -4.2222e-08, -0.965926, 0, 1, -4.37114e-08, 0.965926, -1.13133e-08, -0.258819, 33.0043, 11.1572, -15.7668)
 material_override = SubResource("StandardMaterial3D_f43g6")
 
-[node name="Sculpt_003" parent="." instance=ExtResource("51_8482d")]
+[node name="Sculpt_003" parent="ModelCollider" instance=ExtResource("51_8482d")]
 transform = Transform3D(1, 4.44089e-15, 0, 0, 1, -4.37114e-08, 0, 4.37114e-08, 1, 1.73635, 11.1572, 18.1737)
 material_override = SubResource("StandardMaterial3D_f43g6")
 
-[node name="Sculpt_005" parent="." instance=ExtResource("51_8482d")]
+[node name="Sculpt_005" parent="ModelCollider" instance=ExtResource("51_8482d")]
 transform = Transform3D(-0.587291, 3.5379e-08, 0.809376, 0, 1, -4.37114e-08, -0.809376, -2.56713e-08, -0.587291, -21.7568, 11.1572, -15.7347)
 material_override = SubResource("StandardMaterial3D_f43g6")
 
-[node name="Sculpt_006" parent="." instance=ExtResource("51_8482d")]
+[node name="Sculpt_006" parent="ModelCollider" instance=ExtResource("51_8482d")]
 transform = Transform3D(0.999778, -9.22283e-10, -0.0210994, 1.43774e-15, 1, -4.37114e-08, 0.0210994, 4.37017e-08, 0.999778, 2.52212, 17.3058, -57.9524)
 material_override = SubResource("StandardMaterial3D_f43g6")
 
-[node name="Sculpt_007" parent="." instance=ExtResource("51_8482d")]
+[node name="Sculpt_007" parent="ModelCollider" instance=ExtResource("51_8482d")]
 transform = Transform3D(0.999778, -9.22283e-10, -0.0210994, 1.43774e-15, 1, -4.37114e-08, 0.0210994, 4.37017e-08, 0.999778, 10.1319, 17.3058, -57.9524)
 material_override = SubResource("StandardMaterial3D_f43g6")
 
-[node name="Sculpt_004" parent="." instance=ExtResource("51_8482d")]
+[node name="Sculpt_004" parent="ModelCollider" instance=ExtResource("51_8482d")]
 transform = Transform3D(0.910914, -1.80351e-08, -0.412596, 0, 1, -4.37114e-08, 0.412596, 3.98173e-08, 0.910914, 7.73762, 11.1572, 18.096)
 material_override = SubResource("StandardMaterial3D_f43g6")
 
-[node name="Sculpt_008" parent="." instance=ExtResource("55_vfsrk")]
+[node name="Sculpt_008" parent="ModelCollider" instance=ExtResource("55_vfsrk")]
 transform = Transform3D(0.621244, 3.4253e-08, 0.783618, 0, 1, -4.37114e-08, -0.783618, 2.71554e-08, 0.621244, -12.6348, 4.78303, -44.1905)
 material_override = SubResource("StandardMaterial3D_f51km")
 
-[node name="Sculpt_009" parent="." instance=ExtResource("55_vfsrk")]
+[node name="Sculpt_009" parent="ModelCollider" instance=ExtResource("55_vfsrk")]
 transform = Transform3D(0.0634872, -4.36232e-08, -0.997983, 0, 1, -4.37114e-08, 0.997983, 2.77511e-09, 0.0634872, 32.3509, 11.7439, -6.24522)
 material_override = SubResource("StandardMaterial3D_f51km")
 
-[node name="Sculpt_010" parent="." instance=ExtResource("55_vfsrk")]
+[node name="Sculpt_010" parent="ModelCollider" instance=ExtResource("55_vfsrk")]
 transform = Transform3D(0.0772412, 4.35808e-08, 0.997012, -2.21597e-16, 1, -4.37114e-08, -0.997012, 3.37632e-09, 0.0772412, 17.6555, 2.90223, -9.63423)
 material_override = SubResource("StandardMaterial3D_f51km")
 
-[node name="Sculpt_011" parent="." instance=ExtResource("55_vfsrk")]
+[node name="Sculpt_011" parent="ModelCollider" instance=ExtResource("55_vfsrk")]
 transform = Transform3D(0.518116, -3.73868e-08, -0.85531, -4.96012e-16, 1, -4.37114e-08, 0.85531, 2.26476e-08, 0.518116, 17.6555, 2.90223, -22.0309)
 material_override = SubResource("StandardMaterial3D_f51km")
 
-[node name="Sculpt_012" parent="." instance=ExtResource("55_vfsrk")]
+[node name="Sculpt_012" parent="ModelCollider" instance=ExtResource("55_vfsrk")]
 transform = Transform3D(0.518116, -3.73868e-08, -0.85531, -4.96012e-16, 1, -4.37114e-08, 0.85531, 2.26476e-08, 0.518116, -22.5466, 10.1843, -7.74153)
 material_override = SubResource("StandardMaterial3D_f51km")
 
-[node name="tower_big_001_lp" parent="." instance=ExtResource("59_bacef")]
+[node name="tower_big_001_lp" parent="ModelCollider" instance=ExtResource("59_bacef")]
 transform = Transform3D(1, 0, 0, 0, 1, -4.37114e-08, 0, 4.37114e-08, 1, 9.7011, 6.70961, -57.7393)
 material_override = SubResource("StandardMaterial3D_l1rf0")
 
-[node name="tower_big_001_lp2" parent="." instance=ExtResource("59_bacef")]
+[node name="tower_big_001_lp2" parent="ModelCollider" instance=ExtResource("59_bacef")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, 2.24146, 6.70961, -57.7393)
 material_override = SubResource("StandardMaterial3D_l1rf0")
 
-[node name="tower_big_001_lp3" parent="." instance=ExtResource("59_bacef")]
+[node name="tower_big_001_lp3" parent="ModelCollider" instance=ExtResource("59_bacef")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -1.91069e-15, -4.37114e-08, -0.702023, 6.70961, -44.3843)
 material_override = SubResource("StandardMaterial3D_l1rf0")
 
-[node name="tower_big_001_lp4" parent="." instance=ExtResource("59_bacef")]
+[node name="tower_big_001_lp4" parent="ModelCollider" instance=ExtResource("59_bacef")]
 transform = Transform3D(-0.999898, -6.25563e-10, -0.0143112, 0, 1, -4.37114e-08, 0.0143112, -4.37069e-08, -0.999898, 12.2954, 6.70961, -44.3843)
 material_override = SubResource("StandardMaterial3D_l1rf0")
 
-[node name="tower_big_001_lp11" parent="." instance=ExtResource("59_bacef")]
+[node name="tower_big_001_lp11" parent="ModelCollider" instance=ExtResource("59_bacef")]
 transform = Transform3D(-3.16083, 0.496963, -1.98984, -0.0330396, 1.24593, 3.24944, 1.80473, 0.893196, -3.42554, 22.061, 2.99394, -106.798)
 material_override = SubResource("StandardMaterial3D_l1rf0")
 
-[node name="tower_big_001_lp12" parent="." instance=ExtResource("59_bacef")]
+[node name="tower_big_001_lp12" parent="ModelCollider" instance=ExtResource("59_bacef")]
 transform = Transform3D(0.303809, -1.01757, 3.95007, -0.0330397, 1.24593, 3.24944, -3.62707, -0.0965826, 0.301265, -8.80212, 2.99394, -106.798)
 material_override = SubResource("StandardMaterial3D_l1rf0")
 
-[node name="tower_big_001_lp13" parent="." instance=ExtResource("59_bacef")]
+[node name="tower_big_001_lp13" parent="ModelCollider" instance=ExtResource("59_bacef")]
 transform = Transform3D(-3.54805, -0.23903, 0.854964, -0.0330397, 1.24593, 3.24944, -0.81196, 0.993798, -3.86818, -54.3777, 4.70556, -94.672)
 material_override = SubResource("StandardMaterial3D_l1rf0")
 
-[node name="tower_big_001_lp20" parent="." instance=ExtResource("59_bacef")]
+[node name="tower_big_001_lp20" parent="ModelCollider" instance=ExtResource("59_bacef")]
 transform = Transform3D(-0.189809, -1.57983, 6.06311, -0.0370842, 1.92693, 4.98048, -4.08092, 0.0559696, -0.327262, -64.4954, 4.70556, -49.672)
 material_override = SubResource("StandardMaterial3D_l1rf0")
 
-[node name="tower_big_001_lp21" parent="." instance=ExtResource("59_bacef")]
+[node name="tower_big_001_lp21" parent="ModelCollider" instance=ExtResource("59_bacef")]
 transform = Transform3D(-3.54752, 0.901487, 2.66543, 2.0204, 1.70483, 4.21136, -0.156044, 1.57891, -6.06907, -34.6761, 4.70556, 54.2283)
 material_override = SubResource("StandardMaterial3D_l1rf0")
 
-[node name="tower_big_001_lp22" parent="." instance=ExtResource("59_bacef")]
+[node name="tower_big_001_lp22" parent="ModelCollider" instance=ExtResource("59_bacef")]
 transform = Transform3D(-2.72989, -1.71237, -2.24198, -3.02302, 1.6292, 1.24693, 0.316727, 0.790928, -7.42242, 5.32385, -2.29444, 70.2283)
 material_override = SubResource("StandardMaterial3D_l1rf0")
 
-[node name="tower_big_001_lp14" parent="." instance=ExtResource("59_bacef")]
+[node name="tower_big_001_lp14" parent="ModelCollider" instance=ExtResource("59_bacef")]
 transform = Transform3D(-2.44689, -1.18505, 0.439674, 0.47276, -0.00488234, 5.08031, -2.65296, 1.09213, 0.499793, -60.1235, -4.16286, -12.6617)
 material_override = SubResource("StandardMaterial3D_l1rf0")
 
-[node name="tower_big_001_lp15" parent="." instance=ExtResource("59_bacef")]
+[node name="tower_big_001_lp15" parent="ModelCollider" instance=ExtResource("59_bacef")]
 transform = Transform3D(-3.5508, 0.287826, 0.657533, 0.47276, -0.00488234, 5.08031, 0.646001, 1.58563, -0.103713, -73.7623, -4.16286, -49.805)
 material_override = SubResource("StandardMaterial3D_l1rf0")
 
-[node name="tower_big_001_lp16" parent="." instance=ExtResource("59_bacef")]
+[node name="tower_big_001_lp16" parent="ModelCollider" instance=ExtResource("59_bacef")]
 transform = Transform3D(-2.39187, 1.20639, 0.45276, -2.1513, -0.941864, 2.84866, 1.7029, 0.504604, 4.23471, -61.4203, 1.63477, 11.8535)
 material_override = SubResource("StandardMaterial3D_l1rf0")
 
-[node name="tower_big_001_lp17" parent="." instance=ExtResource("59_bacef")]
+[node name="tower_big_001_lp17" parent="ModelCollider" instance=ExtResource("59_bacef")]
 transform = Transform3D(-4.17525, -0.0163383, 1.12056, -0.0363346, 1.86417, 0.0101022, -2.07603, 0.000232611, -2.25381, 59.7337, 11.5231, 29.4458)
 material_override = SubResource("StandardMaterial3D_l1rf0")
 
-[node name="tower_big_001_lp18" parent="." instance=ExtResource("59_bacef")]
+[node name="tower_big_001_lp18" parent="ModelCollider" instance=ExtResource("59_bacef")]
 transform = Transform3D(0.104843, 0.636177, 2.36525, -0.813018, 1.72792, -0.836714, -4.59042, -0.291504, 0.202214, 76.6015, 2.2859, -18.9239)
 material_override = SubResource("StandardMaterial3D_l1rf0")
 
-[node name="tower_big_001_lp19" parent="." instance=ExtResource("59_bacef")]
+[node name="tower_big_001_lp19" parent="ModelCollider" instance=ExtResource("59_bacef")]
 transform = Transform3D(0.108379, 0.802557, 5.85787, -0.840438, 2.17982, -2.07224, -4.74524, -0.367742, 0.500809, 76.6015, 2.2859, -77.504)
 material_override = SubResource("StandardMaterial3D_l1rf0")
 
-[node name="tower_big_001_lp5" parent="." instance=ExtResource("59_bacef")]
+[node name="tower_big_001_lp5" parent="ModelCollider" instance=ExtResource("59_bacef")]
 transform = Transform3D(-0.999898, -6.25563e-10, -0.0143112, 0, 1, -4.37114e-08, 0.0143112, -4.37069e-08, -0.999898, 32.6832, 0.374367, -15.8942)
 material_override = SubResource("StandardMaterial3D_l1rf0")
 
-[node name="tower_big_001_lp6" parent="." instance=ExtResource("59_bacef")]
+[node name="tower_big_001_lp6" parent="ModelCollider" instance=ExtResource("59_bacef")]
 transform = Transform3D(-0.0187379, 0.00128715, 0.999824, 0.012512, 0.999921, -0.00105277, -0.999746, 0.0124901, -0.0187525, 32.1914, 0.374367, -6.00043)
 material_override = SubResource("StandardMaterial3D_l1rf0")
 
-[node name="tower_big_001_lp7" parent="." instance=ExtResource("59_bacef")]
+[node name="tower_big_001_lp7" parent="ModelCollider" instance=ExtResource("59_bacef")]
 transform = Transform3D(-0.0187379, 0.00128715, 0.999824, 0.012512, 0.999921, -0.00105277, -0.999746, 0.0124901, -0.0187525, 7.68732, 0.374367, 18.0206)
 material_override = SubResource("StandardMaterial3D_l1rf0")
 
-[node name="tower_big_001_lp8" parent="." instance=ExtResource("59_bacef")]
+[node name="tower_big_001_lp8" parent="ModelCollider" instance=ExtResource("59_bacef")]
 transform = Transform3D(0.99726, -0.0124019, 0.0729336, 0.012512, 0.999921, -0.00105277, -0.0729147, 0.00196244, 0.997336, 1.21352, 0.374367, 18.0206)
 material_override = SubResource("StandardMaterial3D_l1rf0")
 
-[node name="tower_big_001_lp9" parent="." instance=ExtResource("59_bacef")]
+[node name="tower_big_001_lp9" parent="ModelCollider" instance=ExtResource("59_bacef")]
 transform = Transform3D(0.99726, -0.0124019, 0.0729336, 0.012512, 0.999921, -0.00105277, -0.0729147, 0.00196244, 0.997336, -22.5833, 0.374367, -7.37429)
 material_override = SubResource("StandardMaterial3D_l1rf0")
 
-[node name="tower_big_001_lp10" parent="." instance=ExtResource("59_bacef")]
+[node name="tower_big_001_lp10" parent="ModelCollider" instance=ExtResource("59_bacef")]
 transform = Transform3D(0.0729147, -0.00196244, -0.997336, 0.012512, 0.999921, -0.00105277, 0.99726, -0.0124019, 0.0729335, -22.4045, 0.374367, -14.7507)
 material_override = SubResource("StandardMaterial3D_l1rf0")
 
-[node name="Plane001" parent="." instance=ExtResource("63_bxkwr")]
+[node name="Plane001" parent="ModelCollider" instance=ExtResource("63_bxkwr")]
 transform = Transform3D(1.42776, 0, 0, 0, -6.24094e-08, 1, 0, -1.42776, -4.37114e-08, 5.00665, 0, -7.2491)
 material_override = SubResource("StandardMaterial3D_p50mi")
 gi_mode = 2
 gi_lightmap_scale = 1
 
-[node name="Plane002" parent="." instance=ExtResource("63_bxkwr")]
+[node name="Plane002" parent="ModelCollider" instance=ExtResource("63_bxkwr")]
 transform = Transform3D(1.42776, 0, 0, 0, -6.24094e-08, 1, 0, -1.42776, -4.37114e-08, 62.7965, 0, -7.2491)
 material_override = SubResource("StandardMaterial3D_p50mi")
 gi_mode = 2
 gi_lightmap_scale = 1
 
-[node name="Plane003" parent="." instance=ExtResource("63_bxkwr")]
+[node name="Plane003" parent="ModelCollider" instance=ExtResource("63_bxkwr")]
 transform = Transform3D(1.42776, 0, 0, 0, -6.24094e-08, 1, 0, -1.42776, -4.37114e-08, 62.7965, 0, 70.2575)
 material_override = SubResource("StandardMaterial3D_p50mi")
 gi_mode = 2
 gi_lightmap_scale = 1
 
-[node name="Plane004" parent="." instance=ExtResource("63_bxkwr")]
+[node name="Plane004" parent="ModelCollider" instance=ExtResource("63_bxkwr")]
 transform = Transform3D(1.42776, 0, 0, 0, -6.24094e-08, 1, 0, -1.42776, -4.37114e-08, 4.96521, 0, 70.2575)
 material_override = SubResource("StandardMaterial3D_p50mi")
 gi_mode = 2
 gi_lightmap_scale = 1
 
-[node name="Plane005" parent="." instance=ExtResource("63_bxkwr")]
+[node name="Plane005" parent="ModelCollider" instance=ExtResource("63_bxkwr")]
 transform = Transform3D(1.42776, 0, 0, 0, -6.24094e-08, 1, 0, -1.42776, -4.37114e-08, -52.886, 0, 70.2575)
 material_override = SubResource("StandardMaterial3D_p50mi")
 gi_mode = 2
 gi_lightmap_scale = 1
 
-[node name="Plane006" parent="." instance=ExtResource("63_bxkwr")]
+[node name="Plane006" parent="ModelCollider" instance=ExtResource("63_bxkwr")]
 transform = Transform3D(1.42776, 0, 0, 0, -6.24094e-08, 1, 0, -1.42776, -4.37114e-08, -52.886, 0, -7.30975)
 material_override = SubResource("StandardMaterial3D_p50mi")
 gi_mode = 2
 gi_lightmap_scale = 1
 
-[node name="Plane007" parent="." instance=ExtResource("63_bxkwr")]
+[node name="Plane007" parent="ModelCollider" instance=ExtResource("63_bxkwr")]
 transform = Transform3D(1.42776, 0, 0, 0, -6.24094e-08, 1, 0, -1.42776, -4.37114e-08, -52.886, 0, -84.949)
 material_override = SubResource("StandardMaterial3D_p50mi")
 gi_mode = 2
 gi_lightmap_scale = 1
 
-[node name="Plane008" parent="." instance=ExtResource("63_bxkwr")]
+[node name="Plane008" parent="ModelCollider" instance=ExtResource("63_bxkwr")]
 transform = Transform3D(1.42776, 0, 0, 0, -6.24094e-08, 1, 0, -1.42776, -4.37114e-08, 4.98088, 0, -84.949)
 material_override = SubResource("StandardMaterial3D_p50mi")
 gi_mode = 2
 gi_lightmap_scale = 1
 
-[node name="Plane009" parent="." instance=ExtResource("63_bxkwr")]
+[node name="Plane009" parent="ModelCollider" instance=ExtResource("63_bxkwr")]
 transform = Transform3D(1.42776, 0, 0, 0, -6.24094e-08, 1, 0, -1.42776, -4.37114e-08, 62.8759, 0, -84.949)
 material_override = SubResource("StandardMaterial3D_p50mi")
 gi_mode = 2

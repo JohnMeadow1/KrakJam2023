@@ -16,6 +16,8 @@ func _ready() -> void:
 		$Best.queue_free()
 
 func play() -> void:
+	$Load.show()
+	await RenderingServer.frame_post_draw
 	get_tree().change_scene_to_file(\"res://Scenes/GameSnake.tscn\")
 
 func exit() -> void:
@@ -75,6 +77,24 @@ theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 100
 text = "Rootsnek"
 script = SubResource("GDScript_scv3s")
+
+[node name="Load" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -226.0
+offset_top = 240.0
+offset_right = 226.0
+offset_bottom = 380.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0.501961, 0.0196078, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 100
+text = "Loading"
+horizontal_alignment = 1
 
 [node name="Best" type="Label" parent="."]
 layout_mode = 1
