@@ -39,7 +39,10 @@ func _ready() -> void:
 		
 		if nosneqqks:
 			nosneqqks = false
-			camera_pivot.rotation.y = Vector2(camera_pivot.global_position.x - sn.global_position.x, camera_pivot.global_position.y - sn.global_position.y).angle()
+#			camera_pivot.rotation.y = Vector2(camera_pivot.global_position.x - sn.global_position.x, camera_pivot.global_position.y - sn.global_position.y).angle()
+#			camera_pivot.rotation.y = sn.global_position
+			var vector_to_sn = camera_pivot.global_position - sn.global_position
+			camera_pivot.look_at(camera_pivot.global_position + Vector3(vector_to_sn.x,0.0, vector_to_sn.z))
 		
 		sn.deded.connect(func():
 			sneqs_alive -= 1
@@ -213,7 +216,7 @@ func update_score() -> void:
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
 		if fininszed:
-			get_tree().auto_accept_quit = false
+			get_tree().auto_accept_quit = true
 			get_tree().change_scene_to_file("res://Scenes/TitleScreen.tscn")
 		else:
 			get_tree().quit()
