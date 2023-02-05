@@ -285,7 +285,7 @@ heightmap_min_layers = 8
 heightmap_max_layers = 32
 heightmap_flip_binormal = true
 heightmap_texture = ExtResource("66_gv8oq")
-uv1_scale = Vector3(2, 2, 2)
+uv1_scale = Vector3(3, 3, 3)
 texture_filter = 1
 
 [sub_resource type="Animation" id="Animation_gexgt"]
@@ -356,13 +356,14 @@ script = ExtResource("1_jj3oq")
 environment = ExtResource("2_pa1ip")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.826843, -0.414734, 0.379902, -0.185153, 0.838529, 0.512433, -0.531082, 0.353362, -0.770121, -0.536589, 18.1375, -25.7845)
-light_intensity_lux = 50.0
+transform = Transform3D(-0.826843, -0.414734, 0.379902, -0.185153, 0.838529, 0.512433, -0.531082, 0.353362, -0.770122, -0.536589, 18.1375, -25.7845)
+visible = false
+light_intensity_lux = 10.0
 light_temperature = 8816.0
-light_color = Color(1, 0.917647, 0.788235, 1)
+light_color = Color(1, 0.776471, 0.52549, 1)
 light_energy = 0.1
 light_indirect_energy = 4.717
-light_volumetric_fog_energy = 2.262
+light_volumetric_fog_energy = 0.0
 shadow_enabled = true
 shadow_bias = 0.01
 shadow_normal_bias = 0.384
@@ -1165,10 +1166,12 @@ material_override = SubResource("StandardMaterial3D_no1ys")
 
 [node name="Window_lp2" parent="ModelCollider" instance=ExtResource("22_ycrm3")]
 transform = Transform3D(1, 0, 0, 0, 0.83, -6.52611e-08, 0, 3.62805e-08, 1.493, 12.265, 7.76828, -24.7024)
+visible = false
 material_override = SubResource("StandardMaterial3D_no1ys")
 
 [node name="Window_lp31" parent="ModelCollider" instance=ExtResource("22_ycrm3")]
 transform = Transform3D(1, 0, 0, 0, 0.83, -6.52611e-08, 0, 3.62805e-08, 1.493, 12.265, 13.3287, -24.6463)
+visible = false
 material_override = SubResource("StandardMaterial3D_no1ys")
 
 [node name="Window_lp32" parent="ModelCollider" instance=ExtResource("22_ycrm3")]
@@ -1241,6 +1244,7 @@ material_override = SubResource("StandardMaterial3D_uog1g")
 
 [node name="Window_lp5" parent="ModelCollider" instance=ExtResource("22_ycrm3")]
 transform = Transform3D(1, 0, 0, 0, 0.83, -6.52611e-08, 0, 3.62805e-08, 1.493, -0.224319, 7.76828, -24.4747)
+visible = false
 material_override = SubResource("StandardMaterial3D_no1ys")
 
 [node name="Window_lp29" parent="ModelCollider" instance=ExtResource("22_ycrm3")]
@@ -1253,6 +1257,7 @@ material_override = SubResource("StandardMaterial3D_no1ys")
 
 [node name="Window_lp10" parent="ModelCollider" instance=ExtResource("22_ycrm3")]
 transform = Transform3D(1, 0, 0, 0, 0.83, -6.52611e-08, 0, 3.62805e-08, 1.493, -7.10418, 7.79768, -18.2844)
+visible = false
 material_override = SubResource("StandardMaterial3D_no1ys")
 
 [node name="Window_lp11" parent="ModelCollider" instance=ExtResource("22_ycrm3")]
@@ -1261,6 +1266,7 @@ material_override = SubResource("StandardMaterial3D_no1ys")
 
 [node name="Window_lp12" parent="ModelCollider" instance=ExtResource("22_ycrm3")]
 transform = Transform3D(-4.37114e-08, 3.62805e-08, 1.493, 0, 0.83, -6.52611e-08, -1, 1.36288e-15, -6.52611e-08, -3.37531, 13.4913, -9.03994)
+visible = false
 material_override = SubResource("StandardMaterial3D_no1ys")
 
 [node name="Window_lp23" parent="ModelCollider" instance=ExtResource("22_ycrm3")]
@@ -1269,10 +1275,12 @@ material_override = SubResource("StandardMaterial3D_no1ys")
 
 [node name="Window_lp13" parent="ModelCollider" instance=ExtResource("22_ycrm3")]
 transform = Transform3D(-4.37114e-08, 3.62805e-08, 1.493, 0, 0.83, -6.52611e-08, -1, 1.36288e-15, -6.52611e-08, 2.63619, 13.126, -2.22015)
+visible = false
 material_override = SubResource("StandardMaterial3D_no1ys")
 
 [node name="Window_lp14" parent="ModelCollider" instance=ExtResource("22_ycrm3")]
 transform = Transform3D(-4.37114e-08, 3.62805e-08, 1.493, 0, 0.83, -6.52611e-08, -1, 1.36288e-15, -6.52611e-08, 2.63619, 8.12595, -2.22015)
+visible = false
 material_override = SubResource("StandardMaterial3D_no1ys")
 
 [node name="Window_lp15" parent="ModelCollider" instance=ExtResource("22_ycrm3")]
@@ -1285,22 +1293,27 @@ material_override = SubResource("StandardMaterial3D_no1ys")
 
 [node name="Window_lp17" parent="ModelCollider" instance=ExtResource("22_ycrm3")]
 transform = Transform3D(-4.37114e-08, 3.62805e-08, 1.493, 0, 0.83, -6.52611e-08, -1, 1.36288e-15, -6.52611e-08, 2.63619, 8.12595, 4.48895)
+visible = false
 material_override = SubResource("StandardMaterial3D_no1ys")
 
 [node name="Window_lp18" parent="ModelCollider" instance=ExtResource("22_ycrm3")]
 transform = Transform3D(-4.37114e-08, 3.62805e-08, 1.493, 0, 0.83, -6.52611e-08, -1, 1.36288e-15, -6.52611e-08, 2.63619, 2.56985, 4.48895)
+visible = false
 material_override = SubResource("StandardMaterial3D_no1ys")
 
 [node name="Window_lp19" parent="ModelCollider" instance=ExtResource("22_ycrm3")]
 transform = Transform3D(1.31134e-07, -3.62805e-08, -1.493, 0, 0.83, -6.52611e-08, 1, 1.80886e-15, 1.95783e-07, 9.85624, 13.126, 4.48895)
+visible = false
 material_override = SubResource("StandardMaterial3D_no1ys")
 
 [node name="Window_lp20" parent="ModelCollider" instance=ExtResource("22_ycrm3")]
 transform = Transform3D(1.31134e-07, -3.62805e-08, -1.493, 0, 0.83, -6.52611e-08, 1, 1.80886e-15, 1.95783e-07, 9.85624, 8.12595, 4.48895)
+visible = false
 material_override = SubResource("StandardMaterial3D_no1ys")
 
 [node name="Window_lp21" parent="ModelCollider" instance=ExtResource("22_ycrm3")]
 transform = Transform3D(1.31134e-07, -3.62805e-08, -1.493, 0, 0.83, -6.52611e-08, 1, 1.80886e-15, 1.95783e-07, 9.85624, 2.56985, 4.48895)
+visible = false
 material_override = SubResource("StandardMaterial3D_no1ys")
 
 [node name="Trees_Outside_001_lp" parent="ModelCollider" instance=ExtResource("23_sqojo")]
@@ -1492,7 +1505,7 @@ transform = Transform3D(1, -3.55271e-15, -8.9407e-08, 0, 1, -4.37114e-08, 8.9407
 material_override = SubResource("StandardMaterial3D_my7x3")
 
 [node name="pillar_001_lp8" parent="ModelCollider" instance=ExtResource("39_wjdna")]
-transform = Transform3D(-1.33118e-07, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, -5.4634e-15, -1.33118e-07, 29.8599, 2.80998, 14.9685)
+transform = Transform3D(0.477061, -0.745164, -0.465986, 0.527731, 0.666862, -0.526113, 0.702789, 0.0050728, 0.71138, 26.0008, 2.35728, 16.9682)
 material_override = SubResource("StandardMaterial3D_my7x3")
 
 [node name="Pillar_002_lp" parent="ModelCollider" instance=ExtResource("43_bfo3m")]
@@ -1763,5 +1776,545 @@ speed_scale = 0.5
 libraries = {
 "": SubResource("AnimationLibrary_ktb0g")
 }
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.1952, 2.26933, 1.34693)
+light_intensity_lumens = 400.0
+light_temperature = 11015.0
+light_color = Color(1, 0.878431, 0.615686, 1)
+shadow_enabled = true
+shadow_blur = 4.429
+omni_range = 8.278
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.1952, 3.41545, 11.1575)
+light_intensity_lumens = 400.0
+light_temperature = 14585.0
+light_color = Color(1, 0.878431, 0.615686, 1)
+light_energy = 1.305
+shadow_enabled = true
+shadow_blur = 4.429
+omni_range = 8.278
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.1952, 3.41545, -27.0489)
+light_intensity_lumens = 400.0
+light_temperature = 14585.0
+light_color = Color(1, 0.878431, 0.615686, 1)
+light_energy = 1.305
+shadow_enabled = true
+shadow_blur = 4.429
+omni_range = 8.278
+
+[node name="OmniLight3D4" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.1952, 3.41545, -50.398)
+light_intensity_lumens = 400.0
+light_temperature = 14585.0
+light_color = Color(1, 0.878431, 0.615686, 1)
+light_energy = 1.305
+shadow_enabled = true
+shadow_blur = 4.429
+omni_range = 8.278
+
+[node name="OmniLight3D5" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.9565, 1.56877, -55.028)
+light_intensity_lumens = 400.0
+light_temperature = 14585.0
+light_color = Color(1, 0.878431, 0.615686, 1)
+light_energy = 1.305
+shadow_enabled = true
+shadow_blur = 4.429
+omni_range = 8.278
+
+[node name="OmniLight3D6" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.10885, 0.982346, -55.028)
+light_intensity_lumens = 235.37
+light_temperature = 14585.0
+light_color = Color(1, 0.878431, 0.615686, 1)
+light_energy = 1.305
+shadow_enabled = true
+shadow_blur = 4.429
+omni_range = 5.146
+
+[node name="OmniLight3D13" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.0234, 0.899371, -54.0846)
+light_intensity_lumens = 400.0
+light_temperature = 14585.0
+light_color = Color(1, 0.878431, 0.615686, 1)
+light_energy = 1.305
+shadow_enabled = true
+shadow_blur = 4.429
+omni_range = 4.392
+
+[node name="OmniLight3D14" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.0234, 1.55194, -41.2653)
+light_intensity_lumens = 400.0
+light_temperature = 14585.0
+light_color = Color(1, 0.878431, 0.615686, 1)
+light_energy = 1.305
+shadow_enabled = true
+shadow_blur = 4.429
+omni_range = 2.956
+
+[node name="OmniLight3D18" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.8987, 0.562716, -30.3535)
+light_intensity_lumens = 200.0
+light_temperature = 14585.0
+light_color = Color(1, 0.878431, 0.615686, 1)
+light_energy = 1.305
+shadow_enabled = true
+shadow_blur = 4.429
+omni_range = 1.838
+
+[node name="OmniLight3D19" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.1657, 0.562716, -21.6193)
+light_intensity_lumens = 200.0
+light_temperature = 14585.0
+light_color = Color(1, 0.878431, 0.615686, 1)
+light_energy = 1.305
+shadow_enabled = true
+shadow_blur = 4.429
+omni_range = 1.838
+
+[node name="OmniLight3D22" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.4944, 0.562716, -0.760894)
+light_intensity_lumens = 200.0
+light_temperature = 14585.0
+light_color = Color(1, 0.878431, 0.615686, 1)
+light_energy = 1.305
+shadow_enabled = true
+shadow_blur = 4.429
+omni_range = 1.838
+
+[node name="OmniLight3D23" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.4944, 0.562716, 6.07688)
+light_intensity_lumens = 200.0
+light_temperature = 14585.0
+light_color = Color(1, 0.878431, 0.615686, 1)
+light_energy = 1.305
+shadow_enabled = true
+shadow_blur = 4.429
+omni_range = 1.838
+
+[node name="OmniLight3D24" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.4944, 0.562716, 13.1711)
+light_intensity_lumens = 200.0
+light_temperature = 14585.0
+light_color = Color(1, 0.878431, 0.615686, 1)
+light_energy = 1.305
+shadow_enabled = true
+shadow_blur = 4.429
+omni_range = 1.838
+
+[node name="OmniLight3D25" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.8546, 0.562716, 16.1787)
+light_intensity_lumens = 200.0
+light_temperature = 14585.0
+light_color = Color(1, 0.878431, 0.615686, 1)
+light_energy = 1.305
+shadow_enabled = true
+shadow_blur = 4.429
+omni_range = 1.838
+
+[node name="OmniLight3D26" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.7708, 0.562716, 16.1787)
+light_intensity_lumens = 200.0
+light_temperature = 14585.0
+light_color = Color(1, 0.878431, 0.615686, 1)
+light_energy = 1.305
+shadow_enabled = true
+shadow_blur = 4.429
+omni_range = 1.838
+
+[node name="OmniLight3D20" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.9293, 1.17299, -24.8594)
+light_intensity_lumens = 200.0
+light_temperature = 14585.0
+light_color = Color(1, 0.878431, 0.615686, 1)
+light_energy = 1.305
+shadow_enabled = true
+shadow_blur = 4.429
+omni_range = 1.838
+
+[node name="OmniLight3D21" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.9293, 1.17299, -34.1421)
+light_intensity_lumens = 200.0
+light_temperature = 14585.0
+light_color = Color(1, 0.878431, 0.615686, 1)
+light_energy = 1.305
+shadow_enabled = true
+shadow_blur = 4.429
+omni_range = 1.838
+
+[node name="OmniLight3D7" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.68239, 0.92427, -44.6971)
+light_intensity_lumens = 150.0
+light_temperature = 14585.0
+light_color = Color(1, 0.878431, 0.615686, 1)
+light_energy = 1.305
+shadow_enabled = true
+shadow_blur = 4.429
+omni_range = 4.754
+
+[node name="OmniLight3D8" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.0336, 0.92427, -44.6971)
+light_intensity_lumens = 150.0
+light_temperature = 14585.0
+light_color = Color(1, 0.878431, 0.615686, 1)
+light_energy = 1.305
+shadow_enabled = true
+shadow_blur = 4.429
+omni_range = 4.754
+
+[node name="OmniLight3D9" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.6007, 0.92427, -46.4626)
+light_intensity_lumens = 150.0
+light_temperature = 14585.0
+light_color = Color(1, 0.878431, 0.615686, 1)
+light_energy = 1.305
+shadow_enabled = true
+shadow_blur = 4.429
+omni_range = 4.754
+
+[node name="OmniLight3D10" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.79804, 0.92427, -46.4626)
+light_intensity_lumens = 150.0
+light_temperature = 14585.0
+light_color = Color(1, 0.878431, 0.615686, 1)
+light_energy = 1.305
+shadow_enabled = true
+shadow_blur = 4.429
+omni_range = 4.754
+
+[node name="OmniLight3D27" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.15446, 0.92427, -44.3342)
+light_intensity_lumens = 150.0
+light_temperature = 14585.0
+light_color = Color(1, 0.878431, 0.615686, 1)
+light_energy = 1.305
+shadow_enabled = true
+shadow_blur = 4.429
+omni_range = 4.754
+
+[node name="OmniLight3D28" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.8131, 0.92427, -44.3342)
+light_intensity_lumens = 150.0
+light_temperature = 14585.0
+light_color = Color(1, 0.878431, 0.615686, 1)
+light_energy = 1.305
+shadow_enabled = true
+shadow_blur = 4.429
+omni_range = 4.754
+
+[node name="OmniLight3D11" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.59105, 0.92427, -41.783)
+light_intensity_lumens = 150.0
+light_temperature = 14585.0
+light_color = Color(1, 0.878431, 0.615686, 1)
+light_energy = 1.305
+shadow_enabled = true
+shadow_blur = 4.429
+omni_range = 4.754
+
+[node name="OmniLight3D15" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.60265, 0.590316, -14.7646)
+light_intensity_lumens = 75.28
+light_temperature = 14585.0
+light_color = Color(1, 0.878431, 0.615686, 1)
+light_energy = 1.305
+shadow_enabled = true
+shadow_blur = 4.429
+omni_range = 2.73
+
+[node name="OmniLight3D16" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.5871, 6.72524, -15.1891)
+light_intensity_lumens = 75.28
+light_temperature = 14585.0
+light_color = Color(1, 0.878431, 0.615686, 1)
+light_energy = 1.305
+shadow_enabled = true
+shadow_blur = 4.429
+omni_range = 2.73
+
+[node name="OmniLight3D17" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.5871, 11.2278, -15.1891)
+light_intensity_lumens = 75.28
+light_temperature = 14585.0
+light_color = Color(1, 0.878431, 0.615686, 1)
+light_energy = 1.305
+shadow_enabled = true
+shadow_blur = 4.429
+omni_range = 2.73
+
+[node name="OmniLight3D12" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.498, 0.92427, -41.783)
+light_intensity_lumens = 150.0
+light_temperature = 14585.0
+light_color = Color(1, 0.878431, 0.615686, 1)
+light_energy = 1.305
+shadow_enabled = true
+shadow_blur = 4.429
+omni_range = 4.754
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(-0.191202, 0.971263, -0.141742, 0.0208266, -0.140359, -0.989882, -0.98133, -0.192219, 0.00660883, 12.4003, 0.0218191, 4.21976)
+light_intensity_lumens = 500.0
+light_energy = 0.39
+shadow_enabled = true
+shadow_normal_bias = 0.697
+shadow_blur = 7.768
+spot_range = 36.555
+spot_angle = 31.29
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="."]
+transform = Transform3D(-0.191202, 0.971263, -0.141742, 0.0208266, -0.140359, -0.989882, -0.98133, -0.192219, 0.00660883, 11.6423, 0.0218191, -3.24067)
+light_intensity_lumens = 500.0
+light_energy = 0.39
+shadow_enabled = true
+shadow_normal_bias = 0.697
+shadow_blur = 7.768
+spot_range = 36.555
+spot_angle = 31.29
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="."]
+transform = Transform3D(-0.192002, 0.981078, 0.0249232, -0.0112745, 0.023189, -0.999668, -0.98133, -0.192219, 0.00660882, 18.6107, 0.274983, -9.28554)
+light_intensity_lumens = 200.0
+light_energy = 0.39
+shadow_enabled = true
+shadow_normal_bias = 0.697
+shadow_blur = 7.768
+spot_range = 9.508
+spot_angle = 31.29
+
+[node name="SpotLight3D4" type="SpotLight3D" parent="."]
+transform = Transform3D(-0.699806, 0.594036, 0.396727, -0.295186, 0.265261, -0.917879, -0.65049, -0.759446, -0.0102802, 19.6705, 0.163262, -21.6596)
+light_intensity_lumens = 500.0
+light_color = Color(0.870588, 0.819608, 0.85098, 1)
+light_energy = 0.39
+shadow_enabled = true
+shadow_normal_bias = 0.697
+shadow_blur = 7.768
+spot_range = 31.199
+spot_angle = 31.29
+
+[node name="SpotLight3D5" type="SpotLight3D" parent="."]
+transform = Transform3D(-0.868912, 0.324963, 0.373351, -0.295186, 0.265261, -0.917879, -0.397312, -0.907764, -0.134564, 16.9055, 0.163262, -30.0335)
+light_intensity_lumens = 500.0
+light_color = Color(0.870588, 0.819608, 0.85098, 1)
+light_energy = 0.39
+shadow_enabled = true
+shadow_normal_bias = 0.697
+shadow_blur = 7.768
+spot_range = 31.199
+spot_angle = 31.29
+
+[node name="SpotLight3D24" type="SpotLight3D" parent="."]
+transform = Transform3D(-0.916088, 0.383689, 0.116472, -0.0540982, 0.169548, -0.984036, -0.397312, -0.907764, -0.134564, 16.9055, 0.163262, -16.2278)
+light_intensity_lumens = 500.0
+light_color = Color(0.870588, 0.819608, 0.85098, 1)
+light_energy = 0.39
+shadow_enabled = true
+shadow_normal_bias = 0.697
+shadow_blur = 7.768
+spot_range = 31.199
+spot_angle = 31.29
+
+[node name="SpotLight3D6" type="SpotLight3D" parent="."]
+transform = Transform3D(-0.847581, -0.516114, 0.123425, -0.135889, -0.0137386, -0.990629, 0.512973, -0.85641, -0.0584898, 7.12245, -0.0983553, -34.1042)
+light_intensity_lumens = 500.0
+light_color = Color(0.870588, 0.819608, 0.85098, 1)
+light_energy = 0.39
+shadow_enabled = true
+shadow_normal_bias = 0.697
+shadow_blur = 7.768
+spot_range = 31.199
+spot_angle = 31.29
+
+[node name="SpotLight3D9" type="SpotLight3D" parent="."]
+transform = Transform3D(0.243555, -0.969682, -0.0199615, -0.135889, -0.0137386, -0.990629, 0.96032, 0.243985, -0.135116, -0.8063, -1.38337, -26.3224)
+light_intensity_lumens = 500.0
+light_color = Color(0.870588, 0.819608, 0.85098, 1)
+light_energy = 0.39
+shadow_enabled = true
+shadow_normal_bias = 0.697
+shadow_blur = 7.768
+spot_range = 31.199
+spot_angle = 31.29
+
+[node name="SpotLight3D11" type="SpotLight3D" parent="."]
+transform = Transform3D(0.243555, -0.969682, -0.0199615, -0.0143732, 0.0169704, -0.999753, 0.969781, 0.243781, -0.00980418, -5.65424, -1.38337, -8.70425)
+light_intensity_lumens = 500.0
+light_color = Color(0.870588, 0.819608, 0.85098, 1)
+light_energy = 0.39
+shadow_enabled = true
+shadow_normal_bias = 0.697
+shadow_blur = 7.768
+spot_range = 31.199
+spot_angle = 31.29
+
+[node name="SpotLight3D12" type="SpotLight3D" parent="."]
+transform = Transform3D(0.239564, -0.959073, -0.150958, -0.0462035, 0.144047, -0.988492, 0.969781, 0.243781, -0.00980418, -2.363, -1.38337, 1.09372)
+light_intensity_lumens = 500.0
+light_color = Color(0.870588, 0.819608, 0.85098, 1)
+light_energy = 0.39
+shadow_enabled = true
+shadow_normal_bias = 0.697
+shadow_blur = 7.768
+spot_range = 31.199
+spot_angle = 31.29
+
+[node name="SpotLight3D10" type="SpotLight3D" parent="."]
+transform = Transform3D(0.973881, 0.181741, -0.136112, -0.135889, -0.0137386, -0.990629, -0.181908, 0.98325, 0.011317, -8.70011, -2.46949, -18.9514)
+light_intensity_lumens = 500.0
+light_color = Color(0.870588, 0.819608, 0.85098, 1)
+light_energy = 0.39
+shadow_enabled = true
+shadow_normal_bias = 0.697
+shadow_blur = 7.768
+spot_range = 31.199
+spot_angle = 31.29
+
+[node name="SpotLight3D7" type="SpotLight3D" parent="."]
+transform = Transform3D(-0.847581, -0.516114, 0.123424, -0.213344, 0.118449, -0.96977, 0.485893, -0.84829, -0.210505, 9.80898, 0.270298, -60.04)
+light_intensity_lumens = 200.0
+light_color = Color(0.870588, 0.819608, 0.85098, 1)
+light_energy = 0.39
+shadow_enabled = true
+shadow_normal_bias = 0.697
+shadow_blur = 7.768
+spot_range = 3.978
+spot_angle = 31.29
+
+[node name="SpotLight3D8" type="SpotLight3D" parent="."]
+transform = Transform3D(-0.847581, -0.516114, 0.123424, -0.213344, 0.118449, -0.96977, 0.485893, -0.84829, -0.210505, 2.59834, 0.270298, -60.04)
+light_intensity_lumens = 200.0
+light_color = Color(0.870588, 0.819608, 0.85098, 1)
+light_energy = 0.39
+shadow_enabled = true
+shadow_normal_bias = 0.697
+shadow_blur = 7.768
+spot_range = 3.978
+spot_angle = 31.29
+
+[node name="SpotLight3D13" type="SpotLight3D" parent="."]
+transform = Transform3D(-0.84758, -0.516114, 0.123424, -0.0256747, -0.192428, -0.980975, 0.530045, -0.834624, 0.149847, 2.59834, 0.270298, -55.9279)
+light_intensity_lumens = 200.0
+light_color = Color(0.870588, 0.819608, 0.85098, 1)
+light_energy = 0.39
+shadow_enabled = true
+shadow_normal_bias = 0.697
+shadow_blur = 7.768
+spot_range = 3.978
+spot_angle = 31.29
+
+[node name="SpotLight3D14" type="SpotLight3D" parent="."]
+transform = Transform3D(-0.84758, -0.516114, 0.123424, -0.0448958, -0.162009, -0.985767, 0.528764, -0.841059, 0.114144, 10.144, 0.207786, -55.9279)
+light_intensity_lumens = 200.0
+light_color = Color(0.870588, 0.819608, 0.85098, 1)
+light_energy = 0.39
+shadow_enabled = true
+shadow_normal_bias = 0.697
+shadow_blur = 7.768
+spot_range = 3.978
+spot_angle = 31.29
+
+[node name="SpotLight3D15" type="SpotLight3D" parent="."]
+transform = Transform3D(-0.84758, -0.516114, 0.123424, -0.112452, -0.0526183, -0.992263, 0.518615, -0.854902, -0.01344, -19.8414, 0.207786, -14.9746)
+light_intensity_lumens = 200.0
+light_color = Color(0.870588, 0.819608, 0.85098, 1)
+light_energy = 0.39
+shadow_enabled = true
+shadow_normal_bias = 0.697
+shadow_blur = 7.768
+spot_range = 5.911
+spot_angle = 31.29
+
+[node name="SpotLight3D16" type="SpotLight3D" parent="."]
+transform = Transform3D(-0.84758, -0.516114, 0.123424, -0.112452, -0.0526183, -0.992263, 0.518615, -0.854902, -0.01344, -19.8414, 0.207786, -8.13075)
+light_intensity_lumens = 200.0
+light_color = Color(0.870588, 0.819608, 0.85098, 1)
+light_energy = 0.39
+shadow_enabled = true
+shadow_normal_bias = 0.697
+shadow_blur = 7.768
+spot_range = 5.911
+spot_angle = 31.29
+
+[node name="SpotLight3D19" type="SpotLight3D" parent="."]
+transform = Transform3D(-0.428411, -0.892305, -0.142324, -0.0993278, 0.203062, -0.974115, 0.898108, -0.403185, -0.175625, 0.960977, 0.207786, 15.2754)
+light_intensity_lumens = 200.0
+light_color = Color(0.870588, 0.819608, 0.85098, 1)
+light_energy = 0.39
+shadow_enabled = true
+shadow_normal_bias = 0.697
+shadow_blur = 7.768
+spot_range = 5.911
+spot_angle = 31.29
+
+[node name="SpotLight3D20" type="SpotLight3D" parent="."]
+transform = Transform3D(-0.428411, -0.892305, -0.142324, -0.0993278, 0.203062, -0.974115, 0.898108, -0.403185, -0.175625, 7.24879, 0.207786, 15.2754)
+light_intensity_lumens = 200.0
+light_color = Color(0.870588, 0.819608, 0.85098, 1)
+light_energy = 0.39
+shadow_enabled = true
+shadow_normal_bias = 0.697
+shadow_blur = 7.768
+spot_range = 5.911
+spot_angle = 31.29
+
+[node name="SpotLight3D21" type="SpotLight3D" parent="."]
+transform = Transform3D(-0.407652, -0.897632, 0.167561, -0.226266, -0.0784814, -0.970899, 0.88466, -0.433702, -0.17111, 7.24879, 0.207786, 8.95384)
+light_intensity_lumens = 200.0
+light_color = Color(0.870588, 0.819608, 0.85098, 1)
+light_energy = 0.39
+shadow_enabled = true
+shadow_normal_bias = 0.697
+shadow_blur = 7.768
+spot_range = 7.497
+spot_angle = 31.29
+
+[node name="SpotLight3D22" type="SpotLight3D" parent="."]
+transform = Transform3D(-0.407652, -0.897632, 0.167561, 0.000992477, -0.183936, -0.982938, 0.913137, -0.40053, 0.0758728, 7.64393, 0.207786, 20.6141)
+light_intensity_lumens = 200.0
+light_color = Color(0.870588, 0.819608, 0.85098, 1)
+light_energy = 0.39
+shadow_enabled = true
+shadow_normal_bias = 0.697
+shadow_blur = 7.768
+spot_range = 7.497
+spot_angle = 31.29
+
+[node name="SpotLight3D23" type="SpotLight3D" parent="."]
+transform = Transform3D(-0.407652, -0.897632, 0.167561, 0.000992477, -0.183936, -0.982938, 0.913137, -0.40053, 0.0758728, 1.88357, 0.207786, 20.6141)
+light_intensity_lumens = 200.0
+light_color = Color(0.870588, 0.819608, 0.85098, 1)
+light_energy = 0.39
+shadow_enabled = true
+shadow_normal_bias = 0.697
+shadow_blur = 7.768
+spot_range = 7.497
+spot_angle = 31.29
+
+[node name="SpotLight3D17" type="SpotLight3D" parent="."]
+transform = Transform3D(-0.832637, -0.501411, -0.235165, 0.194304, 0.133151, -0.971863, 0.518615, -0.854902, -0.01344, -25.0155, 0.207786, -7.45055)
+light_intensity_lumens = 200.0
+light_color = Color(0.870588, 0.819608, 0.85098, 1)
+light_energy = 0.39
+shadow_enabled = true
+shadow_normal_bias = 0.697
+shadow_blur = 7.768
+spot_range = 5.911
+spot_angle = 31.29
+
+[node name="SpotLight3D18" type="SpotLight3D" parent="."]
+transform = Transform3D(-0.832637, -0.501411, -0.235165, 0.194304, 0.133151, -0.971863, 0.518615, -0.854902, -0.01344, -25.0155, 0.207786, -14.6231)
+light_intensity_lumens = 200.0
+light_color = Color(0.870588, 0.819608, 0.85098, 1)
+light_energy = 0.39
+shadow_enabled = true
+shadow_normal_bias = 0.697
+shadow_blur = 7.768
+spot_range = 5.911
+spot_angle = 31.29
 
 [connection signal="timeout" from="UI/Timer" to="." method="update_score"]
