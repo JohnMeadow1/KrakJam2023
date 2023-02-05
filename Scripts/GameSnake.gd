@@ -60,6 +60,11 @@ func _ready() -> void:
 	
 	update_current_snake()
 	
+#	get_tree().paused = true
+#	$AnimationPlayer.play(&"Najazd")
+#	await $AnimationPlayer.animation_finished
+#	get_tree().paused = false
+	
 	camera_distance = camera_3d.position.z
 	
 func make_sneak():
@@ -171,7 +176,7 @@ func update_current_snake():
 		if not snake.is_physics_processing():
 			continue
 		
-		var dist = snake.global_position.distance_squared_to(camera_3d.global_position)
+		var dist = (snake.global_position + snake.head_position).distance_squared_to(camera_3d.global_position)
 		if dist < min_dist:
 			new_current = snake
 			min_dist = dist

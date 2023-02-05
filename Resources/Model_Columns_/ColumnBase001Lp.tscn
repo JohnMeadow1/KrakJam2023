@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cmnos7ix5kg67"]
+[gd_scene load_steps=8 format=3 uid="uid://cmnos7ix5kg67"]
 
 [ext_resource type="Texture2D" uid="uid://df2clg6t08urn" path="res://FBX/Columns/TXT/Column_Base_001_lp_Column_Base_001_lp_BaseColor.png" id="1_1aqw1"]
 [ext_resource type="Texture2D" uid="uid://c04u0pxhag44d" path="res://FBX/Columns/TXT/Column_Base_001_lp_Column_Base_001_lp_OcclusionRoughnessMetallic.png" id="2_5o0sd"]
@@ -59,14 +59,8 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_ionww")
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_p0rkh"]
-size = Vector3(2, 5.5, 2.5)
-
 [node name="Column_Base_001_lp002" type="MeshInstance3D"]
 transform = Transform3D(1, 0, 0, 0, 1, -4.37114e-08, 0, 4.37114e-08, 1, -0.000547647, -0.0092895, 0.00482655)
 material_override = SubResource("StandardMaterial3D_vh5sl")
 mesh = SubResource("ArrayMesh_281lq")
 skeleton = NodePath("")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("BoxShape3D_p0rkh")
