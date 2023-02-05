@@ -1,13 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://djqprv8eoqhol"]
+[gd_scene load_steps=8 format=3 uid="uid://djqprv8eoqhol"]
 
 [ext_resource type="Material" uid="uid://0hmxtpijjwj4" path="res://Resources/SnakeBronw.material" id="1_7prta"]
+[ext_resource type="Texture2D" uid="uid://bc15ycqgwgt2k" path="res://Textures/bark_brown_01_diff_2k.jpg" id="2_gk4gf"]
+[ext_resource type="Texture2D" uid="uid://d1e3d7ctk7vxt" path="res://Textures/bark_brown_01_rough_2k.jpg" id="3_der5s"]
 
 [sub_resource type="GDScript" id="GDScript_0ehyi"]
 script/source = "extends Node3D
 
-const SPEED = 1.0
+const SPEED = 0.75
 
-var rototions := 3
+var rototions := 5
 
 @onready var curve: Curve3D = $Path3D.curve
 @onready var body: CSGPolygon3D = $CSGPolygon3D
@@ -19,6 +21,8 @@ var rototions := 3
 
 var disable_raycasts: int = 60
 var down_timeout: float
+var variable_lifetime := 0.0
+var tics := 0
 
 var direction: Vector3 = Vector3.UP
 var head_position: Vector3
@@ -33,8 +37,11 @@ func _ready() -> void:
 	curve.set_point_position(current_point, head_position)
 	head.position = curve.get_point_position(current_point) + direction * 0.5
 	head.rotation.y = get_forward_rotation()
+	variable_lifetime = randf_range(10.0,20.0)
 
 func _physics_process(delta: float) -> void:
+	variable_lifetime -= delta
+
 	head_position += direction * SPEED * delta
 	curve.set_point_position(current_point, head_position)
 	head.position = head_position
@@ -47,7 +54,14 @@ func _physics_process(delta: float) -> void:
 	if disable_raycasts > 0:
 		disable_raycasts -= 1
 		return
-	
+		
+	tics+=1
+		
+	if (tics%60) == 0:
+		if randf_range(0, 20.0) > variable_lifetime:
+#			rotate_head(-)
+			rotate_to(direction.rotated(up_direction, PI/2 * (randi()%2 * 2 - 1)))
+			
 	if front_raycast.is_colliding():
 		if front_raycast.get_collider().get_meta(&\"snek\", false):
 			set_physics_process(false)
@@ -97,6 +111,11 @@ func get_forward_rotation() -> float:
 	return 0
 "
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7r8d8"]
+albedo_texture = ExtResource("2_gk4gf")
+roughness_texture = ExtResource("3_der5s")
+uv1_triplanar = true
+
 [sub_resource type="Curve3D" id="Curve3D_82rsp"]
 _data = {
 "points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0),
@@ -114,7 +133,8 @@ script = SubResource("GDScript_0ehyi")
 up_direction = Vector3(0, 0, 1)
 
 [node name="CSGPolygon3D" type="CSGPolygon3D" parent="."]
-material_override = ExtResource("1_7prta")
+material_override = SubResource("StandardMaterial3D_7r8d8")
+gi_mode = 2
 use_collision = true
 collision_mask = 0
 polygon = PackedVector2Array(0.25, 0, 0.176777, 0.176777, -1.09278e-08, 0.25, -0.176777, 0.176777, -0.25, -2.18557e-08, -0.176777, -0.176777, 2.98122e-09, -0.25, 0.176777, -0.176777)
