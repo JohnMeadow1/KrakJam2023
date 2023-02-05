@@ -93,7 +93,8 @@ func _physics_process(delta: float) -> void:
 		μtimer = randf_range(2, 4)
 		var μsnake = load("res://Scenes/MicroSnake.tscn").instantiate()
 		μsnake.position = global_position + head_position
-		μsnake.direction = direction.rotated(up_direction, PI/2)
+		
+		μsnake.direction = direction.rotated(up_direction, PI/2 * (randi()%2*2+1))
 		μsnake.up_direction = up_direction
 		owner.add_child(μsnake)
 

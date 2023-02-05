@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://co5nwgi4etmcl"]
 
-[ext_resource type="Texture2D" uid="uid://b1i8pprnjjjs4" path="res://Textures/Title.png" id="1_gjkd8"]
+[ext_resource type="Texture2D" uid="uid://cux1yv7jhtc1a" path="res://John_Meadow_PL_snake_made_of_roots_f4b2f657-0c04-4ab0-94c3-3402174507fb.png" id="1_10eus"]
 [ext_resource type="AudioStream" uid="uid://l6rrog8136wn" path="res://Audio/Title.ogg" id="2_620a1"]
 
 [sub_resource type="GDScript" id="GDScript_jj4ef"]
@@ -56,10 +56,23 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_gjkd8")
-expand_mode = 1
+size_flags_vertical = 0
+expand_mode = 2
+stretch_mode = 4
 script = SubResource("GDScript_jj4ef")
 metadata/_edit_lock_ = true
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -1.0
+offset_bottom = 375.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_10eus")
+stretch_mode = 6
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
@@ -102,8 +115,8 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -218.05
-offset_bottom = -160.05
+offset_top = -322.05
+offset_bottom = -264.05
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_colors/font_color = Color(0.866667, 0.87451, 0, 1)
@@ -118,12 +131,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -43.5
-offset_top = -33.0
-offset_right = 43.5
-offset_bottom = 33.0
+offset_left = -543.0
+offset_top = 95.0
+offset_right = -456.0
+offset_bottom = 196.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(2, 2)
 
 [node name="Button" type="Button" parent="VBoxContainer"]
 layout_mode = 2
@@ -171,6 +185,7 @@ text = "Credits
 Tomasz \"KoBeWi\" Chabora
 Leszek \"John Meadow\" Nowak
 Damian \"viclow\" Wiech
+Midjourney
 Credits"
 script = SubResource("GDScript_elieh")
 
