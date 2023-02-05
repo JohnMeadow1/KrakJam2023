@@ -3,25 +3,26 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dkbv7yv45y0qx"
-path="res://.godot/imported/Trees_Inside_001_lp_Trees_Inside_001_lp_OcclusionRoughnessMetallic.png-e06328b822bc6d74e7d19f941a3e9b09.ctex"
+path.s3tc="res://.godot/imported/Trees_Inside_001_lp_Trees_Inside_001_lp_OcclusionRoughnessMetallic.png-e06328b822bc6d74e7d19f941a3e9b09.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Resources/Tress/txt/Trees_Inside_001_lp_Trees_Inside_001_lp_OcclusionRoughnessMetallic.png"
-dest_files=["res://.godot/imported/Trees_Inside_001_lp_Trees_Inside_001_lp_OcclusionRoughnessMetallic.png-e06328b822bc6d74e7d19f941a3e9b09.ctex"]
+dest_files=["res://.godot/imported/Trees_Inside_001_lp_Trees_Inside_001_lp_OcclusionRoughnessMetallic.png-e06328b822bc6d74e7d19f941a3e9b09.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=false
+mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
@@ -31,4 +32,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=1
+detect_3d/compress_to=0
