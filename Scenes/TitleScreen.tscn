@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://co5nwgi4etmcl"]
+[gd_scene load_steps=7 format=3 uid="uid://co5nwgi4etmcl"]
 
 [ext_resource type="Texture2D" uid="uid://cux1yv7jhtc1a" path="res://John_Meadow_PL_snake_made_of_roots_f4b2f657-0c04-4ab0-94c3-3402174507fb.png" id="1_10eus"]
 [ext_resource type="AudioStream" uid="uid://l6rrog8136wn" path="res://Audio/Title.ogg" id="2_620a1"]
@@ -28,6 +28,16 @@ func pressed() -> void:
 		play()
 	else:
 		exit()
+"
+
+[sub_resource type="GDScript" id="GDScript_0n4v6"]
+script/source = "extends TextureRect
+
+var timer: float
+
+func _process(delta: float) -> void:
+	timer += delta * 0.1
+	position.y = -pow(sin(timer), 2) * (size.y - get_viewport().size.y)
 "
 
 [sub_resource type="GDScript" id="GDScript_scv3s"]
@@ -67,12 +77,13 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -1.0
-offset_bottom = 375.0
+offset_bottom = 504.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_10eus")
-stretch_mode = 6
+expand_mode = 4
+stretch_mode = 4
+script = SubResource("GDScript_0n4v6")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
@@ -115,8 +126,8 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -322.05
-offset_bottom = -264.05
+offset_top = -169.0
+offset_bottom = -111.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_colors/font_color = Color(0.866667, 0.87451, 0, 1)
@@ -126,17 +137,14 @@ horizontal_alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -543.0
-offset_top = 95.0
-offset_right = -456.0
-offset_bottom = 196.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 33.0
+offset_top = -229.0
+offset_right = 120.0
+offset_bottom = -128.0
+grow_vertical = 0
 scale = Vector2(2, 2)
 
 [node name="Button" type="Button" parent="VBoxContainer"]
