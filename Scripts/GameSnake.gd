@@ -81,6 +81,7 @@ func make_sneak(force_spawner := -1):
 	
 	if force_spawner > -1:
 		snek_spawners.get_child(force_spawner).spawn_snek()
+		SNEKOUNT -= 1
 	else:
 		for i in 1000:
 			if snek_spawners.get_child(randi() % snek_spawners.get_child_count()).spawn_snek():

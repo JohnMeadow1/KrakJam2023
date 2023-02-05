@@ -70,6 +70,7 @@ func _physics_process(delta: float) -> void:
 	if front_raycast.is_colliding():
 		if front_raycast.get_collider().get_meta(&"snek", false):
 			set_physics_process(false)
+			set_process(false)
 			glow.hide()
 			deded.emit()
 			audio.stop()
