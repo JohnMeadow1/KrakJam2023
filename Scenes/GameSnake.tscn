@@ -454,15 +454,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0164356, -4.76837e-07, -5.
 up_direction = Vector3(0, 0, 1)
 
 [node name="SnekSpawner7" parent="SnekSpawners" instance=ExtResource("5_sb6wk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.4026, 0, -4.97621)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.4026, 0, -5.19114)
 up_direction = Vector3(0, 0, 1)
 
 [node name="SnekSpawner8" parent="SnekSpawners" instance=ExtResource("5_sb6wk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.2742, 0.775017, -13.3313)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.4714, 0.775017, -13.3313)
 up_direction = Vector3(1, 0, 0)
 
 [node name="SnekSpawner9" parent="SnekSpawners" instance=ExtResource("5_sb6wk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.7941, -4.76837e-07, -17.8615)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.7168, -4.76837e-07, -17.8615)
 up_direction = Vector3(1, 0, 0)
 
 [node name="SnekSpawner10" parent="SnekSpawners" instance=ExtResource("5_sb6wk")]
