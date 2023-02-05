@@ -21,11 +21,13 @@ var is_current: bool:
 var disable_raycasts: int = 60
 var down_timeout: float
 
+var growth_speed := 0.75
+
 var direction: Vector3 = Vector3.UP
 var head_position: Vector3
 var current_point := 1
 
-var μtimer = randf_range(3, 8)
+var μtimer = randf_range(2, 4)
 
 signal deded
 
@@ -41,7 +43,10 @@ func _ready() -> void:
 	body.material_override = body.material_override.duplicate()
 
 func _physics_process(delta: float) -> void:
-	head_position += direction * 2 * delta
+	if is_current:
+		head_position += direction * growth_speed * delta * 2.0
+	else:
+		head_position += direction * growth_speed * delta
 	curve.set_point_position(current_point, head_position)
 	head.position = head_position
 	audio.position = head_position
@@ -85,7 +90,7 @@ func _physics_process(delta: float) -> void:
 	
 	μtimer -= delta
 	if μtimer <= 0:
-		μtimer = randf_range(3, 8)
+		μtimer = randf_range(2, 4)
 		var μsnake = load("res://Scenes/MicroSnake.tscn").instantiate()
 		μsnake.position = global_position + head_position
 		μsnake.direction = direction.rotated(up_direction, PI/2)
