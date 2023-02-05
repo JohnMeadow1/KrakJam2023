@@ -194,7 +194,8 @@ text = "Credits
 Tomasz \"KoBeWi\" Chabora
 Leszek \"John Meadow\" Nowak
 Damian \"viclow\" Wiech
-Midjourney
+HDRI panorma by Greg Zaal
+Titlescreen Midjourney
 Credits"
 script = SubResource("GDScript_elieh")
 
